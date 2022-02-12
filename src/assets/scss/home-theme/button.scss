@@ -1,0 +1,49 @@
+@import "variable/color-variable.scss";
+@import "variable/font-variable.scss";
+
+.home-page {
+  .btn1 {
+    width: 100%;
+    border-radius: 5px;
+    padding: 6px;
+    margin-bottom: 20px;
+    border: 2px solid $color-primary;
+    background: $color-primary-light;
+    border-radius: 30px;
+    color: $color-white;
+    display: inline-block;
+    font-weight: 500;
+    padding: 10px 26px;
+    transition: all 0.2s linear 0s;
+
+    &:hover {
+      background: $color-primary-deep;
+      transform: scale(1.03);
+    }
+  }
+
+  .btn1.purchase-btn {
+    background: $color-primary;
+    border-color: $color-success;
+    font-size: 14px;
+    color: lighten(black,90%);
+  }
+
+  .btn2 {
+    border: 1px solid $color-primary;
+    border-radius: 40px;
+    color: $color-primary;
+    display: inline-block;
+    font-size: 13px;
+    padding: 7px 10px;
+    text-align: center;
+    transition: all 0.2s linear 0s;
+    width: 100%;
+
+    &:hover {
+      background: $color-primary none repeat scroll 0 0;
+      color: $color-white;
+    }
+  }
+
+}

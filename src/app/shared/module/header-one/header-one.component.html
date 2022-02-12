@@ -1,0 +1,60 @@
+<!--<header class="sticky" [ngClass]="class" [class.fixed]="stick && sticky">-->
+<div class="container topbar">
+  <div class="row">
+    <div class="logo col-md-2 ">
+      <div class="logo-img"><img class="img-item" src="assets/images/logo.png" alt=""></div>
+      <div class="name">Enterprise Ecommerce</div>
+    </div>
+    <div class="searches col-md-3 ">
+      <form>
+        <input type="text" placeholder="Search...">
+        <button><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    <div class="user-logo col-md-2 ">
+      <a class="uniq" href="#">
+        <div class="user-dcpt">
+          <img class="img-item" alt="" src="assets/images/user.jpg">
+          <div class="user-name">Mujahid Khan</div>
+        </div>
+      </a>
+    </div>
+    <div class="menu-wrapper col-md-5">
+      <a href="">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="my-board" >
+        <i class="fab fa-flipboard"></i>
+        <span>My board</span>
+      </a>
+      <a href="my-business" >
+        <i class="fas fa-briefcase"></i>
+        <span>My business</span>
+      </a>
+     <!-- <a href="customer-talk">
+        <i class="far fa-comment-alt"></i>
+        <span>Customer talk</span>
+      </a>-->
+      <a href="message">
+        <i class="far fa-comments"></i>
+        <span>Message</span>
+      </a>
+      <a href="notification">
+        <i class="far fa-bell"></i>
+        <span>Notification</span>
+      </a>
+      <a (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+      <!--<div>
+        <a href="#">
+          <i class="fas fa-th"></i>
+          <span>More <i class="fas fa-caret-down"></i></span>
+        </a>
+      </div>-->
+    </div>
+  </div>
+</div>
+

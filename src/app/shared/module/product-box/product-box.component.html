@@ -1,0 +1,64 @@
+<div *ngIf="!loader" class="product-box-inside">
+  <div class="img-wrapper">
+    <!--
+    <div class="lable-block">
+      <span class="new-lable" *ngIf="product.new">new</span>
+      <span class="sale-lable" *ngIf="product.sale">on sale </span>
+    </div>
+    -->
+    <div class="image-front">
+      <!--a [routerLink]="['/organization/category/product']" [queryParams]="{id: '1'}">-->
+      <!--<a [routerLink]="['/organization/product', { color: 'red' }]" [queryParams]="{id: '1'}">-->
+      <!--<img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
+        [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"
+        class="img-fluid lazy-loading" alt="{{ product.images[0].alt }}" />-->
+      <!--</a>-->
+      <img src="assets/images/product/5.jpg" class="img-fluid lazy-loading" alt="product" />
+    </div>
+    <div class="product-image-label">
+      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(productDetail)">
+        <i class="ti-shopping-cart"></i>
+      </a>
+      <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishList(productDetail)">
+        <i class="ti-heart" aria-hidden="true"></i>
+      </a>
+      <a href="javascript:void(0)" title="Quick View" (click)="showQuickView(productDetail)">
+        <i class="ti-search" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  
+  <div class="product-detail">
+    <!--<a [routerLink]="['/Test%20organization%201%20diu/product', 'toyota'.replace(' ', '-')]">-->
+    <a href="/{{getEncodeURI(organizationName)}}/product/{{getEncodeURI(productDetail.seoUrl)}}">
+      <div class="product-title">product title</div>
+    </a>
+    <!--<h6>{{ product?.title | titlecase }}</h6>-->
+    <!--<p>{{ product?.description }}</p>-->
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aliquam autem,
+      consequatur debitis ex fugiat harum,
+      illo obcaecati ratione tenetur, voluptatibus? Dolore harum, sequi.</p>
+    <h4>
+      $150
+      <del><span class="money"> $120</span></del>
+    </h4>
+  </div>
+</div>
+
+<div *ngIf="loader"  class="">
+  <div class="">
+    <ngx-skeleton-loader [theme]="{ 'background-color': '#e8e8e8', 'border-radius': '0', height: '230px' }"></ngx-skeleton-loader>
+  </div>
+  <div class="">
+    <div>
+      <ngx-skeleton-loader [theme]="{ 'background-color': '#e8e8e8', width: '160px', 'border-radius': '15px',  height: '15px', 'margin-bottom': '2px'}">
+      </ngx-skeleton-loader>
+    </div>
+    <div>
+      <ngx-skeleton-loader [theme]="{ 'background-color': '#e8e8e8', width: '130px', 'border-radius': '15px',  height: '15px', 'margin-bottom': '2px'}">
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
+
+<!--<app-quick-view #quickView [productDetail]="productDetail"></app-quick-view>-->

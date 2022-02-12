@@ -1,0 +1,24 @@
+<owl-carousel-o [options]="HomeSliderConfig" class="image-slider-1" >
+  <ng-container *ngFor="let slider of sliders">
+    <ng-template carouselSlide>
+      <div class="home2 text-center"
+           [ngStyle]="{'background-image': 'url('+slider.image+')'}">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="image-slider-contain-1" >
+                <div>
+                  <h4 class="light-font">{{slider.title}}</h4>
+                  <h1 class="light-font">{{slider.subTitle}}</h1>
+                  <a class="btn btn-solid" [ngClass]="buttonClass">
+                    {{buttonText}}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

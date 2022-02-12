@@ -1,0 +1,19 @@
+<ng-template #temp let-itemList="itemList" let-depth="depth" [ngTemplateOutlet]="temp" [ngTemplateOutletContext]="{itemList: itemList, depth: depth}">
+  <div *ngFor="let item of itemList">
+    <div class="d-flex align-items-center" (click)="onItemSelected(item)"
+         [class.active]="item?.id === sltItem?.id">
+      <div mat-list-item [ngStyle]="{'margin-left': (depth * 30) + 'px'}"
+           [ngClass]="{'expanded': item.expand && item.expand === true}">{{item.displayName}}</div>
+      <!--style="padding-top: 5px"-->
+      <div *ngIf="item.childItemList && item.childItemList.length>0">
+        <mat-icon [@indicatorRotate]="item.expand && item.expand === true ? 'expanded': 'collapsed'">expand_more</mat-icon>
+      </div>
+    </div>
+    <div *ngIf="item.expand && item.expand === true" [@slideIn]>
+      <ng-template [ngTemplateOutlet]="temp" [ngTemplateOutletContext]="{itemList: item.childItemList, depth: depth+1}"></ng-template>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- <tree-view [itemList]="itemList" (navClicked)="navClicked($event)"></tree-view>-->

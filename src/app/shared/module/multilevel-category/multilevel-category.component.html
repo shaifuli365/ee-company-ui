@@ -1,0 +1,15 @@
+<a mat-list-item [ngStyle]="{'padding-left': (depth * 15) + 'px'}"
+   (click)="onItemSelected(item)"
+   [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}">
+  <img alt="" src="assets/images/icon/jamuna/5.jpg" class="img-fluid me-2" alt="">
+  {{item.displayName}}
+  <span class="flex" *ngIf="item.children && item.children.length">
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">expand_more</mat-icon>
+  </span>
+</a>
+
+<div *ngIf="expanded" [@slideIn]>
+  <!--recursive call-->
+  <app-multilevel-category *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </app-multilevel-category>
+</div>

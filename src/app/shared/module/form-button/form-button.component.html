@@ -1,0 +1,13 @@
+<div class="form-group">
+  <button type="button" class="btn btn-primary mr-1" *ngIf="mode==='save'"
+          (click)="this.save.emit()" [disabled]="parentFg.invalid" >Save</button>
+
+  <button type="button" class="btn btn-primary mr-1" *ngIf="mode==='update'"
+          (click)="this.update.emit()" [disabled]="parentFg.invalid" >Update</button>
+
+  <button type="button" class="btn btn-primary mr-1" *ngIf="mode==='save' || mode==='update' "
+          (click)="this.clear.emit()" >Clear</button>
+
+  <button type="button" class="btn btn-primary mr-1" *ngIf="mode==='search'"
+          (click)="this.search.emit()" [disabled]="parentFg.invalid" >Search</button>
+</div>

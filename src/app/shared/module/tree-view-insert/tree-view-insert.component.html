@@ -1,0 +1,28 @@
+<ng-template #temp let-itemList="itemList" let-depth="depth" let-parent="parent"
+             [ngTemplateOutlet]="temp" [ngTemplateOutletContext]="{itemList: itemList, depth: depth, parent:null}">
+  <div *ngFor="let item of itemList">
+    <div class="d-flex align-items-center" (click)="onItemSelected(item)">
+      <div mat-list-item [ngStyle]="{'margin-left': (depth * 30) + 'px'}"
+           [ngClass]="{'expanded': item.expand && item.expand === true}">{{item.caName}}</div>
+      <div *ngIf="item.accChartOfAccountChildList && item.accChartOfAccountChildList.length>0">
+        &nbsp;({{item.accChartOfAccountChildList.length}})&nbsp;+ </div>
+    </div>
+    <div *ngIf="item.expand && item.expand === true" [@slideIn]>
+      <ng-template [ngTemplateOutlet]="temp"
+                   [ngTemplateOutletContext]="{itemList: item.accChartOfAccountChildList, depth: depth+1, parent: item}"></ng-template>
+    </div>
+  </div>
+  
+  <!-- must have a parent, if parent has no child, and parent type is caGroup  -->
+  <!-- must have a parent, if parent type is chartOfAccountGroup and have itemlist and  -->
+  <!-- must have a parent, if parent has na child, and aprent is caGroup  -->
+  <div style="margin: 3px 0"
+       *ngIf="(
+       (parent && parent.accChartOfAccountChildList.length === 0 && parent.type === 'chartOfAccountGroup')
+       || (parent && parent.type === 'chartOfAccountGroup' && itemList && itemList.length>0 && itemList[0].type === 'chartOfAccount')
+       || (parent && parent.type === 'chartOfAccount')
+       )">
+    <input type="text" [ngStyle]="{'margin-left': (depth * 30) + 'px'}" #in/>
+    <button class="btn btn-primary" (click)="save(in.value, parent)">save</button>
+  </div>
+</ng-template>

@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label class="col-form-label"><span *ngIf="required">*</span> {{ label }}</label>
+  <textarea class="form-control" [value]="data"
+            (change)="onChange($event)" (keyup)="onChange($event)" (blur)="onChange($event)">
+  </textarea>
+  <div *ngIf="this.control.invalid && (this.control.dirty || this.control.touched)" class="alert alert-danger">
+    <div *ngIf="errorWithMessage.length > 0">
+      {{errorWithMessage[0].errorMessage}}
+    </div>
+  </div>
+</div>

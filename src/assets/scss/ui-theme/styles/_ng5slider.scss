@@ -1,0 +1,30 @@
+
+.ng5-slider .ng5-slider-pointer {
+  cursor: pointer;
+  width: 20px !important;
+  height: 20px !important;
+  top: -8px !important;
+  background-color: var(--theme-deafult) !important;
+  z-index: 3;
+  border-radius: 16px !important;
+}
+
+.ng5-slider .ng5-slider-pointer:after {
+  content: '';
+  width: 14px !important;
+  height: 14px !important;
+  position: absolute;
+  top: 3px !important;
+  left: 3px !important;
+  border-radius: 16px !important;
+  background: #fff;
+}
+
+.ng5-slider .ng5-slider-selection {
+  background: var(--theme-deafult) !important;
+}
+
+.ng5-slider .ng5-slider-pointer.ng5-slider-active:after {
+  background: #fff !important;
+}
+

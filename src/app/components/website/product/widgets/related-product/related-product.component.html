@@ -1,0 +1,16 @@
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 product-related">
+                <h2>Related Products</h2>
+            </div>
+        </div>
+        <div class="row search-product">
+            <div class="col-xl-2 col-md-4 col-sm-6" *ngFor="let productDetail of productDetailList | slice:0:6">
+                <div class="product-box">
+                    <app-product-box [productDetail]="productDetail" [currency]="productService?.Currency" [cartModal]="true"></app-product-box>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

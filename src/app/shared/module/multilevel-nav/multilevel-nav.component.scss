@@ -1,0 +1,26 @@
+:host {
+  .mat-list-item{
+    padding: 3px 0 3px 0;
+    .routeIcon {
+      margin-right: 10px;
+    }
+    &.active {
+      background-color: #eeeeee;
+    }
+    /*&:hover, &:focus {
+      &:not(.expanded) {
+        background-color: red !important;
+      }
+    }*/
+    /*&:hover.expanded {
+        background: blue !important;
+    }
+    &:hover:not(.expanded) {
+        background: red !important;
+    }*/
+  }
+}
+
+.flex{
+  display:flex;
+}
