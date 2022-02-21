@@ -13,6 +13,10 @@ export class WebsiteService {
                 private router: Router, private route: ActivatedRoute,
                 private authService: AuthService, private crudService: CrudService) {}
 
+    identifyCompany(url){
+        return this.crudService.save({url}, '/organization/getOrgInfoByUrl', false, true);
+    }
+
     getMenuList(organizationName): Observable<any> {
         return this.crudService.getList({organizationName}, '/websiteMenu/getAllMenuListByOrganizationName', false, true);
     }

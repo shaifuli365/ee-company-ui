@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:9092/api/v1',
-  // apiUrl: 'http://20b99864ae9a.ngrok.io/api/v1',
   instagram_token: 'INSTAGRAM_TOKEN',
   stripe_token: 'STRIPE_PUBLISHABLE_KEY',
   paypal_token: 'PAYPAL_CLIENT_ID'

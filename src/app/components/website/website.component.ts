@@ -22,6 +22,12 @@ export class WebsiteComponent implements OnInit {
         this.organizationName = list[1];
         this.menuName = list[2];
         this.getMenuList(list[1]);
+        console.log(list[1]);
+
+        this.websiteService.identifyCompany(list[1]).subscribe(res => {
+            console.log(res);
+        }, err => {});
+
     }
 
     getMenuList(organizationName){
