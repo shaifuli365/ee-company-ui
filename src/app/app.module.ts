@@ -17,7 +17,6 @@ import {PreferenceService} from './shared/services/auth/preference.service';
 import {WebsiteModule} from './components/website/website.module';
 import {UserInfoService} from './shared/services/auth/user-info.service';
 
-
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
