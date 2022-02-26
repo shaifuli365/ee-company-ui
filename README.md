@@ -7,11 +7,11 @@
 
 3 ThemeLoaderLayoutModule will load ThemeLoaderLayoutComponent
 
-3 ThemeLoaderLayoutComponent will load Theme by company
+3 ThemeLoaderLayoutComponent will load Theme module by company
 
-4 For example: padma theme will load PadmaHomeComponent
+4 For example: for padma theme it will load PadmaModule
 
-
+5 PadmaModule will load PadmalayoutModule
 
 
 

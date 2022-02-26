@@ -7,7 +7,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthGuard} from './shared/services/auth/auth.guard';
 import {AuthService} from './shared/services/auth/auth.service';
@@ -16,6 +15,7 @@ import {AuthInterceptor} from './shared/services/auth/auth.interceptor';
 import {PreferenceService} from './shared/services/auth/preference.service';
 import {WebsiteModule} from './components/website/website.module';
 import {UserInfoService} from './shared/services/auth/user-info.service';
+import {RouterModule} from '@angular/router';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -30,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     // HttpClientModule,
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
+    RouterModule.forRoot([]),
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: true,
@@ -43,7 +44,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AppRoutingModule,
     WebsiteModule,
   ],
   providers: [

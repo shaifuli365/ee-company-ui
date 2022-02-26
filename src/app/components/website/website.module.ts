@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {HeaderOneModule} from '../../shared/module/header-one/header-one.module';
 import {ThemeLoaderHomeService} from './theme-loader/home/theme-loader-home.service';
 import {AuthGuard} from '../../shared/services/auth/auth.guard';
+import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 
 @Component({
   selector: 'app-website',

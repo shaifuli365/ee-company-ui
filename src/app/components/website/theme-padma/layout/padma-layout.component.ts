@@ -2,24 +2,18 @@ import {Component, ComponentFactoryResolver, OnInit, ViewContainerRef} from '@an
 
 @Component({
   selector: 'app-padma-layout',
-  template: `
-    <app-padma-header></app-padma-header>
+  template: `padma layout
+    <!--<app-padma-header></app-padma-header>
     <app-padma-home></app-padma-home>
-    <app-padma-footer></app-padma-footer>
+    <app-padma-footer></app-padma-footer>-->
   `
 })
 export class PadmaLayoutComponent implements OnInit {
 
-  constructor(private vcr: ViewContainerRef,
-              private cfr: ComponentFactoryResolver) {
-    this.fn();
+  constructor() {
+
   }
 
   ngOnInit(): void {}
-
-  async fn() {
-
-  }
-
 
 }
