@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
-import { map, tap } from 'rxjs/operators';
-import {Token} from '../../entity/user-info';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
@@ -15,18 +13,10 @@ export class UserInfoService {
     constructor(public http: HttpClient, private authService: AuthService) { }
 
     getUserInfoFromToken() {
-        const token = localStorage.getItem('accessToken');
-        const toArray =  token.split('.');
-        const decodedString = atob(toArray[1]);
-        // console.log(decodedString);
-        // let obj = new Token();
+        const token: string | null = localStorage.getItem('accessToken');
+        const toArray =  token? token.split('.') : '';
+        const decodedString = toArray[1];
         const obj = JSON.parse(decodedString);
-        /*
-        for (const val of toArray) {
-            console.log(val);
-            console.log(atob(val));
-        }*/
-
         return decodedString;
     }
 

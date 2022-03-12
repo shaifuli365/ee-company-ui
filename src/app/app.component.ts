@@ -13,7 +13,7 @@ export class AppComponent {
 
   // For Progressbar
   loaders = this.loader.progress$.pipe(
-    delay(1000),
+    //delay(1000),
     withLatestFrom(this.loader.progress$),
     map(v => v[1]),
   );

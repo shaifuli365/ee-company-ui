@@ -30,7 +30,7 @@ export class PreferenceService {
   }
 
   setSelectedOrgId(selectedOrgId: number) {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
+    const preference: Preference = JSON.parse(localStorage.getItem('preference')?? '');
     if (preference == null){
       const preference2 = new Preference();
       preference2.selectedOrgId = selectedOrgId;
@@ -41,17 +41,18 @@ export class PreferenceService {
     }
   }
 
-  getSelectedOrgId(): any  {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
-    if (preference == null){
-      return null;
+  getSelectedOrgId(): number  {
+    const preference: Preference = JSON.parse(localStorage.getItem('preference')?? '');
+    /*if (preference == ''){
+      return 0;
     }else {
       return +preference.selectedOrgId;
-    }
+    }*/
+    return 0;
   }
 
   setSelectedOrgName(selectedOrgName: string) {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
+    const preference: Preference = JSON.parse(localStorage.getItem('preference') ?? '');
     if (preference == null){
       const preference2 = new Preference();
       preference2.selectedOrgName = selectedOrgName;
@@ -63,7 +64,7 @@ export class PreferenceService {
   }
 
   getSelectedOrgName() {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
+    const preference: Preference = JSON.parse(localStorage.getItem('preference') ?? '');
     if (preference == null){
       return null;
     }else {
@@ -72,7 +73,7 @@ export class PreferenceService {
   }
 
   setRoleList(roleList: any) {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
+    const preference: Preference = JSON.parse(localStorage.getItem('preference') ?? '');
     if (preference == null){
       const preference2 = new Preference();
       preference2.roleList = roleList;
@@ -84,7 +85,7 @@ export class PreferenceService {
   }
 
   getRoleList() {
-    const preference: Preference = JSON.parse(localStorage.getItem('preference'));
+    const preference: Preference = JSON.parse(localStorage.getItem('preference')?? '');
     if (preference == null){
       return null;
     }else {

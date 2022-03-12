@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, ValidationErrors} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors} from '@angular/forms';
 import {filter, map, tap} from 'rxjs/operators';
 import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {pipe} from 'rxjs';
@@ -12,12 +12,12 @@ export function formAllControls(form: FormGroup){
 
 export function allInvalid(form: FormGroup){
   const invalid = [];
-  const controls = form.controls;
+  /*const controls: object = form.controls;
   for (const name in controls) {
     if (controls[name].invalid) {
       invalid.push(name);
     }
-  }
+  }*/
   console.log(invalid);
 }
 
@@ -44,20 +44,22 @@ export function toFormData<T>( formValue: T ) {
   return formData;
 }
 
-export function uploadProgress<T>( cb: ( progress: number ) => void ) {
+/*export function uploadProgress<T>( cb: ( progress: number ) => void ) {
   return tap(( event: HttpEvent<T> ) => {
     if ( event.type === HttpEventType.UploadProgress ) {
       cb(Math.round((100 * event.loaded) / event.total));
     }
   });
-}
+}*/
 
+/*
 export function toResponseBody<T>() {
   return pipe(
     filter(( event: HttpEvent<T> ) => event.type === HttpEventType.Response),
     map(( res: HttpResponse<T> ) => res.body)
   );
 }
+*/
 
 export function requiredFileType( type: string ) {
   return (control: FormControl ) => {
@@ -75,7 +77,7 @@ export function requiredFileType( type: string ) {
   };
 }
 
-export function printError(type: string ) {
+/*export function printError(type: string ) {
   Object.keys(this.websiteDisplayGroupFg.controls).forEach(key => {
     const controlErrors: ValidationErrors = this.websiteDisplayGroupFg.get(key).errors;
     if (controlErrors != null) {
@@ -84,7 +86,7 @@ export function printError(type: string ) {
       });
     }
   });
-}
+}*/
 
 /*export function markAllTouched(obj1, key, val){
   Object.keys(this.f).forEach(controlName =>

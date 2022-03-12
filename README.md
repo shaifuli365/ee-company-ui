@@ -1,23 +1,21 @@
 
 # theme loading , routing and displaying architecture
 
-1 WebsiteModule will load angular RouterModule 
+1 WebsiteModule will load angular RouterModule
 
 2 RouterModule will load ThemeLoaderLayoutModule for home routing  ['']
 
 3 ThemeLoaderLayoutModule will load ThemeLoaderLayoutComponent
 
-3 ThemeLoaderLayoutComponent will load Theme by company
+3 ThemeLoaderLayoutComponent will load Theme module by company
 
-4 For example: padma theme will load PadmaHomeComponent
+4 For example: for padma theme it will load PadmaModule
 
-
-
-
+5 PadmaModule will load PadmalayoutModule
 
 
 # todo
-load website component 
+load website component
 then *ngIf
 
 #Run on local
@@ -26,7 +24,7 @@ ng run enterprise-ecommerce:serve-ssr
 
 #deployment
 npm install
-npm run build:ssr 
+npm run build:ssr
 npm run serve:ssr
 
 ### generate component and module
@@ -39,3 +37,8 @@ ng g d shared/module/input-number --skipImport=true
 cart
 refund-dispute
 delivery 
+
+
+ng add @angular/material
+npm install ngx-bootstrap --save
+

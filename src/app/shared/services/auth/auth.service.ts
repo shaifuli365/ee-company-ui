@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
-  headers = null;
+  headers: HttpHeaders = new HttpHeaders();
   userInfo: any;
   isAuthenticated: boolean;
 
@@ -48,8 +48,7 @@ export class AuthService {
   }
 
   getHeadersWithAccessToken(): HttpHeaders {
-    this.headers = new HttpHeaders()
-      .append('Authorization', 'Bearer ' + this.getToken());
+    this.headers.append('Authorization', 'Bearer ' + this.getToken());
     return this.headers;
   }
 
