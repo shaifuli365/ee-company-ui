@@ -1,8 +1,22 @@
 import {Compiler, Component, ComponentFactory, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-class CommentDto {
+class WebsiteSetup {
   id: number;
+  websiteTemplateDetailIndexPageId: number;
+  websiteTemplateDetailCategoryProductPageId: number;
+  websiteTemplateDetailSingleProductPageId: number;
+  websiteTemplateDetailProductGroupPageId: number;
+
+
+  constructor(id: number, websiteTemplateDetailIndexPageId: number, websiteTemplateDetailCategoryProductPageId: number,
+              websiteTemplateDetailSingleProductPageId: number, websiteTemplateDetailProductGroupPageId: number) {
+    this.id = id;
+    this.websiteTemplateDetailIndexPageId = websiteTemplateDetailIndexPageId;
+    this.websiteTemplateDetailCategoryProductPageId = websiteTemplateDetailCategoryProductPageId;
+    this.websiteTemplateDetailSingleProductPageId = websiteTemplateDetailSingleProductPageId;
+    this.websiteTemplateDetailProductGroupPageId = websiteTemplateDetailProductGroupPageId;
+  }
 }
 
 @Component({
@@ -18,28 +32,22 @@ export class ThemeLoaderLayoutComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-    await this.decideTheme().then(async (value) => {
-      console.log(value);
-      console.log(value.id);
-      console.log(typeof value.id);
-      if (value.id === '1'){
+    await this.decideTheme().then(async (ws: WebsiteSetup | undefined) => {
+      if (ws && ws.websiteTemplateDetailIndexPageId === 1){
         await this.loadPadmaTheme();
       }
-      else if (value.id === '2'){
+      else if (ws && ws.websiteTemplateDetailIndexPageId === 2){
         await this.loadJamunaTheme();
       }else{
-        await this.loadPadmaTheme();
+        await this.loadJamunaTheme();
       }
-
     });
-    console.log(1111);
   }
 
-  async decideTheme(): Promise<any> {
+  async decideTheme(): Promise<WebsiteSetup | undefined> {
     return await this.httpClient
-        .get<CommentDto>('https://5ffdbefed9ddad0017f687c2.mockapi.io/comments/2')
+        .post<WebsiteSetup>('http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',{organizationWebAddress: 'diu'})
         .toPromise();
-
   }
 
   createComponent(factory: ComponentFactory<any>) {

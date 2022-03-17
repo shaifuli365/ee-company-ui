@@ -2,7 +2,6 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {HeaderOneModule} from '../../shared/module/header-one/header-one.module';
-import {ThemeLoaderHomeService} from './theme-loader/home/theme-loader-home.service';
 import {AuthGuard} from '../../shared/services/auth/auth.guard';
 
 @Component({
@@ -29,7 +28,6 @@ export class WebsiteComponent implements OnInit {
     HeaderOneModule,
   ],
   providers: [
-    ThemeLoaderHomeService,
     AuthGuard
   ]
 })
