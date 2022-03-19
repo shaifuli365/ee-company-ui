@@ -1,5 +1,6 @@
 import {Compiler, Component, ComponentFactory, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ResponseMessage} from '../../model/response-message';
 
 class WebsiteSetup {
   id: number;
@@ -7,7 +8,6 @@ class WebsiteSetup {
   websiteTemplateDetailCategoryProductPageId: number;
   websiteTemplateDetailSingleProductPageId: number;
   websiteTemplateDetailProductGroupPageId: number;
-
 
   constructor(id: number, websiteTemplateDetailIndexPageId: number, websiteTemplateDetailCategoryProductPageId: number,
               websiteTemplateDetailSingleProductPageId: number, websiteTemplateDetailProductGroupPageId: number) {
@@ -32,21 +32,22 @@ export class ThemeLoaderLayoutComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-    await this.decideTheme().then(async (ws: WebsiteSetup | undefined) => {
-      if (ws && ws.websiteTemplateDetailIndexPageId === 1){
+    await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
+      console.log(ws);
+      if (ws && ws.data.websiteTemplateDetailIndexPageId === 1){
         await this.loadPadmaTheme();
       }
-      else if (ws && ws.websiteTemplateDetailIndexPageId === 2){
+      else if (ws && ws.data.websiteTemplateDetailIndexPageId === 2){
         await this.loadJamunaTheme();
       }else{
-        await this.loadJamunaTheme();
+        await this.loadNotFoundTheme();
       }
-    });
+    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });
   }
 
-  async decideTheme(): Promise<WebsiteSetup | undefined> {
+  async decideTheme(): Promise<ResponseMessage<WebsiteSetup> | undefined> {
     return await this.httpClient
-        .post<WebsiteSetup>('http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',{organizationWebAddress: 'diu'})
+        .post<ResponseMessage<WebsiteSetup> | undefined>('http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',{organizationWebAddress: 'diu.com'})
         .toPromise();
   }
 
@@ -63,6 +64,11 @@ export class ThemeLoaderLayoutComponent implements OnInit {
   async loadJamunaTheme() {
     console.log('loading jamuna theme');
     this.loadModule(await import('../theme-jamuna/layout/jamuna-layout.module').then(m => m.JamunaLayoutModule));
+  }
+
+  async loadNotFoundTheme() {
+    console.log('Not found');
+    this.loadModule(await import('../theme-not-found/layout/not-found-layout.module').then(m => m.NotFoundLayoutModule));
   }
 
   private loadModule(moduleType: Type<any>) {
