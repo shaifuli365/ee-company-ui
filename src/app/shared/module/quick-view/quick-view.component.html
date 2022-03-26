@@ -6,9 +6,9 @@
             </button>
             <div class="row">
                 <div class="col-lg-6  col-xs-12">
-                    <div class="quick-view-img">
+                   <!-- <div class="quick-view-img">
                         <img [src]="ImageSrc ? ImageSrc : product.images[0].src" [alt]="product.images[0].alt" class="img-fluid">
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-lg-6 rtl-text">
                     <div class="product-right">
@@ -24,7 +24,7 @@
                         </ul>
                         <div class="border-product">
                             <h6 class="product-title">product details</h6>
-                            <p>{{ product.description.substring(0, 200)+'...' }}</p>
+                            <p>{{ product?.description?.substring(0, 200)+'...' }}</p>
                         </div>
                         <div class="product-description border-product">
                             <div class="size-box" *ngIf="Size(product.variants).length">
@@ -34,8 +34,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h5 class="avalibility" *ngIf="counter <= product.stock"><span>In Stock</span></h5>
-                            <h5 class="avalibility" *ngIf="counter > product.stock"><span>Out of Stock</span></h5>
+                            <!--<h5 class="avalibility" *ngIf="counter <= product?.stock"><span>In Stock</span></h5>
+                            <h5 class="avalibility" *ngIf="counter > product?.stock"><span>Out of Stock</span></h5>-->
                             <h6 class="product-title">quantity</h6>
                             <div class="qty-box">
                                 <div class="input-group">
@@ -54,10 +54,10 @@
                             </div>
                         </div>
                         <div class="product-buttons">
-                            <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock"
+                           <!-- <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock"
                                (click)="addToCart(product)">add to cart</a>
                             <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]"
-                               class="btn btn-solid">view detail</a>
+                               class="btn btn-solid">view detail</a>-->
                         </div>
                     </div>
                 </div>

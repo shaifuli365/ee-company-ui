@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
-import {Observable} from 'rxjs';
-import {Product} from '../../entity/product';
-import {indexInList, isInList} from '../../util/collection-util';
+import {indexInList, isInList} from '../../../common/util/single-collection-util';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +11,9 @@ export class WishListService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  public addProductToWishList(product): any {
+  public addProductToWishList(product: any): any {
     const wishListProductListStr = localStorage.getItem('wishListProductList');
-    let wishListProductList = [];
+    let wishListProductList:any = [];
     if (wishListProductListStr !== null){
       wishListProductList = JSON.parse( wishListProductListStr );
     }
@@ -30,7 +29,8 @@ export class WishListService {
 
 
   removeProductFromWishList(product) {
-    const cartProductList = JSON.parse(localStorage.getItem('cartProductList'));
+    const t : string | null = localStorage.getItem('cartProductList');
+    const cartProductList = t ? JSON.parse(t) : [];
     const index = indexInList(cartProductList, product, 'id');
     if (index !== -1 ){
       cartProductList.splice(index, 1);
@@ -38,9 +38,9 @@ export class WishListService {
     localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }
 
-  getAllProductFromWishList() {
+  /*getAllProductFromWishList() {
     return  JSON.parse(localStorage.getItem('cartProductList'));
-  }
+  }*/
 
 }
 

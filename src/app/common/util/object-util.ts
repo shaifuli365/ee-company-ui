@@ -40,7 +40,7 @@ export function objIteration(obj: object): void {
 
 export function getKeyListOfObj<T extends object>(obj: T): Array<string> {
   for (const [p, v] of Object.entries(obj)) {
-   console.log(p);
+    console.log(p);
   }
   return Object.keys(Object.entries(obj));
 }
@@ -116,16 +116,8 @@ export function copyObjByPropMap<T extends object, U extends object>(
   return obj1;
 }
 
-
 export function map(key:string, value:string)  : Map<string, string> {
-  let m : Map<string,string> = new Map<string,string>();
-  m.set(key,value);
-  return m;
-
-  return new Map<string,string>([
-    ["key1", "value1"],
-    ["key2", "value2"]
-  ]);
+  return new Map<string,string>();
 }
 
 export function record(obj: object)  : Record<string, string> {

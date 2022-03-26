@@ -1,21 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
-import {Observable} from 'rxjs';
-import {Product} from '../../entity/product';
-import {map} from 'rxjs/operators';
-import {indexInList, isInList} from '../../util/collection-util';
+import {indexInList, isInList} from '../../../common/util/single-collection-util';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CartService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  public addProductToCart(product): any {
+  public addProductToCart(product:any): any {
     const cartProductListStr = localStorage.getItem('cartProductList');
-    let cartProductList = [];
+    let cartProductList:Array<any> = [];
     if (cartProductListStr !== null){
       cartProductList = JSON.parse( cartProductListStr );
     }
@@ -30,7 +25,7 @@ export class CartService {
   }
 
   removeProductFromCart(product) {
-    const cartProductList = JSON.parse(localStorage.getItem('cartProductList'));
+    const cartProductList = JSON.parse(localStorage.getItem('cartProductList') || '[]');
     const index = indexInList(cartProductList, product, 'id');
     if (index !== -1 ){
       cartProductList.splice(index, 1);
@@ -39,12 +34,11 @@ export class CartService {
   }
 
   getAllProductFromCart() {
-    return  JSON.parse(localStorage.getItem('cartProductList'));
+    return  JSON.parse(localStorage.getItem('cartProductList') || '[]');
   }
 
-
-  public calculateCartTotalAmount(): number {
+  calculateCartTotalAmount(): number {
     return 0;
   }
-}
 
+}

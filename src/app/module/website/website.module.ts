@@ -3,6 +3,8 @@ import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {HeaderOneModule} from '../../shared/module/header-one/header-one.module';
 import {AuthGuard} from '../../shared/services/auth/auth.guard';
+import {JamunaService} from './theme-jamuna/layout/jamuna.service';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-website',
@@ -25,10 +27,11 @@ export class WebsiteComponent implements OnInit {
         ]
       }
     ]),
+    CarouselModule,
     HeaderOneModule,
   ],
   providers: [
-    AuthGuard
+    AuthGuard,JamunaService
   ]
 })
 export class WebsiteModule {}

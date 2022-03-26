@@ -34,8 +34,8 @@ export class DisplayGroupComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.productDetailList = changes.displayGroupWithProductDetailList.currentValue
-      .filter(e => e.wdgId === changes.displayGroupUnique.currentValue.wdgId && e.pdId);
+    this.productDetailList = changes['displayGroupWithProductDetailList'].currentValue
+      .filter(e => e.wdgId === changes['displayGroupUnique'].currentValue.wdgId && e.pdId);
   }
 
 }

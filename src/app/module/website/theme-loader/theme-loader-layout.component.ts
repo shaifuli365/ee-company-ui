@@ -33,8 +33,8 @@ export class ThemeLoaderLayoutComponent implements OnInit {
 
   async ngOnInit(){
 
-    await this.loadPadmaTheme();
-    //await this.loadJamunaTheme();
+    //await this.loadPadmaTheme();
+    await this.loadJamunaTheme();
     /*await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
       console.log(ws);
       if (ws && ws.data.websiteTemplateDetailIndexPageId === 1){

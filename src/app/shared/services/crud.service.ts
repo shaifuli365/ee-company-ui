@@ -3,11 +3,10 @@ import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from './auth/auth.service';
 import {PreferenceService} from './auth/preference.service';
-import {from, Observable} from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
-import {toFormData} from '../util/form-util';
 import {environment} from '../../../environments/environment';
+import {toFormData} from '../../common/util/form-util';
 
 @Injectable({
   providedIn: 'root'

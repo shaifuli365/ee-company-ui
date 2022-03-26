@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
   Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 import { Router } from '@angular/router';
 
 import { ProductService } from '../../services/misc/product.service';
-import {Product} from '../../entity/product';
+import {Product, Variants} from '../../entity/product';
 
 @Component({
   selector: 'app-quick-view',
@@ -22,14 +22,15 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
   public modalOpen = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router,
-              private modalService: NgbModal, public productService: ProductService) { }
+              public productService: ProductService) { }
 
   ngOnInit(): void {}
 
   openModal() {
     this.modalOpen = true;
     if (isPlatformBrowser(this.platformId)) {
-      this.modalService.open(this.QuickView, {
+
+      /*this.modalService.open(this.QuickView, {
         size: 'lg',
         ariaLabelledBy: 'modal-basic-title',
         centered: true,
@@ -45,27 +46,29 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
             console.log(reason);
           }
       });
+      */
+
     }
   }
 
 
-  Color(variants) {
+  Color(variants: Variants[] | undefined) {
     const uniqColor = [];
-    for (let i = 0; i < Object.keys(variants).length; i++) {
+    /*for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
         uniqColor.push(variants[i].color);
       }
-    }
+    }*/
     return uniqColor;
   }
 
   Size(variants) {
     const uniqSize = [];
-    for (let i = 0; i < Object.keys(variants).length; i++) {
+    /*for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
         uniqSize.push(variants[i].size);
       }
-    }
+    }*/
     return uniqSize;
   }
 
@@ -96,7 +99,7 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
 
   ngOnDestroy() {
     if (this.modalOpen){
-      this.modalService.dismissAll();
+      //this.modalService.dismissAll();
     }
   }
 }

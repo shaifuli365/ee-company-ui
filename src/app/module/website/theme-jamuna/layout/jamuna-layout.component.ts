@@ -11,13 +11,13 @@ import {CategoryItem} from '../../../../shared/module/multilevel-category/catego
 })
 export class JamunaLayoutComponent implements OnInit {
 
-  organizationName = '';
+ /* organizationName = '';
   products;
   sliders = [];
   productGroupList = [];
   navItems: CategoryItem[] = [];
   displayGroupWithProductDetailList = [];
-  displayGroupUniqueList = [];
+  displayGroupUniqueList = [];*/
 
   constructor() {}
 

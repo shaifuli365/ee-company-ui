@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CrudService} from '../../../shared/services/crud.service';
 import {Observable} from 'rxjs';
+import {CrudService} from '../../../../shared/services/crud.service';
 
 
 @Injectable()
-export class WebsiteHomeJamunaService {
+export class JamunaService {
 
     constructor( private crudService: CrudService, private http: HttpClient) { }
 

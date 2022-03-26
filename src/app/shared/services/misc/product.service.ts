@@ -12,14 +12,17 @@ export class ProductService {
 
   public Currency = { name: 'Dollar', currency: 'USD', price: 1 };
   public OpenCart = false;
-  public Products;
+  public Products:Observable<Product[]>;
 
   constructor(private http: HttpClient, private crudService: CrudService) { }
 
   private get products(): Observable<Product[]> {
+
     this.Products = this.http.get<Product[]>('assets/data/products16.json').pipe(map(data => data));
-    this.Products.subscribe(next => { localStorage.products = JSON.stringify(next); });
-    return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage.products || '[]')));
+
+    this.Products.subscribe(res => { localStorage['products'] = JSON.stringify(res); });
+
+    return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
   }
 
   public get getProducts(): Observable<Product[]> {
@@ -27,16 +30,21 @@ export class ProductService {
   }
 
   public getProductBySlug(slug: string): Observable<Product> {
-    return this.products.pipe(map(items => {
+
+    const fn = items => {
       return items.find((item: any) => {
         return item.title.replace(' ', '-') === slug;
       });
-    }));
+    }
+    return this.products.pipe(
+      map(fn)
+    );
+
   }
 
   getProductWithDetail(orgName, productDetailSeoUrl): Observable<any> {
-      return this.crudService.getList({orgName , productDetailSeoUrl},
-        '/productDetail/getByOrgNameAndProductDetailName', false, false);
+    return this.crudService.getList({orgName , productDetailSeoUrl},
+      '/productDetail/getByOrgNameAndProductDetailName', false, false);
   }
 
   getProductDetailList(productId: any) {

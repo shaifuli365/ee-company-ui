@@ -51,9 +51,12 @@ import {CategoryItem} from './category-item';
   ]
 })
 export class MultilevelCategoryComponent {
-  expanded: boolean;
+  expanded: boolean = false;
+
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
+
   @Input() item: CategoryItem;
+
   @Input() depth: number;
 
   @Output() navClicked: EventEmitter<any> = new EventEmitter();

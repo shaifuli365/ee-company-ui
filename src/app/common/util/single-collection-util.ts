@@ -1,5 +1,5 @@
 import {addPropToObj, checkObjHasPropAndValue, classToEmptyObj, getKeyListOfObj} from './object-util';
-import {onlyPresentArray} from './type-check-util';
+import {onlyArray, onlyPresentArray} from './type-check-util';
 import {Nullable} from '../type/nullable.type';
 import {classType} from '../type/class.type';
 
@@ -165,18 +165,36 @@ export function desc(list: any[], key: string) {
 /**
  * find form list of object by object property and value
  * @param list [{id:1,name:'name 1'},{id:2,name:'name 2'}]
- * @param key example 'id'
+ * @param prop example 'id'
  * @param value example 2
  * @return example {id:2,name:'name 2'}
  */
-export function findObjFromListByPropAndValue<T>(list: Array<T>, prop: string, value: number | string) : Nullable<T>{
-  onlyPresentArray(list);
+export function findObjFromListByPropAndValue<T extends object>(list: Array<T>, prop: string, value: number | string) : Nullable<T>{
+  onlyArray(list);
   for (let i = 0 ; i < list.length; i ++) {
     if(list[i][prop] === value){
       return list[i];
     }
   }
   return null;
+}
+
+/**
+ * find form list of object by object property and value
+ * @param list [{id:1,name:'name 1'},{id:2,name:'name 2'}]
+ * @param prop example 'id'
+ * @param value example 2
+ * @return example [{id:2,name:'name 2'}]
+ */
+export function findListOfObjFromListByPropAndValue<T extends object>(list: Array<T>, prop: string, value: number | string) : Array<T>{
+  onlyArray(list);
+  let resultList: Array<T> = [];
+  for (let i = 0; i < list.length; i++) {
+    if(list[i][prop] === value){
+      resultList = addObjToList(resultList, list[i])
+    }
+  }
+  return resultList;
 }
 
 export function findFirst<T, U>(
@@ -200,7 +218,7 @@ export function removeObjFromList<T extends object>(list: Array<T>, prop: string
 
 
 /**
- * get a object if it is present in list only once
+ * get a object(in a list) if it is present in list only once
  * @param list1 example: [ {id:1,name:'name 1'},{id:2,name:'name 2'},{id:2,name:'name 2'} ]
  * @param prop1 example: 'id'
  * @return resultList example: [ {id:1,name:'name 1'},{id:2,name:'name 2'}]
@@ -218,7 +236,7 @@ export function uniqueObjList<T extends object>(list:Array<T>, prop: string): Ar
 }
 
 /**
- * get a object if it is present in list more than once
+ * get a object(in a list) if it is present in list more than once
  * @param list example [{id: 1, name: 'name 1'}, {id: 2, name: 'name 2'}, {id: 2, name: 'name 2'}, {id: 3, name: 'name 3'}]
  * @param prop   'id'
  * @return List example : [{id:2,name:'name 2'}]
@@ -232,7 +250,7 @@ export function nonUniqueObjList<T extends object>(list:Array<T>, prop: string):
 }
 
 /**
- * get a object only once from list
+ * get a object(in a list) only once from list
  * @param list1 example: [ {id:1,name:'name 1'},{id:2,name:'name 2'},{id:2,name:'name 2'} ]
  * @param prop1 example: 'id'
  * @return resultList example: [ {id:1,name:'name 1'},{id:2,name:'name 2'}]
@@ -240,3 +258,43 @@ export function nonUniqueObjList<T extends object>(list:Array<T>, prop: string):
 export function distinctObjFromList<T extends object>(list:Array<T>, prop: string): Array<T> {
   return list.filter(o => list.some(id => o[prop] === id ));
 }
+
+/**
+ * commonObjectMap
+ * @param list1 example: [ {id:1,name:'name 1'},{id:2,name:'name 2'},{id:2,name:'name 2'} ]
+ * @param prop1 example: 'id'
+ * @return resultList example: map { numberOfOccurance: 2, object: {id:2,name:'name 2'},{id:2,name:'name 2'} }
+ */
+export function commonObjectMap<T extends object>(list:Array<T>, prop: string): Array<T> {
+  return list.filter(o => list.some(id => o[prop] === id ));
+}
+
+
+
+/**
+ * reduce
+ * @param list1 example: [ {id:1,name:'name 1'},{id:2,name:'name 2'},{id:2,name:'name 2'} ]
+ * @param prop1 example: 'id'
+ * @return resultList example: map { numberOfOccurance: 2, object: {id:2,name:'name 2'},{id:2,name:'name 2'} }
+ */
+export function reduce<T>(
+  array: T[],
+  predicate: (previousValue: T, currentValue: T) => T)  : T {
+
+  const t:number = [1, 2, 3].reduce((previousValue, currentValue) => {
+    return previousValue + currentValue;
+  });
+  return <T><unknown>t;
+
+  /*const tempArray: T= array.reduce(predicate);
+  return tempArray;*/
+
+}
+
+export function callbackEx(a, fn: (e: number) => string) : string {
+  return fn(a);
+}
+
+
+
+
