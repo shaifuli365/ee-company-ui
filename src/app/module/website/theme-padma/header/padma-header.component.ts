@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-padma-footer',
+  selector: 'app-padma-header',
   templateUrl: './padma-header.component.html',
   styleUrls: ['./padma-header.component.scss']
 })

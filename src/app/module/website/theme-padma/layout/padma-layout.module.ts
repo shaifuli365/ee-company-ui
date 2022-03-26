@@ -4,6 +4,7 @@ import {PadmaLayoutComponent} from './padma-layout.component';
 import {PadmaHomeComponent} from '../home/padma-home.component';
 import {PadmaHeaderComponent} from '../header/padma-header.component';
 import {PadmaFooterComponent} from '../footer/padma-footer.component';
+import {RouterModule, Routes} from '@angular/router';
 
 @NgModule({
   declarations: [

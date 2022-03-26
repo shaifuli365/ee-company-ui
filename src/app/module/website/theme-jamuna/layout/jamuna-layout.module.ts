@@ -10,7 +10,8 @@ import {JamunaHeaderComponent} from '../header/jamuna-header.component';
     JamunaLayoutComponent,
     JamunaHomeComponent,
     JamunaHeaderComponent,
-    JamunaFooterComponent],
+    JamunaFooterComponent
+  ],
   imports: [
     CommonModule
   ],

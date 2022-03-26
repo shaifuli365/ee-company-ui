@@ -32,7 +32,10 @@ export class ThemeLoaderLayoutComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-    await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
+
+    await this.loadPadmaTheme();
+    //await this.loadJamunaTheme();
+    /*await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
       console.log(ws);
       if (ws && ws.data.websiteTemplateDetailIndexPageId === 1){
         await this.loadPadmaTheme();
@@ -42,7 +45,7 @@ export class ThemeLoaderLayoutComponent implements OnInit {
       }else{
         await this.loadNotFoundTheme();
       }
-    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });
+    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });*/
   }
 
   async decideTheme(): Promise<ResponseMessage<WebsiteSetup> | undefined> {

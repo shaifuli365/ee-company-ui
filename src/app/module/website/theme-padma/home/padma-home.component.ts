@@ -7,7 +7,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PadmaHomeComponent implements OnInit {
 
+  organizationName = '';
+  products;
+  sliders = [];
+  productGroupList = [];
+  //navItems: CategoryItem[] = [];
+  displayGroupWithProductDetailList = [];
+  displayGroupUniqueList = [];
+
+  constructor() {}
+
   ngOnInit(): void {
+
   }
+
 
 }
