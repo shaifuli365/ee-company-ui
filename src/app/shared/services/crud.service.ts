@@ -121,24 +121,38 @@ export class CrudService {
       observer.complete(); });
   }
 
-
   /**
    * wrapper function for getting data with auth and organization id
    */
-  getList(params = {}, relativeUrl, orgMust= false, authMust= true): Observable<any> {
+  get<T extends object>( params:object = {}, relativeUrl: string,
+                         orgMust:boolean= false, authMust:boolean= true): Observable<HttpResponse<T>>{
+
+    let httpParams = new HttpParams();
+    Object.keys(params).forEach(function (key) {
+      httpParams = httpParams.append(key, params[key]);
+    });
+
     if (orgMust){
       if (this.preferenceService.getSelectedOrgId() == null){
         this.toastrService.error( 'failed to get data, select an organization', 'Error' );
         return new Observable();
       }
-      params = {...params, organizationId: this.preferenceService.getSelectedOrgId()};
+     //  params = {...params, organizationId: this.preferenceService.getSelectedOrgId()};
+      httpParams.append('organizationId', this.preferenceService.getSelectedOrgId());
     }
     if (authMust){
-      return this.http.get(`${environment.apiUrl}${relativeUrl}`,
-        {headers:  this.authService.getHeadersWithAccessToken(), params});
+      return this.http.get<T>(
+        `${environment.apiUrl}${relativeUrl}`,
+        { headers:  this.authService.getHeadersWithAccessToken(),
+          params: httpParams,
+          observe: 'response',
+          responseType : 'json'
+        });
+
     }
-    return this.http.get(`${environment.apiUrl}${relativeUrl}`, {params});
+    return this.http.get<T>(`${environment.apiUrl}${relativeUrl}`, {params: httpParams, observe: 'response', responseType : 'json'});
   }
+
 
   /**
    * wrapper function for getting data with auth and organization id

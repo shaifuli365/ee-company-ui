@@ -50,12 +50,12 @@ export class CategoryComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const list = decodeURIComponent(this.location.path()).split('/');
       this.organizationName = list[1];
-      this.getBrandList(list[1]);
+      //this.getBrandList(list[1]);
     });
     this.getProductByFilter(2);
   }
 
-  getBrandList(orgName){
+ /* getBrandList(orgName){
     this.categoryService.getBrandList(orgName)
       .subscribe(res => {
         this.brandSetupList = res.data;
@@ -75,7 +75,7 @@ export class CategoryComponent implements OnInit {
           });
         }
       });
-  }
+  }*/
 
   sortByFilter(value) {
     this.router.navigate([], {

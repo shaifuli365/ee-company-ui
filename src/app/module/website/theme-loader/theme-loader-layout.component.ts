@@ -60,17 +60,17 @@ export class ThemeLoaderLayoutComponent implements OnInit {
   }
 
   async loadPadmaTheme() {
-    console.log('loading padma theme');
+    //console.log('loading padma theme');
     this.loadModule(await import('../theme-padma/layout/padma-layout.module').then(m => m.PadmaLayoutModule));
   }
 
   async loadJamunaTheme() {
-    console.log('loading jamuna theme');
+    //console.log('loading jamuna theme');
     this.loadModule(await import('../theme-jamuna/layout/jamuna-layout.module').then(m => m.JamunaLayoutModule));
   }
 
   async loadNotFoundTheme() {
-    console.log('Not found');
+    //console.log('Not found');
     this.loadModule(await import('../theme-not-found/layout/not-found-layout.module').then(m => m.NotFoundLayoutModule));
   }
 

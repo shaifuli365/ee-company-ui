@@ -272,22 +272,16 @@ export function commonObjectMap<T extends object>(list:Array<T>, prop: string): 
 
 
 /**
- * reduce
+ * reducing
  * @param list1 example: [ {id:1,name:'name 1'},{id:2,name:'name 2'},{id:2,name:'name 2'} ]
  * @param prop1 example: 'id'
  * @return resultList example: map { numberOfOccurance: 2, object: {id:2,name:'name 2'},{id:2,name:'name 2'} }
  */
-export function reduce<T>(
+export function aggregate<T>(
   array: T[],
   predicate: (previousValue: T, currentValue: T) => T)  : T {
 
-  const t:number = [1, 2, 3].reduce((previousValue, currentValue) => {
-    return previousValue + currentValue;
-  });
-  return <T><unknown>t;
-
-  /*const tempArray: T= array.reduce(predicate);
-  return tempArray;*/
+  return array.reduce(predicate);
 
 }
 

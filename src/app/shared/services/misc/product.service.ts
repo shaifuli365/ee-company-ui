@@ -42,7 +42,7 @@ export class ProductService {
 
   }
 
-  getProductWithDetail(orgName, productDetailSeoUrl): Observable<any> {
+  /*getProductWithDetail(orgName, productDetailSeoUrl): Observable<any> {
     return this.crudService.getList({orgName , productDetailSeoUrl},
       '/productDetail/getByOrgNameAndProductDetailName', false, false);
   }
@@ -50,5 +50,5 @@ export class ProductService {
   getProductDetailList(productId: any) {
     return this.crudService.getList({productId},
       '/productDetail/getProductDetailList', false, false);
-  }
+  }*/
 }
