@@ -22,8 +22,8 @@ export class WebsiteHomeService {
   }
 
 
-  getMenuList(orgWebsite): Observable<any> {
-    return this.crudService.get({orgWebsite: orgWebsite}, '/websiteMenu/getAllMenuListByOrganizationName', false, true);
+  getMenuList<T extends object>(organizationWebAddress): Observable<any> {
+    return this.crudService.get({organizationWebAddress: organizationWebAddress}, '/websiteMenu/getAllMenuListByOrganizationName', false, true);
   }
 
   getProductGroupList(orgName): Observable<any> {

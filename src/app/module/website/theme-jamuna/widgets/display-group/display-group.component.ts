@@ -1,4 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {WebsiteDisplayGroupProductDetailProjection} from '../../../../model/WebsiteDisplayGroupProductDetailProjection';
 
 @Component({
   selector: 'app-display-group',
@@ -6,7 +8,8 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
   styleUrls: ['./display-group.component.scss']
 })
 export class DisplayGroupComponent implements OnInit, OnChanges {
-  public ProductSliderConfig: any = {
+
+  p/*ublic ProductSliderConfig: any = {
     loop: true,
     dots: true,
     navSpeed: 300,
@@ -24,18 +27,19 @@ export class DisplayGroupComponent implements OnInit, OnChanges {
         items: 1
       }
     }
-  };
+  };*/
 
-  @Input() displayGroupWithProductDetailList;
-  @Input() displayGroupUnique;
-  @Input() organizationName;
-  productDetailList = [];
+  @Input() organizationName: string;
+
+  productDetailList:Array<WebsiteDisplayGroupProductDetailProjection> = [];
+  @Input() displayGroupWithProductDetailList: Array<WebsiteDisplayGroupProductDetailProjection>;
+  @Input() displayGroup : WebsiteDisplayGroupProductDetailProjection;
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.productDetailList = changes['displayGroupWithProductDetailList'].currentValue
-      .filter(e => e.wdgId === changes['displayGroupUnique'].currentValue.wdgId && e.pdId);
+      .filter(e => e.wdgId === changes['displayGroup'].currentValue.wdgId && e.pdId);
   }
 
 }

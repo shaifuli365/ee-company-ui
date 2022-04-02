@@ -8,6 +8,7 @@ import {uniqueObjList} from '../../../../common/util/single-collection-util';
 import {WebsiteDisplayGroupProductDetailProjection} from '../../../model/WebsiteDisplayGroupProductDetailProjection';
 import {HttpResponse} from '@angular/common/http';
 import {ResponseMessage} from '../../../model/response-message';
+import {OwlOptions} from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-jamuna-home',
@@ -16,9 +17,10 @@ import {ResponseMessage} from '../../../model/response-message';
 })
 export class JamunaHomeComponent implements OnInit {
 
+
   organizationName:string = '';
   organizationWebAddress:string = '';
-  menuTitleList = [];
+  menuTitleList:Array<string> = [];
   products;
   sliders = [];
   productGroupList:Array<any> = [];
@@ -33,7 +35,6 @@ export class JamunaHomeComponent implements OnInit {
     this.websiteHomeService.getOrganizationWebAddress(location).subscribe(res => {
       this.getMenuList(res);
       this.getDisplayGroupList(res);
-
     }, err => {});
 
     //this.getProductGroupList();
@@ -45,33 +46,36 @@ export class JamunaHomeComponent implements OnInit {
     this.websiteHomeService.getDisplayGroupList<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>
     (this.websiteHomeService.getEncodeURI(organizationWebAddress)).subscribe(
       (res: HttpResponse<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>) => {
-      console.log(res.body);
-      if(res.body && res.body.data){
-        this.displayGroupWithProductDetailList = res.body.data;
-      }
-      this.displayGroupUniqueList = uniqueObjList(this.displayGroupWithProductDetailList, 'wdgId');
-      console.log(this.displayGroupUniqueList);
-    }, err => {});
+        console.log(res.body);
+        if(res.body && res.body.data){
+          this.displayGroupWithProductDetailList = res.body.data;
+        }
+        this.displayGroupUniqueList = uniqueObjList(this.displayGroupWithProductDetailList, 'wdgId');
+        console.log(this.displayGroupUniqueList);
+      }, err => {});
   }
 
   getMenuList(organizationWebAddress: string){
-    this.websiteHomeService.getMenuList(organizationWebAddress).subscribe(res => {
-      //console.log(this.menuTitleList);
-      this.menuTitleList = res.data;
-    }, err => {});
+    this.websiteHomeService.getMenuList<ResponseMessage<Array<string>>>(organizationWebAddress).subscribe(
+      (res:HttpResponse<ResponseMessage<Array<string>>>) => {
+        //console.log(res);
+        if(res.body && res.body.data) {
+          this.menuTitleList = res.body.data;
+        }
+      }, err => {});
   }
 
-/*
-  getBannerList(){
-    this.websiteHomeService.getBannerList(this.organizationName).subscribe(res => {
-      // console.log(res);
-      if (res.status === true) {
-        // res.data.map(element => this.sliders.push(element));
-        this.sliders = res.data;
-      }
-    }, err => {});
-  }
-*/
+  /*
+    getBannerList(){
+      this.websiteHomeService.getBannerList(this.organizationName).subscribe(res => {
+        // console.log(res);
+        if (res.status === true) {
+          // res.data.map(element => this.sliders.push(element));
+          this.sliders = res.data;
+        }
+      }, err => {});
+    }
+  */
 
   getProductGroupList(){
     this.websiteHomeService.getProductGroupList(this.organizationName)

@@ -16,6 +16,7 @@ import {AuthService} from './shared/services/auth/auth.service';
 import {AuthInterceptor} from './shared/services/auth/auth.interceptor';
 import {PreferenceService} from './shared/services/auth/preference.service';
 import {UserInfoService} from './shared/services/auth/user-info.service';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CarouselModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     LoadingBarHttpClientModule,

@@ -45,8 +45,7 @@ import {OwlCarouselOConfig} from 'ngx-owl-carousel-o/lib/carousel/owl-carousel-o
     MultilevelNavModule,
     MatListModule,
     TruncatePipeModule,
-    MultilevelCategoryModule,
-    CarouselModule
+    MultilevelCategoryModule
   ],
   providers: []
 })

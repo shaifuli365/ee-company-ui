@@ -34,11 +34,15 @@
         </div>
       </div>
       <div class="col-md-9 bg">
+
+
         <div *ngFor="let displayGroupUnique of displayGroupUniqueList">
+
           <app-display-group [displayGroupWithProductDetailList]="displayGroupWithProductDetailList"
-                             [displayGroupUnique]="displayGroupUnique"
+                             [displayGroup]="displayGroupUnique"
                              [organizationName]="organizationName">
           </app-display-group>
+
         </div>
       </div>
     </div>
