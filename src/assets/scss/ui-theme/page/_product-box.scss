@@ -1,0 +1,195 @@
+
+.product-box-inside {
+  position: relative;
+  transition: all 0.5s ease;
+
+  .img-wrapper {
+    position: relative;
+    overflow: hidden;
+    .lable-block {
+      .new-lable {
+        border-radius: 100%;
+        background-color: var(--theme-deafult);
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        position: absolute;
+        padding: 10px 5px;
+        color: $white;
+        top: 5px;
+        left: 5px;
+        z-index: 1;
+      }
+      .sale-lable {
+        position: absolute;
+        font-size: 16px;
+        font-weight: 700;
+        writing-mode: vertical-rl;
+        transform: rotate(-180deg);
+        top: 7px;
+        right: 7px;
+        letter-spacing: 0.1em;
+        z-index: 1;
+        color: #050505;
+      }
+    }
+    .image-front {
+      opacity: 1;
+      top: 0;
+      left: 0;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+    .product-image-label {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+      margin: 0 auto;
+      display: inline-block;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.5s ease;
+      a {
+        [class^="icon-"], [class*=" icon-"] {
+          display: inline-block;
+        }
+      }
+      button {
+        background: none;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+      }
+      i {
+        color: $icon;
+        font-size: 18px;
+        padding-right: 10px;
+        padding-left: 10px;
+        display: block;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        background-color: lighten(rgba(0, 0, 0, 0.7),70%);
+        /*border-radius: 100%;
+        border:2px solid var(--theme-deafult);*/
+        &:hover {
+          color: var(--theme-deafult);
+        }
+      }
+    }
+  }
+
+  .product-detail {
+    padding-left: 10px;
+    p {
+      display: none;
+    }
+    .product-title {
+      line-height: 1;
+      padding-top: 0;
+      padding-bottom: 5px;
+      transition: all 0.5s ease;
+      font-size: 18px;
+      margin-top: 5px;
+      color: var(--theme-deafult);
+    }
+    h4 {
+      font-size: 18px;
+      color: $dark-font;
+      font-weight: 700;
+      margin-bottom: 0;
+      transition: all 0.5s ease;
+      del {
+        color: #aaa;
+        font-size: 14px;
+      }
+    }
+    .product-color-box {
+      padding-top: 10px;
+      li {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        margin-right: 5px;
+        transition: all 0.1s ease;
+        vertical-align: middle;
+        cursor: pointer;
+        &.white {
+          background-color: $white;
+          border: 1px solid #aaa;
+        }
+        &.pink {
+          background-color: $pink;
+        }
+        &.red {
+          background-color: $red;
+        }
+        &.green {
+          background-color: $green;
+        }
+        &.yellow {
+          background-color: $yellow;
+        }
+        &.skyblue {
+          background-color: $skyblue;
+        }
+        &.blue {
+          background-color: $blue;
+        }
+        &.orange {
+          background-color: $orange;
+        }
+        &.purple {
+          background-color: $purple;
+        }
+        &.violet {
+          background-color: $violet;
+        }
+        &.brown {
+          background-color: $brown;
+        }
+        &.lightgreen {
+          background-color: $lightgreen;
+        }
+        &.olive {
+          background-color: $olive;
+        }
+        &.navy {
+          background-color: $navy;
+        }
+        &.black {
+          background-color: $black;
+        }
+        &.gray,
+        .grey {
+          background-color: $grey;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .product-image-label {
+      opacity: 1;
+      transition: all 0.5s ease;
+      button {
+        animation: fadeInRight 300ms ease-in-out;
+      }
+      a {
+        &:nth-child(2) i {
+          animation: fadeInRight 500ms ease-in-out;
+        }
+        &:nth-child(3) i {
+          animation: fadeInRight 700ms ease-in-out;
+        }
+        &:nth-child(4) i {
+          animation: fadeInRight 1000ms ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+
+

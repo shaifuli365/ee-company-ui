@@ -1,19 +1,13 @@
 <div *ngIf="!loader" class="product-box-inside">
   <div class="img-wrapper">
-    <!--
-    <div class="lable-block">
-      <span class="new-lable" *ngIf="product.new">new</span>
-      <span class="sale-lable" *ngIf="product.sale">on sale </span>
-    </div>
-    -->
+
     <div class="image-front">
-      <!--a [routerLink]="['/organization/category/product']" [queryParams]="{id: '1'}">-->
-      <!--<a [routerLink]="['/organization/product', { color: 'red' }]" [queryParams]="{id: '1'}">-->
-      <!--<img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
-        [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"
-        class="img-fluid lazy-loading" alt="{{ product.images[0].alt }}" />-->
-      <!--</a>-->
-      <img src="../../../../assets/images/product/5.jpg" class="img-fluid lazy-loading" alt="product" />
+
+      <a [routerLink]="['/organization/product', { color: 'red' }]" [queryParams]="{id: '1'}">
+        <img [src]="productDetail?.imageUrl || 'assets/images/placeholder/placeholder.jpg'"
+             alt="product" height="250" width="250" style="border: 2px solid gray;"/>
+      </a>
+
     </div>
     <div class="product-image-label">
       <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(productDetail)">
@@ -27,7 +21,7 @@
       </a>
     </div>
   </div>
-  
+
   <div class="product-detail">
     <!--<a [routerLink]="['/Test%20organization%201%20diu/product', 'toyota'.replace(' ', '-')]">-->
     <a href="/{{getEncodeURI(organizationName)}}/product/{{getEncodeURI(productDetail.seoUrl)}}">

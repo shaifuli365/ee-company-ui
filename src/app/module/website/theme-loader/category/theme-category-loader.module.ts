@@ -4,6 +4,8 @@ import {RouterModule} from '@angular/router';
 import {CrudService} from '../../../../common/service/crud.service';
 import {ThemeCategoryLoaderComponent} from './theme-category-loader.component';
 import {CategoryService} from '../../theme-jamuna/category/category.service';
+import {WishListService} from '../../../../shared/services/misc/wishlist.service';
+import {CartService} from '../../../../shared/services/misc/cart.service';
 
 
 @NgModule({
@@ -14,6 +16,9 @@ import {CategoryService} from '../../theme-jamuna/category/category.service';
       path: '', component: ThemeCategoryLoaderComponent,
     }])
   ],
-  providers: [CategoryService , CrudService ]
+  providers: [CategoryService ,
+    CrudService,
+    WishListService,
+    CartService ]
 })
 export class ThemeCategoryLoaderModule {}

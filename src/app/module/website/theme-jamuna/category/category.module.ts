@@ -7,7 +7,6 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {SkeletonProductBoxComponent} from './widgets/skeleton-product-box/skeleton-product-box.component';
 import {FormsModule} from '@angular/forms';
-import {CategoryService} from './category.service';
 import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
 
 @NgModule({

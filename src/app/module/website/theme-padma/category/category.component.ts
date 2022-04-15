@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Location, ViewportScroller} from '@angular/common';
 import {CategoryService} from './category.service';
-import {removeObjFromList} from '../../../shared/util/collection-util';
-import {isNumber} from '../../../shared/util/check-util';
+
 
 @Component({
   selector: 'app-category',
@@ -22,8 +21,8 @@ export class CategoryComponent implements OnInit {
   public brandSetupSltParamNameList: string[] = [];
   public brandCollapse = true;
 
-  public minPrice: number = null;
-  public maxPrice: number = null;
+  public minPrice: number|null = null;
+  public maxPrice: number|null = null;
   public priceCollapse = true;
 
   public category: string;

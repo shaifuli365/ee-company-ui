@@ -1,0 +1,20 @@
+
+div#loading-bar {
+  color: var(--theme-deafult) !important;
+  .bar {
+    background: var(--theme-deafult) !important;
+  }
+}
+
+#loading-bar-spinner {
+  top: 15px !important;
+  left: unset !important;
+  right: 0 !important;
+  margin-right: 20px;
+  color: var(--theme-deafult) !important;
+  .spinner-icon {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+

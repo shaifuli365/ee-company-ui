@@ -1,0 +1,41 @@
+
+
+.qty-box {
+  .input-group {
+    justify-content: center;
+    span {
+      button {
+        background: $white !important;
+        border: 1px solid #ced4da;
+      }
+    }
+    .form-control {
+      text-align: center;
+      width: 80px;
+      flex: unset;
+    }
+    button {
+      background-color: transparent;
+      border: 0;
+      color: $grey;
+      cursor: pointer;
+      padding-left: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      z-index: 0;
+      i {
+        font-weight: 900;
+        color: $dark-font;
+      }
+    }
+    .icon {
+      padding-right: 0;
+    }
+  }
+}
+
+
+.openFilterbar {
+  left: -15px !important;
+}
