@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {CrudService} from '../../../shared/services/crud.service';
-import {OrganizationDto} from '../../model/OrganizationDto';
-import { WebsiteDisplayGroupProductDetailProjection } from '../../model/WebsiteDisplayGroupProductDetailProjection';
+import {OrganizationDto} from '../../dto/OrganizationDto';
+import { WebsiteDisplayGroupProductDetailProjection } from '../../dto/WebsiteDisplayGroupProductDetailProjection';
 
 
 @Injectable()
@@ -63,7 +63,7 @@ export class WebsiteHomeService {
 
   getOrganizationWebAddress(location: Location): Observable<string> {
     //console.log(location.hostname);
-    return of('diu.com')
+    return of('organization1.com')
   }
 
   getOrganizationByWebAddress(webAddress: string): Observable<OrganizationDto> {

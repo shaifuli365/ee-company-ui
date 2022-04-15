@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {WebsiteDisplayGroupProductDetailProjection} from '../../../../model/WebsiteDisplayGroupProductDetailProjection';
+import {WebsiteDisplayGroupProductDetailProjection} from '../../../../dto/WebsiteDisplayGroupProductDetailProjection';
 
 @Component({
   selector: 'app-display-group',
@@ -9,7 +9,7 @@ import {WebsiteDisplayGroupProductDetailProjection} from '../../../../model/Webs
 })
 export class DisplayGroupComponent implements OnInit, OnChanges {
 
-  p/*ublic ProductSliderConfig: any = {
+  /*public ProductSliderConfig: any = {
     loop: true,
     dots: true,
     navSpeed: 300,

@@ -1,4 +1,4 @@
-<h1>Jamuna</h1>
+
 
 <div class="webnav2 container">
 
@@ -20,7 +20,7 @@
     <app-slider [sliders]="sliders" ></app-slider>
 
     <div class="row">
-      <div class="col-md-3">
+      <!--<div class="col-md-3">
         <div class="category-sidebar p-1 bg-1 text-uppercase" >
           <div class="wrapper-tree">
             <div *ngIf="productGroupList.length > 0">
@@ -32,12 +32,10 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-9 bg">
+      </div>-->
 
-
+      <div class="col-md-12 bg">
         <div *ngFor="let displayGroupUnique of displayGroupUniqueList">
-
           <app-display-group [displayGroupWithProductDetailList]="displayGroupWithProductDetailList"
                              [displayGroup]="displayGroupUnique"
                              [organizationName]="organizationName">

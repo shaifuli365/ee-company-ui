@@ -5,7 +5,6 @@ import {JamunaHomeComponent} from '../home/jamuna-home.component';
 import {JamunaFooterComponent} from '../footer/jamuna-footer.component';
 import {JamunaHeaderComponent} from '../header/jamuna-header.component';
 import {MatListModule} from '@angular/material/list';
-import {ProductBoxModule} from '../../../../shared/module/product-box/product-box.module';
 import {MultilevelCategoryModule} from '../../../../shared/module/multilevel-category/multilevel-category.module';
 import {TruncatePipeModule} from '../../../../shared/pipes/truncate/truncate-pipe.module';
 import {MultilevelNavModule} from '../../../../shared/module/multilevel-nav/multilevel-nav.module';
@@ -20,7 +19,9 @@ import {SkeletonProductBoxComponent} from '../widgets/skeleton-product-box/skele
 import {ServiceIconComponent} from '../widgets/service-icon/service-icon.component';
 import {DisplayGroupComponent} from '../widgets/display-group/display-group.component';
 import {ProductDetailBoxComponent} from '../widgets/product-detail-box/product-detail-box.component';
-import {OwlCarouselOConfig} from 'ngx-owl-carousel-o/lib/carousel/owl-carousel-o-config';
+import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
+import {ImageLazyLoadModule} from '../../../../shared/module/image-lazy-load/image-lazy-load.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import {OwlCarouselOConfig} from 'ngx-owl-carousel-o/lib/carousel/owl-carousel-o
     MultilevelNavModule,
     MatListModule,
     TruncatePipeModule,
-    MultilevelCategoryModule
+    MultilevelCategoryModule,
+    ImageLazyLoadModule,
+    RouterModule
   ],
   providers: []
 })

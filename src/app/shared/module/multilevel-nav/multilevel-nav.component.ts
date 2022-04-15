@@ -51,8 +51,7 @@ import {NavItem} from './nav-item';
   ]
 })
 export class MultilevelNavComponent {
-  expanded: boolean= false;
-
+  expanded: boolean = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem;
   @Input() depth: number;

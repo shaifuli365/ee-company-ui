@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryItem} from '../../../../shared/module/multilevel-category/category-item';
 import {WebsiteHomeService} from '../../service/website-home.service';
 import {uniqueObjList} from '../../../../common/util/single-collection-util';
-import {WebsiteDisplayGroupProductDetailProjection} from '../../../model/WebsiteDisplayGroupProductDetailProjection';
+import {WebsiteDisplayGroupProductDetailProjection} from '../../../dto/WebsiteDisplayGroupProductDetailProjection';
 import {HttpResponse} from '@angular/common/http';
 import {ResponseMessage} from '../../../model/response-message';
 import {OwlOptions} from 'ngx-owl-carousel-o';
@@ -16,7 +16,6 @@ import {OwlOptions} from 'ngx-owl-carousel-o';
   styleUrls: ['./jamuna-home.component.scss']
 })
 export class JamunaHomeComponent implements OnInit {
-
 
   organizationName:string = '';
   organizationWebAddress:string = '';

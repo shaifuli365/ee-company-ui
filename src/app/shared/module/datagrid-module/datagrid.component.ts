@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, ViewChild, EventEmitter, SimpleChanges
 import {AgGridAngular} from 'ag-grid-angular';
 import {PageChangedEvent} from 'ngx-bootstrap/pagination';
 import {ShowUpdateDeleteComponent} from './show-update-delete/show-update-delete.component';
-import {Page} from '../../model/page';
+import {Page} from '../../../module/model/page';
 import {HttpParams} from '@angular/common/http';
 
 @Component({

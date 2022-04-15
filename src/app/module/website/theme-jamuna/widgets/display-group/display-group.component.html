@@ -11,9 +11,8 @@
 
         <div class="row">
           <div class="col-md-2" *ngFor="let productDetail of productDetailList">
-            <!--{{productDetail | json}}-->
-
-
+            <app-product-detail-box [productDetail]="productDetail" [organizationName]="organizationName">
+            </app-product-detail-box>
 
           </div>
         </div>
@@ -23,8 +22,7 @@
 
           <ng-container *ngFor="let productDetail of productDetailList">
             <ng-template carouselSlide>
-              <app-product-detail-box [productDetail]="productDetail" [organizationName]="organizationName">
-              </app-product-detail-box>
+
             </ng-template>
           </ng-container>
 

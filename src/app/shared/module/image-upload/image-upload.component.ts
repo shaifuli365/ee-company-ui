@@ -1,12 +1,10 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, ControlContainer, ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ValidationService} from '../../services/validation.service';
-import {CrudService} from '../../services/crud.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {hasRequiredField} from '../../util/form-util';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'input-file',
+  selector: 'image-upload',
   templateUrl: './image-upload.component.html',
   providers: [
     {
@@ -17,25 +15,27 @@ import {DomSanitizer} from '@angular/platform-browser';
   ],
   styleUrls: ['./image-upload.component.scss']
 })
-export class ImageUploadComponent implements OnInit, ControlValueAccessor {
+export class ImageUploadComponent implements OnInit  {
   @Input() formControlName;
-  @Input() progress = 0;
   @Input() label;
-  @Input() mode: 'save' | 'update' = 'save';
   @Input() updateImgSrc = '';
-  onChange;
+  @Input() uploadUrl = '';
+  @Input() required = false;
+
+  progress = 0;
+
   file: File | null = null;
   control: AbstractControl;
   parentForm: FormGroup;
-  required;
   errorWithMessage = [];
   url: any;
+
+  @Output() fileEmit = new EventEmitter<File>();
 
   @HostListener('change', ['$event.target.files']) emitFiles( event: FileList ) {
     const file = event && event.item(0);
     this.onChange(file);
     this.file = file;
-    this.setError();
   }
 
   constructor(private host: ElementRef<HTMLInputElement>,
@@ -45,68 +45,44 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     this.parentForm = this.controlContainer.control as FormGroup;
     this.control = this.parentForm.get(this.formControlName);
-
-    this.required = this.hasRequiredField(this.control);
-    if (!this.control) {
-      throw new Error('File Field input component must be a part of a form group');
-    }
+    this.required = hasRequiredField(this.control);
   }
 
-  writeValue( value: null ) {
-    console.log(value);
-    this.host.nativeElement.value = '';
-    this.file = null;
-    if (value === null){
-      this.clearImage();
-    }
-    if (value !== null){
-      this.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(value));
-    }
-  }
+  onChange(file:File){
 
-  registerOnChange( fn ) {
-    this.onChange = fn;
   }
-
-  registerOnTouched( fn ) {}
 
   /*hasError( field: string, error: string ) {
     return this.control.dirty && this.control.hasError(error);
   }*/
-  private setError() {
-    this.errorWithMessage = [];
-    if (this.control.errors){
-      for (const [key, value] of Object.entries(this.control.errors)) {
-        this.errorWithMessage.push(ValidationService.getValidatorErrorMessage(key, value));
-      }
-    }
-  }
 
-  public hasRequiredField(abstractControl: AbstractControl): boolean{
-    if (abstractControl.validator) {
-      const validator = abstractControl.validator({}as AbstractControl);
-      if (validator && validator.required) {
-        return true;
-      }
-    }
-    return false;
-  }
+  writeValue( value: null ) {}
+  registerOnChange(fn: ()=>{} ) {}
+  registerOnTouched(fn: ()=>{} ) {}
 
-  onChoose(event: any){
-    if (event.target.files.length === 0) {
+
+  onChoose(event: Event){
+    if ((event.target as HTMLInputElement).files.length === 0) {
       return;
     }
-    const mimeType = event.target.files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
+    if ((event.target as HTMLInputElement).files
+      && (event.target as HTMLInputElement).files.length
+      && (event.target as HTMLInputElement).files.length > 0) {
+      const file = (event.target as HTMLInputElement).files;
+    }
+
+    const mimeType = (event.target as HTMLInputElement).files[0].type;
+    if (mimeType.match(/image\/*/) === null) {
       return;
     }
-    this.renderImage(event.target.files[0]);
+    this.renderImage((event.target as HTMLInputElement).files[0]);
+    this.fileEmit.emit((event.target as HTMLInputElement).files[0]);
   }
 
   renderImage(file: File) {
-    const reader = new FileReader();
+    const reader:FileReader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = (e) => {
+    reader.onload = (e:ProgressEvent<FileReader>) => {
       this.url = reader.result;
     };
   }
@@ -114,5 +90,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   clearImage() {
     this.url = null;
   }
+
+
 
 }
