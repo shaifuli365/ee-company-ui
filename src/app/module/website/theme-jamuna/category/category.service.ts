@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {CrudService} from 'src/app/shared/services/crud.service';
 import {Product} from 'src/app/shared/entity/product';
+import {BrandSetupDto} from '../../../dto/BrandSetupDto';
+import {classToObj} from '../../../../common/util/object-util';
 
 @Injectable()
 export class CategoryService {
@@ -19,10 +21,6 @@ export class CategoryService {
         /*return this.http.get<any>('assets/data/products16.json')
           .pipe(map(data => data));*/
     }
-
-    /*getBrandList(orgName): Observable<any> {
-        return this.crudService.getList({orgName}, '/brandSetup/getAllByOrgName', false, false);
-    }*/
 
 
     private get products(): Observable<Product[]> {
@@ -141,4 +139,11 @@ export class CategoryService {
             startPage, endPage, startIndex, endIndex, pages};
     }
 
+  getBrandList(orgName):Observable<Array<BrandSetupDto>> {
+
+    const bs1:BrandSetupDto = classToObj(BrandSetupDto,{id:1,name:'brand 1'})
+    const bs2:BrandSetupDto = classToObj(BrandSetupDto,{id:2,name:'brand 2'})
+    const bs3:BrandSetupDto = classToObj(BrandSetupDto,{id:3,name:'brand 3'})
+    return of([bs1,bs2,bs3]);
+  }
 }

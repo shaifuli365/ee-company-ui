@@ -48,7 +48,7 @@ export class WebsiteHomeService {
       navItems[i] = {
         displayName: pgList[i].name,
         iconName: 'insert_chart_outlined',
-        route: this.getEncodeURI(organizationName) + '/category/' + this.getEncodeURI(pgList[i].name),
+        route: encodeURI(organizationName) + '/category/' + encodeURI(pgList[i].name),
         children: []
       };
       if (pgList[i].productGroupChildList.length > 0){
@@ -57,17 +57,4 @@ export class WebsiteHomeService {
     }
   }
 
-  getEncodeURI(uri: any) {
-    return encodeURI(uri);
-  }
-
-  getOrganizationWebAddress(location: Location): Observable<string> {
-    //console.log(location.hostname);
-    return of('organization1.com')
-  }
-
-  getOrganizationByWebAddress(webAddress: string): Observable<OrganizationDto> {
-    console.log(location.hostname);
-    return of(new OrganizationDto(true,''))
-  }
 }

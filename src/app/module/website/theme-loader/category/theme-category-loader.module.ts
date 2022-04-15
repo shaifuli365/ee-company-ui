@@ -6,6 +6,7 @@ import {ThemeCategoryLoaderComponent} from './theme-category-loader.component';
 import {CategoryService} from '../../theme-jamuna/category/category.service';
 import {WishListService} from '../../../../shared/services/misc/wishlist.service';
 import {CartService} from '../../../../shared/services/misc/cart.service';
+import {WebsiteService} from '../../service/website.service';
 
 
 @NgModule({
@@ -16,9 +17,12 @@ import {CartService} from '../../../../shared/services/misc/cart.service';
       path: '', component: ThemeCategoryLoaderComponent,
     }])
   ],
-  providers: [CategoryService ,
+  providers: [
+    WebsiteService,
+    CategoryService,
     CrudService,
     WishListService,
-    CartService ]
+    CartService
+  ]
 })
 export class ThemeCategoryLoaderModule {}

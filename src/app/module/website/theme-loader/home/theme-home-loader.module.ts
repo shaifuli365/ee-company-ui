@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {WebsiteHomeService} from '../../service/website-home.service';
 import {CrudService} from '../../../../common/service/crud.service';
 import {ThemeHomeLoaderComponent} from './theme-home-loader.component';
+import {WebsiteService} from '../../service/website.service';
 
 @NgModule({
   declarations: [ThemeHomeLoaderComponent],
@@ -13,6 +14,10 @@ import {ThemeHomeLoaderComponent} from './theme-home-loader.component';
       path: '', component: ThemeHomeLoaderComponent,
     }])
   ],
-  providers: [WebsiteHomeService , CrudService ]
+  providers: [
+    WebsiteService,
+    WebsiteHomeService ,
+    CrudService
+  ]
 })
 export class ThemeHomeLoaderModule {}

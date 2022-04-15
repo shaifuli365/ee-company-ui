@@ -9,6 +9,7 @@ import {WebsiteDisplayGroupProductDetailProjection} from '../../../dto/WebsiteDi
 import {HttpResponse} from '@angular/common/http';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {ResponseMessage} from '../../../model/ResponseMessage';
+import {WebsiteService} from '../../service/website.service';
 
 @Component({
   selector: 'app-jamuna-home',
@@ -28,10 +29,11 @@ export class JamunaHomeComponent implements OnInit {
   displayGroupUniqueList : Array<WebsiteDisplayGroupProductDetailProjection> = [];
 
   constructor( private location: Location, private toastrService: ToastrService, private router: Router,
-               private websiteHomeService: WebsiteHomeService, private activatedRoute: ActivatedRoute) {}
+               private websiteService: WebsiteService, private websiteHomeService: WebsiteHomeService,
+               private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.websiteHomeService.getOrganizationWebAddress(location).subscribe(res => {
+    this.websiteService.getOrganizationWebAddress(location).subscribe(res => {
       this.getMenuList(res);
       this.getDisplayGroupList(res);
     }, err => {});
@@ -43,7 +45,7 @@ export class JamunaHomeComponent implements OnInit {
 
   getDisplayGroupList(organizationWebAddress: string){
     this.websiteHomeService.getDisplayGroupList<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>
-    (this.websiteHomeService.getEncodeURI(organizationWebAddress)).subscribe(
+    (encodeURI(organizationWebAddress)).subscribe(
       (res: HttpResponse<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>) => {
         console.log(res.body);
         if(res.body && res.body.data){

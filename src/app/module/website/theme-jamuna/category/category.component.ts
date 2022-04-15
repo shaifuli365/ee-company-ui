@@ -3,9 +3,11 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Location, ViewportScroller} from '@angular/common';
 import {CategoryService} from './category.service';
 import {ProductDetailDto} from '../../../dto/ProductDetailDto';
-import {classToObj} from '../../../../common/util/object-util';
+import {addPropToObj, classToObj} from '../../../../common/util/object-util';
 import {isNumber} from '../../../../common/util/type-check-util';
-import {removeObjFromList} from '../../../../common/util/single-collection-util';
+import {addPropInListOfObj, removeObjFromList} from '../../../../common/util/single-collection-util';
+import {WebsiteService} from '../../service/website.service';
+import {BrandSetupDto} from '../../../dto/BrandSetupDto';
 
 @Component({
   selector: 'app-category',
@@ -19,9 +21,9 @@ export class CategoryComponent implements OnInit {
   public productDetail;
   public productDetailList:Array<ProductDetailDto> = [];
 
-  public brandSetupList: any[] = [];
+  public brandSetupDtoList: BrandSetupDto[] = [];
   public brandSetupSltList: any[] = [];
-  public brandSetupSltParamNameList: string[] = [];
+  public brandParamNameList: string[] = [];
   public brandCollapse = true;
 
   public minPrice: number|null = null;
@@ -37,13 +39,14 @@ export class CategoryComponent implements OnInit {
   public categoryName = '';
 
   constructor(private location: Location, private route: ActivatedRoute, private router: Router,
+              private websiteService: WebsiteService,
               private viewScroller: ViewportScroller, public categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params:Params) => {
       // console.log(params);
-      this.brandSetupSltParamNameList = params['brand'] ? params['brand'].split(',') : [];
+      this.brandParamNameList = params['brand'] ? params['brand'].split(',') : [];
       this.minPrice = params['minPrice'] ? params['minPrice'] : this.minPrice;
       this.maxPrice = params['maxPrice'] ? params['maxPrice'] : this.maxPrice;
       this.sortBy = params['sortBy'] ? params['sortBy'] : 'ascending';
@@ -52,32 +55,34 @@ export class CategoryComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const list = decodeURIComponent(this.location.path()).split('/');
       this.organizationName = list[1];
-      //this.getBrandList(list[1]);
+      this.websiteService.getOrganizationWebAddress(location).subscribe(res => {
+        this.getBrandList(res);
+      }, err => {});
+
     });
     this.getProductByFilter(2);
   }
 
-  /* getBrandList(orgName){
-     this.categoryService.getBrandList(orgName)
-       .subscribe(res => {
-         this.brandSetupList = res.data;
-         this.brandSetupList = this.brandSetupList.map(obj => ({ ...obj, selected : false }));
-         // filter according to param
-         for (const brandSetupSltParamName of this.brandSetupSltParamNameList) {
-           const t = this.brandSetupList.find( bc => bc.name === brandSetupSltParamName );
-           if (t !== null && t !== undefined ){
-             this.brandSetupSltList.push(t);
-           }
-           this.brandSetupList = this.brandSetupList.map(bs => {
-             if (bs.name === brandSetupSltParamName){
-               return { ...bs, selected : true };
-             }else{
-               return bs;
-             }
-           });
-         }
-       });
-   }*/
+  getBrandList(orgName){
+    this.categoryService.getBrandList(orgName)
+      .subscribe((res:Array<BrandSetupDto>) => {
+        this.brandSetupDtoList = res;
+
+        for (const brandParamName of this.brandParamNameList) {
+          const t:BrandSetupDto|null = this.brandSetupDtoList.find( bsd => bsd.name === brandParamName)?? null ;
+          t ?  this.brandSetupSltList.push(t) : null;
+
+          this.brandSetupDtoList = this.brandSetupDtoList.map(bsd => {
+            if (bsd.name === brandParamName){
+              bsd.selected=true;
+              return bsd;
+            }else{
+              return bsd;
+            }
+          });
+        }
+      });
+  }
 
   sortByFilter(value) {
     this.router.navigate([], {
@@ -153,9 +158,9 @@ export class CategoryComponent implements OnInit {
   getProductByFilter(filter){
 
     this.productDetailList = [
-     classToObj(ProductDetailDto, {id: '1', seoTitle: 'shirt 1', seoUrl: 'shirt-1', size: 'small'}),
-     classToObj(ProductDetailDto, {id: '2', seoTitle: 'shirt 2', seoUrl: 'shirt 2', size: 'medium'}),
-     classToObj(ProductDetailDto, {id: '3', seoTitle: 'shirt 3', seoUrl: 'shirt 3', size: 'large'}),
+      classToObj(ProductDetailDto, {id: '1', seoTitle: 'shirt 1', seoUrl: 'shirt-1', size: 'small'}),
+      classToObj(ProductDetailDto, {id: '2', seoTitle: 'shirt 2', seoUrl: 'shirt 2', size: 'medium'}),
+      classToObj(ProductDetailDto, {id: '3', seoTitle: 'shirt 3', seoUrl: 'shirt 3', size: 'large'}),
     ]
     /* this.categoryService.getProductList()
        .subscribe(response => {
