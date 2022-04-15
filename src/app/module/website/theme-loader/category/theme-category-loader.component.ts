@@ -21,13 +21,66 @@ class WebsiteSetup {
 
 @Component({
   selector: 'app-theme-category-loader',
-  template: ` catttttttt `
+  template: ` <ng-container #anchor></ng-container> `
 })
 export class ThemeCategoryLoaderComponent implements OnInit {
 
+
+  @ViewChild('anchor', { read: ViewContainerRef }) anchor: ViewContainerRef;
+
+  componentFactories: ComponentFactory<any>[];
+
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
-  ngOnInit(){
+  async ngOnInit(){
+
+    //await this.loadPadmaTheme();
+    await this.loadJamunaCategoryPage();
+    /*await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
+      console.log(ws);
+      if (ws && ws.data.websiteTemplateDetailIndexPageId === 1){
+        await this.loadPadmaTheme();
+      }
+      else if (ws && ws.data.websiteTemplateDetailIndexPageId === 2){
+        await this.loadJamunaTheme();
+      }else{
+        await this.loadNotFoundTheme();
+      }
+    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });*/
+  }
+
+  async decideTheme(): Promise<ResponseMessage<WebsiteSetup> | undefined> {
+    return await this.httpClient
+      .post<ResponseMessage<WebsiteSetup> | undefined>('http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',{organizationWebAddress: 'diu.com'})
+      .toPromise();
+  }
+
+  createComponent(factory: ComponentFactory<any>) {
+    this.anchor.clear();
+    this.anchor.createComponent(factory);
+  }
+
+  async loadPadmaTheme() {
+    //console.log('loading padma theme');
+    this.loadModule(await import('../../theme-padma/layout/padma-layout.module').then(m => m.PadmaLayoutModule));
+  }
+
+  async loadJamunaCategoryPage() {
+    //console.log('loading jamuna theme');
+    this.loadModule(await import('../../theme-jamuna/category/category.module').then(m => m.JamunaCategoryModule));
+  }
+
+  async loadNotFoundTheme() {
+    //console.log('Not found');
+    this.loadModule(await import('../../theme-not-found/layout/not-found-layout.module').then(m => m.NotFoundLayoutModule));
+  }
+
+  private loadModule(moduleType: Type<any>) {
+    this.anchor.clear();
+    const moduleFactories = this.compiler.compileModuleAndAllComponentsSync(moduleType);
+    this.componentFactories = moduleFactories.componentFactories;
+    this.anchor.clear();
+    this.anchor.createComponent(this.componentFactories[0]);
   }
 
 }

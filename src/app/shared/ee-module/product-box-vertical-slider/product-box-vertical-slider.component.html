@@ -2,26 +2,26 @@
 <div class="theme-card">
     <h5 class="title-border">{{ title }}</h5>
     <owl-carousel-o [options]="NewProductSliderConfig" class="offer-slider">
-        <ng-container *ngFor="let product of products | slice:0:4 ">
+        <ng-container *ngFor="let productDetailDto of productDetailDtoList | slice:0:4 ">
             <ng-template carouselSlide>
                 <div>
-                  <div class="media" *ngFor="let product of products | slice:0:4 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                  <div class="media" *ngFor="let productDetailDto of productDetailDtoList | slice:0:4 ">
+                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
                       <!--<img class="img-fluid w-auto"
-                           [defaultImage]="'assets/images/product/placeholder.jpg'" 
+                           [defaultImage]="'assets/images/product/placeholder.jpg'"
                            [lazyLoad]="product.images[0].src" alt="">-->
                         <img class="img-fluid w-auto" src="https://source.unsplash.com/random/443x304?electronic" alt="">
 
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                      <h6>{{ product.title | titlecase }}</h6></a>
+                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                      <h6>{{ productDetailDto.seoTitle | titlecase }}</h6></a>
                       <h4>
-                        {{ product?.price * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
-                        <del *ngIf="product?.discount">
-                          <span class="money"> 
-                            {{ product?.price * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        <del *ngIf="productDetailDto?.currentSalePrice">
+                          <span class="money">
+                            {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
                           </span>
                         </del>
                       </h4>
@@ -31,22 +31,22 @@
             </ng-template>
             <ng-template carouselSlide>
                 <div>
-                  <div class="media" *ngFor="let product of products | slice:3:6 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                  <div class="media" *ngFor="let productDetailDto of productDetailDtoList | slice:3:6 ">
+                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
                       <!--<img class="img-fluid w-auto"
-                           [defaultImage]="'assets/images/product/placeholder.jpg'" 
-                           [src]="product.images[0].src" alt="">-->
-                      <img class="img-fluid w-auto" [src]="product.images[0].src" alt="">
+                           [defaultImage]="'assets/images/product/placeholder.jpg'"
+                           [src]="productDetailDto.images[0].src" alt="">-->
+                      <!--<img class="img-fluid w-auto" [src]="productDetailDto.ima[0].src" alt="">-->
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                      <h6>{{ product.title | titlecase }}</h6></a>
+                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                      <h6>{{ productDetailDto.seoTitle | titlecase }}</h6></a>
                       <h4>
-                        {{ product?.price * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
-                        <del *ngIf="product?.discount">
-                          <span class="money"> 
-                            {{ product?.price * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        <del *ngIf="productDetailDto?.currentSalePrice">
+                          <span class="money">
+                            {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
                           </span>
                         </del>
                       </h4>

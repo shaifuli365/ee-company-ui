@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {ProductDetailDto} from '../../../../../dto/ProductDetailDto';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GridComponent implements OnInit {
 
-  @Input() productDetailList = [];
+  @Input() productDetailList:Array<ProductDetailDto> = [];
   @Input() paginate = 10;
   @Input() layoutView = 'grid-view';
   @Input() sortBy: string;

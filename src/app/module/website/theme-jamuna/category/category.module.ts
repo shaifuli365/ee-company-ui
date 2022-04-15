@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CategoryComponent } from './category.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CategoryComponent} from './category.component';
 import {GridComponent} from './widgets/grid/grid.component';
 import {RouterModule} from '@angular/router';
 import {CarouselModule} from 'ngx-owl-carousel-o';
@@ -9,7 +9,6 @@ import {SkeletonProductBoxComponent} from './widgets/skeleton-product-box/skelet
 import {FormsModule} from '@angular/forms';
 import {CategoryService} from './category.service';
 import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
-import {ProductBoxVerticalSliderModule} from '../../../../shared/ee-module/product-box-vertical-slider/product-box-vertical-slider.module';
 
 @NgModule({
   declarations: [
@@ -25,12 +24,8 @@ import {ProductBoxVerticalSliderModule} from '../../../../shared/ee-module/produ
     CarouselModule,
     NgxSkeletonLoaderModule,
     ProductBoxModule,
-    ProductBoxVerticalSliderModule,
-    /*NgbModule, */
     FormsModule
   ],
-  providers: [
-    CategoryService
-  ]
+  providers: []
 })
 export class JamunaCategoryModule { }

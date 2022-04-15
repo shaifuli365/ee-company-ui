@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {WebsiteHomeService} from '../../service/website-home.service';
 import {CrudService} from '../../../../common/service/crud.service';
 import {ThemeCategoryLoaderComponent} from './theme-category-loader.component';
+import {CategoryService} from '../../theme-jamuna/category/category.service';
 
 
 @NgModule({
@@ -14,6 +14,6 @@ import {ThemeCategoryLoaderComponent} from './theme-category-loader.component';
       path: '', component: ThemeCategoryLoaderComponent,
     }])
   ],
-  providers: [WebsiteHomeService , CrudService ]
+  providers: [CategoryService , CrudService ]
 })
 export class ThemeCategoryLoaderModule {}
