@@ -55,7 +55,6 @@
             <div class="row">
               <div class="mt-3" [ngClass]="grid" *ngFor="let productDetail of productDetailList">
                 <div class="product-box">
-                  <!--(click)="showProduct(product)"-->
                   <app-product-box [productDetail]="productDetail"
                                    [organizationName]="organizationName"
                                    [thumbnail]="false" [cartModal]="true" [loader]="true"></app-product-box>

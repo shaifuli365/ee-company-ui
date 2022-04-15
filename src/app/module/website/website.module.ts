@@ -5,6 +5,7 @@ import {AuthGuard} from '../../shared/services/auth/auth.guard';
 import {WebsiteHomeService} from './service/website-home.service';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {ThemeCategoryLoaderModule} from './theme-loader/category/theme-category-loader.module';
+import {DynamicPageModule} from './theme-jamuna/dynamic-page/dynamic-page.module';
 
 @Component({
   selector: 'app-website',
@@ -27,6 +28,9 @@ export class WebsiteComponent implements OnInit {
 
           {path: 'category/:category', loadChildren: () => import('./theme-loader/category/theme-category-loader.module')
               .then(m => m.ThemeCategoryLoaderModule) , canActivate: [AuthGuard] },
+
+          {path: ':page', loadChildren: () => import('./theme-loader/dynamic-page/theme-dynamic-page-loader.module')
+              .then(m => m.ThemeDynamicPageLoaderModule) , canActivate: [AuthGuard] },
         ]
       }
     ]),

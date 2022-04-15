@@ -17,12 +17,6 @@ export class CategoryService {
     constructor(private http: HttpClient, private toastrService: ToastrService,
                 private crudService: CrudService) { }
 
-    public getProductList(): any {
-        /*return this.http.get<any>('assets/data/products16.json')
-          .pipe(map(data => data));*/
-    }
-
-
     private get products(): Observable<Product[]> {
         this.Products = this.http.get<Product[]>('assets/data/products16.json')
           .pipe(map(data => data));
@@ -30,18 +24,6 @@ export class CategoryService {
         this.Products.subscribe(next => { localStorage['products'] = JSON.stringify(next); });
         return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
     }
-
-    /*public get getProducts(): Observable<Product[]> {
-        return this.products;
-    }
-
-    public getProductBySlug(slug: string): Observable<Product> {
-        return this.products.pipe(map(items => {
-            return items.find((item: any) => {
-                return item.title.replace(' ', '-') === slug;
-            });
-        }));
-    }*/
 
     public filterProducts(filter: any): Observable<Product[]> {
         return this.products.pipe(map(product =>

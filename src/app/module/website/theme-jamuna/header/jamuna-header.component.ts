@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-jamuna-header',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./jamuna-header.component.scss']
 })
 export class JamunaHeaderComponent implements OnInit {
+
+  @Input() menuTitleList:Array<string>;
 
   constructor() {}
 

@@ -22,12 +22,12 @@ import {ProductDetailBoxComponent} from '../widgets/product-detail-box/product-d
 import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
 import {ImageLazyLoadModule} from '../../../../shared/module/image-lazy-load/image-lazy-load.module';
 import {RouterModule} from '@angular/router';
+import {JamunaHeaderModule} from '../header/jamuna-header.module';
 
 @NgModule({
   declarations: [
     JamunaLayoutComponent,
     JamunaHomeComponent,
-    JamunaHeaderComponent,
     JamunaFooterComponent,
     SliderComponent,
     LogoComponent,
@@ -48,7 +48,8 @@ import {RouterModule} from '@angular/router';
     TruncatePipeModule,
     MultilevelCategoryModule,
     ImageLazyLoadModule,
-    RouterModule
+    RouterModule,
+    JamunaHeaderModule
   ],
   providers: []
 })

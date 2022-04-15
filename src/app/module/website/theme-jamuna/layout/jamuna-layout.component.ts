@@ -4,7 +4,6 @@ import {CategoryItem} from '../../../../shared/module/multilevel-category/catego
 @Component({
   selector: 'app-jamuna-layout',
   template: `<!--jamuna layout-->
-    <app-jamuna-header></app-jamuna-header>
     <app-jamuna-home></app-jamuna-home>
     <app-jamuna-footer></app-jamuna-footer>
   `
