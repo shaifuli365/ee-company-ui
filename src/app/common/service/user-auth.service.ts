@@ -15,16 +15,9 @@ export class UserAuthService {
   constructor(private apiService: ApiService, private http: HttpClient, private jwtService: JwtService) {}
 
   forgetPassword(params: HttpParams) {
-    return this.apiService.get(apiUriLocation.auth.forgetPassword, params);
+    return this.apiService.get('', params);
   }
 
-  resetPassword(params: HttpParams) {
-    return this.apiService.put(apiUriLocation.auth.resetPassword, params);
-  }
-
-  verifyToken(params: HttpParams) {
-    return this.apiService.get(apiUriLocation.auth.verifyToken, params);
-  }
 
   haveAuthentication() {
     const token = this.jwtService.getToken();
@@ -44,7 +37,7 @@ export class UserAuthService {
 
   login(credentials:any): Observable<Response> {
     this.purgeAuth();
-    return this.apiService.post(apiUriLocation.auth.login, credentials)
+    return this.apiService.post('', credentials)
       .pipe(map(
         (resp) => {
           // console.log(resp);
@@ -66,7 +59,7 @@ export class UserAuthService {
   refreshToken(): Observable<any> {
     const params = new HttpParams()
       .set('token', this.jwtService.getRefreshToken().toString());
-    return this.apiService.get(apiUriLocation.auth.refreshToken, params);
+    return this.apiService.get('', params);
   }
 
   getAuthCurrentUser(): CurrentUser {

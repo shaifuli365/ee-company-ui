@@ -7,8 +7,8 @@ import {WebsiteHomeService} from '../../service/website-home.service';
 import {uniqueObjList} from '../../../../common/util/single-collection-util';
 import {WebsiteDisplayGroupProductDetailProjection} from '../../../dto/WebsiteDisplayGroupProductDetailProjection';
 import {HttpResponse} from '@angular/common/http';
-import {ResponseMessage} from '../../../model/response-message';
 import {OwlOptions} from 'ngx-owl-carousel-o';
+import {ResponseMessage} from '../../../model/ResponseMessage';
 
 @Component({
   selector: 'app-jamuna-home',

@@ -32,6 +32,7 @@
     "@ngx-loading-bar/router": "^4.2.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@rxweb/reactive-form-validators": "^2.1.6",
     "bootstrap": "^4.4.1",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",

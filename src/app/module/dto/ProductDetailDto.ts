@@ -29,7 +29,6 @@ export class ProductDetailDto {
   colorSetup: number|null = null;
   colorSetupId: number|null = null;
 
-
   constructor(id: number, seoTitle: string, seoUrl: string, size: string, model: string,
               barCode: string, basePrice: string, currentSalePrice: string, subSku: string,
               captionTitle: string, captionBgColor: string, year: number, productWeightInGram: number,

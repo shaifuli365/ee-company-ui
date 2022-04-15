@@ -1,6 +1,6 @@
 import {Compiler, Component, ComponentFactory, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ResponseMessage} from '../../../model/response-message';
+import {ResponseMessage} from '../../../model/ResponseMessage';
 
 class WebsiteSetup {
   id: number;

@@ -3,7 +3,9 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Location, ViewportScroller} from '@angular/common';
 import {CategoryService} from './category.service';
 import {ProductDetailDto} from '../../../dto/ProductDetailDto';
-
+import {classToObj} from '../../../../common/util/object-util';
+import {isNumber} from '../../../../common/util/type-check-util';
+import {removeObjFromList} from '../../../../common/util/single-collection-util';
 
 @Component({
   selector: 'app-category',
@@ -39,13 +41,13 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params:Params) => {
       // console.log(params);
-      this.brandSetupSltParamNameList = params.brand ? params.brand.split(',') : [];
-      this.minPrice = params.minPrice ? params.minPrice : this.minPrice;
-      this.maxPrice = params.maxPrice ? params.maxPrice : this.maxPrice;
-      this.sortBy = params.sortBy ? params.sortBy : 'ascending';
-      this.currentPage = params.page ? params.page : this.currentPage;
+      this.brandSetupSltParamNameList = params['brand'] ? params['brand'].split(',') : [];
+      this.minPrice = params['minPrice'] ? params['minPrice'] : this.minPrice;
+      this.maxPrice = params['maxPrice'] ? params['maxPrice'] : this.maxPrice;
+      this.sortBy = params['sortBy'] ? params['sortBy'] : 'ascending';
+      this.currentPage = params['page'] ? params['page'] : this.currentPage;
     });
     this.route.params.subscribe((params: Params) => {
       const list = decodeURIComponent(this.location.path()).split('/');
@@ -151,26 +153,10 @@ export class CategoryComponent implements OnInit {
   getProductByFilter(filter){
 
     this.productDetailList = [
-      new ProductDetailDto(),
-      new ProductDetailDto(),
-      new ProductDetailDto()
+     classToObj(ProductDetailDto, {id: '1', seoTitle: 'shirt 1', seoUrl: 'shirt-1', size: 'small'}),
+     classToObj(ProductDetailDto, {id: '2', seoTitle: 'shirt 2', seoUrl: 'shirt 2', size: 'medium'}),
+     classToObj(ProductDetailDto, {id: '3', seoTitle: 'shirt 3', seoUrl: 'shirt 3', size: 'large'}),
     ]
-    /*  {
-        id: 1,
-        seoTitle: 'awesome good apple organic',
-        seoUrl : 'awesome good apple'
-      } ,
-      {
-        id: 2,
-        seoTitle: 'awesome good mango organic',
-        seoUrl : 'awesome good mango'
-      },
-      {
-        id: 3,
-        seoTitle: 'awesome good orange organic',
-        seoUrl : 'awesome good orange'
-      }
-    ];*/
     /* this.categoryService.getProductList()
        .subscribe(response => {
          this.productDetailList = response;
