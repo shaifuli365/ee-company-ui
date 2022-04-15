@@ -35,3 +35,22 @@ export function getYearFromToday(date: Date, pattern: string = 'YYYY-MM-DD') {
 export function getDateAfterAddingYear(numberOfYear: number): Date {
   return moment().subtract(numberOfYear, 'years').toDate();
 }
+
+
+export function dateToYearMonthDayConversion(dob) {
+  let dobMoment, newDateMoment, year, month, day;
+  dobMoment = moment(dob);
+  newDateMoment = moment();
+
+  year = newDateMoment.diff(dobMoment, 'year');
+  dobMoment = dobMoment.add(year, 'year');
+  month = newDateMoment.diff(dobMoment, 'month');
+  dobMoment = dobMoment.add(month, 'month');
+  day = newDateMoment.diff(dobMoment, 'day');
+
+  year = year != 0 ? year + 'Y ' : '';
+  month = month != 0 ? month + "M " : '';
+  day = day != 0 ? day + "D" : '';
+
+  return year + month + day;
+}

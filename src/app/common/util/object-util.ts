@@ -40,7 +40,7 @@ export function objIteration(obj: object): void {
 
 export function getKeyListOfObj<T extends object>(obj: T): Array<string> {
   for (const [p, v] of Object.entries(obj)) {
-    console.log(p);
+   console.log(p);
   }
   return Object.keys(Object.entries(obj));
 }

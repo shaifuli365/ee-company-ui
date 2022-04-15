@@ -1,7 +1,6 @@
-import {addPropToObj, checkObjHasPropAndValue, classToEmptyObj, getKeyListOfObj} from './object-util';
-import {onlyArray, onlyPresentArray} from './type-check-util';
+import {addPropToObj, checkObjHasPropAndValue} from './object-util';
+import {onlyArray} from './type-check-util';
 import {Nullable} from '../type/nullable.type';
-import {classType} from '../type/class.type';
 
 
 /**
@@ -77,7 +76,7 @@ export function isInList(list, obj, prop): boolean {
  * @param propList1 example: id
  * @return result example : 0
  */
-export function indexInList(list: any[], obj, prop: string): number {
+export function indexInList<T extends object>(list: T[], obj:T, prop: string): number {
   if (list === null || list === undefined || list.length > 0){
     return -1;
   }

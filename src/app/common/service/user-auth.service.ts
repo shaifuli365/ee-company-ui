@@ -7,13 +7,24 @@ import {map} from 'rxjs/operators';
 import jwt_decode from "jwt-decode";
 import {AuthResponse} from '../model/auth-response';
 import {CurrentUser} from '../model/current-user';
-
+import {apiUriLocation} from '../model/api-uri-location';
 
 @Injectable()
 export class UserAuthService {
 
   constructor(private apiService: ApiService, private http: HttpClient, private jwtService: JwtService) {}
 
+  forgetPassword(params: HttpParams) {
+    return this.apiService.get(apiUriLocation.auth.forgetPassword, params);
+  }
+
+  resetPassword(params: HttpParams) {
+    return this.apiService.put(apiUriLocation.auth.resetPassword, params);
+  }
+
+  verifyToken(params: HttpParams) {
+    return this.apiService.get(apiUriLocation.auth.verifyToken, params);
+  }
 
   haveAuthentication() {
     const token = this.jwtService.getToken();
@@ -31,6 +42,19 @@ export class UserAuthService {
     this.jwtService.saveToken(authResponse);
   }
 
+  login(credentials:any): Observable<Response> {
+    this.purgeAuth();
+    return this.apiService.post(apiUriLocation.auth.login, credentials)
+      .pipe(map(
+        (resp) => {
+          // console.log(resp);
+          if (resp.code === 200) {
+            this.setAuth(resp['data']);
+          }
+          return resp;
+        }
+      ));
+  }
 
   //logout(): Observable<any> {
   logout(): void {
@@ -42,7 +66,7 @@ export class UserAuthService {
   refreshToken(): Observable<any> {
     const params = new HttpParams()
       .set('token', this.jwtService.getRefreshToken().toString());
-    return this.apiService.get('', params);
+    return this.apiService.get(apiUriLocation.auth.refreshToken, params);
   }
 
   getAuthCurrentUser(): CurrentUser {

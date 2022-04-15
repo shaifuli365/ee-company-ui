@@ -3,9 +3,13 @@
                  animateRows [rowData]="content" [columnDefs]="columnDefs"
                  [defaultColDef]="defaultColDef"
                  [enableRangeSelection]="true"
+                 [enableRangeHandle]="true"
+                 [enableFillHandle]="true"
+                 [enableCellTextSelection]="true"
+                 [ensureDomOrder]="true"
                  [frameworkComponents]="frameworkComponents"
                  (gridReady)="onGridReady($event)" (rowClicked)="onRowClicked($event)"
-                 rowSelection="single">
+                 [rowSelection]="rowSelection">
 </ag-grid-angular>
 
 <span class="form-text text-muted">

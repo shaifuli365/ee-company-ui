@@ -17,3 +17,25 @@ export function mustMatch(controlName: string, matchingControlName: string) {
     }
   };
 }
+
+
+export function numValidate(event) {
+  const pattern = /[0-9\+\-\ ]/;
+  if (!pattern.test(event.key)) {
+    event.preventDefault();
+  } 
+}
+
+export function lettersNumbersOnly(event) {
+  const pattern = /[A-Za-z0-9]/;
+  if (!pattern.test(event.key)) {
+    event.preventDefault();
+  } 
+}
+
+export function stringValidator(event){
+  const pattern = /^[A-Za-z]+$/;
+  if (!pattern.test(event.key)) {
+    event.preventDefault();
+  } 
+}

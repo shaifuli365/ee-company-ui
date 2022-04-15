@@ -1,13 +1,18 @@
 import {
-  addObjToList, commonObjFromList,
+  addObjToList,
+  aggregate,
+  callbackEx,
+  commonObjectMap,
   contain,
+  findListOfObjFromListByPropAndValue,
   findObjFromListByPropAndValue,
-  groupByProp3,
+  toCommaSeparatedValue,
   uniqueObjList
 } from '../util/single-collection-util';
 import {Nullable} from '../type/nullable.type';
-import {CommonObjectMap, Student, University, UniversityStudentProjection} from './model/model.spec';
+import {Student, University, UniversityStudentProjection} from './model/model.spec';
 import {classToObj} from '../util/object-util';
+import {groupByProp} from '../util/multi-collection-util';
 
 describe('Test single collection util', () => {
 
@@ -28,13 +33,13 @@ describe('Test single collection util', () => {
   it('findObjFromListByPropAndValue', () => {
     const student1: Student = classToObj(Student, {id: '1', name: 'name 1'});
     const student2: Student = classToObj(Student, {id: '1', name: 'name 1'});
+    const student3: Student = classToObj(Student, {id: '3', name: 'name 3'});
     let studentList: Array<Student> = [];
 
     studentList = addObjToList(studentList, student1);
     studentList = addObjToList(studentList, student2);
 
-    const studentT: Nullable<Student> = findObjFromListByPropAndValue( studentList,  'id', 3);
-    //const studentT: Student = findFirst( studentList,  x => true , (x) => x);
+    const studentT: Nullable<Student> = findObjFromListByPropAndValue( studentList,  'id', '1');
     const studentT2: Student = classToObj(Student, {id: '1', name: 'name 1'});
 
     expect(studentT).toEqual(studentT2 );
@@ -58,24 +63,6 @@ describe('Test single collection util', () => {
     expect(studentListE).toEqual(studentT3 );
   });
 
-
-  it('commonObjFromList', () => {
-    let studentListT2: Array<Student> =  [
-      new Student( '2',  'name 2', null)
-    ];
-
-    //new CommonObjectMap( 1,  new Student( '1',  'name 1', null)),
-
-    let studentListT: Array<Student> =  [
-      new Student( '1',  'name 1', null),
-      new Student( '2',  'name 2', null),
-      new Student( '2',  'name 2', null),
-      new Student( '3',  'name 3', null),
-    ];
-    const studentT3: Array<Student> = commonObjFromList( studentListT, 'id');
-    expect(studentListT2).toEqual(studentT3 );
-  });
-
   it('contain', () => {
     let student: Student =  new Student( '1',  'name 1');
 
@@ -90,32 +77,62 @@ describe('Test single collection util', () => {
   });
 
 
-  it('test5 groupByProp', () => {
+  it('test4', () => {
+    const str = toCommaSeparatedValue(['abc', 'def' , 2], null);
+    // console.log(str);
+    expect(str).toBe('abc,def,2');
+  });
 
-    let student: Student =  new Student( '1',  'name 1');
-    let university: University = new University( '1',  'name 1', [student] );
 
-    let universityStudentProjectionList: Array<UniversityStudentProjection> =  [
-      new UniversityStudentProjection('1','student 1','1','university 1'),
-      new UniversityStudentProjection('2','student 1','1','university 1'),
-      new UniversityStudentProjection('3','student 1','1','university 1'),
-      new UniversityStudentProjection('4','student 1','1','university 1'),
-      new UniversityStudentProjection('5','student 1','1','university 1'),
-      new UniversityStudentProjection('6','student 1','2','university 2'),
-      new UniversityStudentProjection('7','student 1','2','university 2'),
+  it('commonObjectMap', () => {
+    let studentListT2: Array<Student> =  [
+      new Student( '2',  'name 2', null)
     ];
+    //new commonObjectMap( 1,  new Student( '1',  'name 1', null)),
+    let studentListT: Array<Student> =  [
+      new Student( '1',  'name 1', null),
+      new Student( '2',  'name 2', null),
+      new Student( '2',  'name 2', null),
+      new Student( '3',  'name 3', null),
+    ];
+    const studentT3: Array<Student> = commonObjectMap( studentListT, 'id');
+    expect(studentListT2).toEqual(studentT3 );
+  });
 
-    const universityList:Array<University> = groupByProp3<University>(
-      'universityId',
-      universityStudentProjectionList,
-      University,
-      [{'':''},{'':''}],
-      'studentList',
-      Student,
-      [{'':''},{'':''}]
-    );
-    console.log(universityList);
-    expect(1).toEqual(1 );
+
+  it('findListOfObjFromListByPropAndValue', () => {
+
+    let studentList: Array<Student> = [];
+    studentList = addObjToList(studentList, classToObj(Student, {id: '1', name: 'name 1'}));
+    studentList = addObjToList(studentList, classToObj(Student, {id: '2', name: 'name 2'}));
+    studentList = addObjToList(studentList, classToObj(Student, {id: '2', name: 'name 2'}));
+    studentList = addObjToList(studentList, classToObj(Student, {id: '3', name: 'name 3'}));
+
+    const studentListE: Array<Student> = findListOfObjFromListByPropAndValue( studentList,  'id', '2');
+
+    let studentList2: Array<Student> = [];
+    studentList2 = addObjToList(studentList2, classToObj(Student, {id: '2', name: 'name 2'}));
+    studentList2 = addObjToList(studentList2, classToObj(Student, {id: '2', name: 'name 2'}));
+
+    expect(studentListE).toEqual(studentList2 );
+  });
+
+
+  it('aggregate', () => {
+
+    const t:number = aggregate([1, 2, 3], (previousValue, currentValue) => {
+      return previousValue + currentValue;
+    });
+
+    expect(t).toEqual(6 );
+  });
+
+
+  it('callback', () => {
+    const fn = (b: number) : string => {
+      return b.toString();
+    }
+    expect(callbackEx(5,fn)).toEqual("5" );
   });
 
 });

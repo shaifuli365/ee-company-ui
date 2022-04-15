@@ -1,8 +1,8 @@
 import {test1} from '../util/type-check-util';
 import {ApiResponseCode} from '../enums/api-response-code';
 import {ApiResponse} from '../model/api-response';
-import {listToCommaSeparatedString} from '../util/single-collection-util';
-import {addPropToObj} from '../util/object-util';
+import {toCommaSeparatedValue} from '../util/single-collection-util';
+
 
 enum AnEnum {
   One = 1,
@@ -31,10 +31,6 @@ describe('Test type convert util', () => {
     expect(true).toEqual(c);
   });
 
-  it('test4', () => {
-    const str = listToCommaSeparatedString(['abc', 'def' , 2], null);
-    // console.log(str);
-    expect(str).toBe('abc,def,2');
-  });
+
 
 });

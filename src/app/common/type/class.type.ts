@@ -1,3 +1,3 @@
-export type classType = {new(...args: any[])};
+export type classType = {new(...args: any[]) :any};
 
-export type classTypeEmpty = {new()};
+export type classTypeEmpty = {new() :any};

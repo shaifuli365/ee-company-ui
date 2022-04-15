@@ -99,6 +99,50 @@ describe('Test object util', () => {
   });
 
   it('map', () => {
+    /*const o: object = {id:1,name:'shaiful'}
+    console.log(typeof o);
+    console.log(o)
+
+    const student: Student = new Student('2', 'name 2');
+    console.log(typeof student);
+    console.log(student)*/
+
+    let m : Map<string,string> = new Map<string,string>();
+    m.set('1','111');
+    m.set('2','222');
+    m.set('3','333');
+    m.set('4','444');
+    console.log(typeof m);
+    console.log(m);
+
+    console.log(m.get("1"));
+    console.log(m.has("1"));
+    console.log(m.has("3"));
+
+    console.log(m.size);
+    console.log(m.delete("2"));
+
+    //m.clear();
+
+    /*let m2 : Map<string,string> = new Map<string,string>([
+      ["key1", "value1"],
+      ["key2", "value2"]
+    ]);
+    console.log(typeof m2);
+    console.log(m2);*/
+
+    for (let key of m.keys()) {
+      console.log(key);
+    }
+    for (let value of m.values()) {
+      console.log(value);
+    }
+
+    console.log("The Map Enteries are: ");
+    for (let entry of m.entries()) {
+      console.log(entry[0], entry[1]);
+    }
+
     expect(1).toEqual(1);
   });
 

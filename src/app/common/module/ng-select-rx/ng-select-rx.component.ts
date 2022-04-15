@@ -11,7 +11,7 @@ export class NgSelectRxComponent implements OnInit, ControlValueAccessor {
 
   selectedValues: any;
   selectAllFlag = false;
-  @ViewChild('combo', { static: true }) combo;
+  //@ViewChild('combo', { static: true }) combo;
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
@@ -45,13 +45,13 @@ export class NgSelectRxComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  onChange(event) {
+  onChange(event: Array<any>) {
     //debugger;
   }
 
   onTouched() {}
 
-  onSelectionChange(selectedItems) {
+  onSelectionChange(selectedItems:any) {
     if (Array.isArray(selectedItems)) {
       const newList = selectedItems.map((x) => x.id);
       this.selectedValues = [...newList];

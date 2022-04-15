@@ -1,29 +1,26 @@
 import {EmptyException} from '../exception/empty-exception';
 import {UndefinedTypeException} from '../exception/undefined-type-exception';
 import {MismatchTypeException} from '../exception/mismatch-type-exception';
+import {UnExpectedTypeException} from '../exception/unexpected-type-exception';
 
 /**
  * is variable Array
  */
-export function isArray(v : Array<any>): boolean {
-  //return Array.isArray(v);
-  if ((v instanceof Array) && !(v instanceof Object) && (typeof v !== 'object') ){
-    return true;
-  }
-  return false;
+export function isArray(v : any): boolean {
+  return Array.isArray(v);
 }
-
 
 /**
  * throw Error Exception if it is not array
  */
-export function onlyArray(v : Array<any>): void {
+export function onlyArray(v : any): boolean {
   if (typeof v === 'undefined'){
     throw new UndefinedTypeException();
   }
   if (!isArray(v)){
-    throw new MismatchTypeException('only array type allowed but found other type');
+    throw new UnExpectedTypeException('only array type allowed but found other type');
   }
+  return true;
 }
 
 /**
@@ -221,3 +218,6 @@ export function test1(o: { [key: string]: any }): boolean {
 export function test2(a): number {
   return a;
 }
+
+
+

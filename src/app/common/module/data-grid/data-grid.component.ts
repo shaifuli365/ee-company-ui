@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {AgGridAngular} from 'ag-grid-angular';
 import {PageChangedEvent} from 'ngx-bootstrap/pagination';
-import {HttpParams} from '@angular/common/http';
 import {Page} from '../../model/page';
-import {ColDef} from 'ag-grid-community';
+import {ColDef, GridApi, GridReadyEvent} from 'ag-grid-community';
 import {DataGridIconComponent} from './data-grid-icon/data-grid-icon.component';
 import {CurrentPage} from '../../model/current-page';
 import {toInteger} from '../../util/type-convert-util';
+import {ColumnApi} from 'ag-grid-community/dist/lib/columns/columnApi';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -19,8 +19,8 @@ export class DataGridComponent implements OnInit, OnChanges {
 
   @Input() columnDefs: ColDef[];
   @Input()  frameworkComponents = { btnCellRenderer: DataGridIconComponent };
-  gridApi;
-  gridColumnApi;
+  gridApi: GridApi;
+  gridColumnApi: ColumnApi;
   showPagination = true;
   @ViewChild('agGrid') agGrid: AgGridAngular;
   @Output() getPage = new EventEmitter();
@@ -61,7 +61,7 @@ export class DataGridComponent implements OnInit, OnChanges {
   /*const selectedNodes = this.agGrid.api.getSelectedNodes();
    const selectedData = selectedNodes.map(node => node.data );*/
 
-  onGridReady($event: any) {
+  onGridReady($event: GridReadyEvent) {
     this.gridApi = $event.api;
     this.gridColumnApi = $event.columnApi;
   }
@@ -95,4 +95,5 @@ export class DataGridComponent implements OnInit, OnChanges {
     resizable: true,
   };
 
+  public rowSelection = 'single';
 }
