@@ -16,7 +16,7 @@ export class ThemeCheckoutLoaderComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-    await this.loadJamunaDynamicPageTheme();
+    await this.loadJamunaCheckoutTheme();
   }
 
   createComponent(factory: ComponentFactory<any>) {
@@ -24,8 +24,8 @@ export class ThemeCheckoutLoaderComponent implements OnInit {
     this.anchor.createComponent(factory);
   }
 
-  async loadJamunaDynamicPageTheme() {
-    this.loadModule(await import('../../theme-jamuna/dynamic-page/dynamic-page.module').then(m => m.DynamicPageModule));
+  async loadJamunaCheckoutTheme() {
+    this.loadModule(await import('../../theme-jamuna/checkout/checkout.module').then(m => m.CheckoutModule));
   }
 
   private loadModule(moduleType: Type<any>) {

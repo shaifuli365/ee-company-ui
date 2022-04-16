@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {DynamicPageService} from './dynamic-page.service';
+import {WebsiteDynamicPageService} from '../../service/website-dynamic-page.service';
 
 @Component({
   selector: 'app-dynamic-page',
@@ -11,7 +11,7 @@ import {DynamicPageService} from './dynamic-page.service';
 export class DynamicPageComponent implements OnInit {
 
   constructor( private location: Location,  private router: Router, private activatedRoute: ActivatedRoute,
-               private dynamicPageService: DynamicPageService) {}
+               private websiteDynamicPageService: WebsiteDynamicPageService) {}
 
   websiteMenu = {title: '', content : ''};
 

@@ -1,21 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {SizeModalComponent} from './widgets/size-modal/size-modal.component';
+import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
-import {ProductService} from '../../../../shared/services/misc/product.service';
 import {WebsiteSingleProductService} from '../../service/website-single-product.service';
 
 @Component({
-  selector: 'app-custom',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-single-product',
+  templateUrl: './single-product.component.html',
+  styleUrls: ['./single-product.component.scss']
 })
 export class SingleProductComponent implements OnInit {
 
   public counter = 1;
   public activeSlide: any = 0;
-  @ViewChild('sizeChart') SizeChart: SizeModalComponent;
   public ProductDetailsThumbConfig: any = {
     items: 3,
     loop: true,

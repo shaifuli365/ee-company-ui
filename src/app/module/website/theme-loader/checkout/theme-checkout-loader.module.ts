@@ -4,6 +4,8 @@ import {RouterModule} from '@angular/router';
 import {CrudService} from '../../../../common/service/crud.service';
 import {WebsiteService} from '../../service/website.service';
 import {ThemeCheckoutLoaderComponent} from './theme-checkout-loader.component';
+import {WebsiteCheckoutService} from '../../service/website-checkout.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ThemeCheckoutLoaderComponent],
@@ -11,11 +13,14 @@ import {ThemeCheckoutLoaderComponent} from './theme-checkout-loader.component';
     CommonModule,
     RouterModule.forChild([{
       path: '', component: ThemeCheckoutLoaderComponent,
-    }])
+    }]),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     WebsiteService,
-    CrudService
+    CrudService,
+    WebsiteCheckoutService
   ]
 })
 export class ThemeCheckoutLoaderModule {}

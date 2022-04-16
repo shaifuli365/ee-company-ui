@@ -6,7 +6,7 @@
             <ng-template carouselSlide>
                 <div>
                   <div class="media" *ngFor="let productDetailDto of productDetailDtoList | slice:0:4 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle]">
                       <!--<img class="img-fluid w-auto"
                            [defaultImage]="'assets/images/product/placeholder.jpg'"
                            [lazyLoad]="product.images[0].src" alt="">-->
@@ -15,13 +15,13 @@
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle]">
                       <h6>{{ productDetailDto.seoTitle | titlecase }}</h6></a>
                       <h4>
-                        {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        <!--{{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}-->
                         <del *ngIf="productDetailDto?.currentSalePrice">
                           <span class="money">
-                            {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                            <!--{{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}-->
                           </span>
                         </del>
                       </h4>
@@ -32,7 +32,7 @@
             <ng-template carouselSlide>
                 <div>
                   <div class="media" *ngFor="let productDetailDto of productDetailDtoList | slice:3:6 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                    <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle]">
                       <!--<img class="img-fluid w-auto"
                            [defaultImage]="'assets/images/product/placeholder.jpg'"
                            [src]="productDetailDto.images[0].src" alt="">-->
@@ -40,13 +40,13 @@
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle.replace(' ', '-')]">
+                      <a [routerLink]="['/shop/product/left/sidebar/', productDetailDto.seoTitle]">
                       <h6>{{ productDetailDto.seoTitle | titlecase }}</h6></a>
                       <h4>
-                        {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                        <!--{{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}-->
                         <del *ngIf="productDetailDto?.currentSalePrice">
                           <span class="money">
-                            {{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}
+                            <!--{{ productDetailDto?.currentSalePrice * productService.Currency?.price | currency:productService.Currency?.currency:'symbol' }}-->
                           </span>
                         </del>
                       </h4>

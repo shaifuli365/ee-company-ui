@@ -71,7 +71,7 @@ export class ThemeHomeLoaderComponent implements OnInit {
 
   async loadNotFoundTheme() {
     //console.log('Not found');
-    this.loadModule(await import('../../theme-not-found/layout/not-found-layout.module').then(m => m.NotFoundLayoutModule));
+    this.loadModule(await import('../../theme-not-found/not-found-layout.module').then(m => m.NotFoundLayoutModule));
   }
 
   private loadModule(moduleType: Type<any>) {

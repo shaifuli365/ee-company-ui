@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
   Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {Product} from '../../../entity/product';
 
 
@@ -19,15 +18,13 @@ export class SizeModalComponent implements OnInit, OnDestroy  {
   public closeResult: string;
   public modalOpen = false;
 
-  // tslint:disable-next-line:ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private modalService: NgbModal) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
   }
 
   openModal() {
-    this.modalOpen = true;
+    /*this.modalOpen = true;
     if (isPlatformBrowser(this.platformId)) { // For SSR
       this.modalService.open(this.SizeChart, {
         size: 'md',
@@ -40,10 +37,10 @@ export class SizeModalComponent implements OnInit, OnDestroy  {
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-    }
+    }*/
   }
 
-  private getDismissReason(reason: any): string {
+  /*private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -51,11 +48,11 @@ export class SizeModalComponent implements OnInit, OnDestroy  {
     } else {
       return `with: ${reason}`;
     }
-  }
+  }*/
 
   ngOnDestroy() {
     if (this.modalOpen){
-      this.modalService.dismissAll();
+      //this.modalService.dismissAll();
     }
   }
 

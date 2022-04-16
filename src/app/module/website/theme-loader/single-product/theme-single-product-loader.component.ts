@@ -24,7 +24,7 @@ export class ThemeSingleProductLoaderComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-    await this.loadJamunaDynamicPageTheme();
+    await this.loadJamunaSingleProductTheme();
   }
 
   createComponent(factory: ComponentFactory<any>) {
@@ -32,8 +32,8 @@ export class ThemeSingleProductLoaderComponent implements OnInit {
     this.anchor.createComponent(factory);
   }
 
-  async loadJamunaDynamicPageTheme() {
-    this.loadModule(await import('../../theme-jamuna/dynamic-page/dynamic-page.module').then(m => m.DynamicPageModule));
+  async loadJamunaSingleProductTheme() {
+    this.loadModule(await import('../../theme-jamuna/single-product/single-product.module').then(m => m.SingleProductModule));
   }
 
   private loadModule(moduleType: Type<any>) {

@@ -27,7 +27,7 @@
                           <!--<img [defaultImage]="'assets/images/product/placeholder.jpg'"
                                [lazyLoad]="image.src" [alt]="image.alt" class="img-fluid"
                                (click)="owlCar.to(activeSlide = i.toString())">-->
-                          <img [src]="'assets/images/product/placeholder.jpg'" [alt]="image.alt" class="img-fluid"
+                          <img [src]="'assets/images/product/placeholder.jpg'" alt="{{image}}" class="img-fluid"
                                (click)="showImage(image)">
                         </div>
                       </ng-template>
@@ -50,7 +50,7 @@
                       [ngStyle]="{'background-color': color}">
                   </li>
                 </ul>
-                
+
                 <div class="product-description border-product">
                   <h5 class="avalibility" *ngIf="false"><span>In Stock</span></h5>
                   <h5 class="avalibility" *ngIf="true"><span>Out of Stock</span></h5>
@@ -100,11 +100,11 @@
             </div>
           </div>
         </div>
-        
+
         <section class="tab-product m-0">
           <div class="row">
             <div class="col-sm-12 col-lg-12">
-              <ngb-tabset [type]="'tabs'" class="nav-material">
+              <!--<ngb-tabset [type]="'tabs'" class="nav-material">
                 <ngb-tab>
                   <ng-template ngbTabTitle>Description</ng-template>
                   <ng-template ngbTabContent>
@@ -163,7 +163,7 @@
                     </div>
                   </ng-template>
                 </ngb-tab>
-              </ngb-tabset>
+              </ngb-tabset>-->
             </div>
           </div>
         </section>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes} from '@angular/router';
 import {DynamicPageComponent} from './dynamic-page.component';
-import {DynamicPageService} from './dynamic-page.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +20,6 @@ import {DynamicPageService} from './dynamic-page.service';
       },
     ]),
   ],
-  providers: [DynamicPageService]
+  providers: []
 })
 export class DynamicPageModule { }

@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-import { ProductService } from '../../../../../shared/services/misc/product.service';
-import {Product} from '../../../../../shared/entity/product';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProductService} from '../../../../../../shared/services/misc/product.service';
 
 @Component({
   selector: 'app-related-product',

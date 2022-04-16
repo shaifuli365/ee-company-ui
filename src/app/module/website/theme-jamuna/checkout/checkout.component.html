@@ -150,22 +150,20 @@
                 <div class="title-box">
                   <div>Product <span> Total</span></div>
                 </div>
-                <ul class="qty" *ngIf='products.length'>
-                  <li *ngFor="let product of products">
-                    {{ product.title }} × {{ product.quantity }}
-                    <span>
-                                                {{ (product.price) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
-                                            </span>
+                <ul class="qty" *ngIf='cartProductList.length'>
+                  <li *ngFor="let cartProduct of cartProductList">
+                    {{ cartProduct.seoTitle }} × {{ cartProduct.currentSalePrice }}
+                   <!-- <span>{{ (product.price) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}</span>-->
                   </li>
                 </ul>
-                <ul class="qty" *ngIf='!products.length'>
+                <ul class="qty" *ngIf='!cartProductList.length'>
                   <li class="empty-checkout"> There are no products in cart </li>
                 </ul>
                 <ul class="sub-total">
                   <li>
-                    Subtotal <span class="count">{{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</span>
+                    Subtotal <!--<span class="count">{{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</span>-->
                   </li>
-                  <li *ngIf='products.length'>
+                  <li *ngIf='cartProductList.length'>
                     Shipping
                     <div class="shipping">
                       <div class="shopping-option">
@@ -180,11 +178,11 @@
                   </li>
                 </ul>
                 <ul class="total">
-                  <li>Total <span class="count">{{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</span></li>
+                  <li>Total <!--<span class="count">{{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</span>--></li>
                 </ul>
               </div>
 
-              <div class="payment-box" *ngIf='products.length'>
+              <div class="payment-box" *ngIf='cartProductList.length'>
                 <div class="upper-box">
                   <div class="payment-options">
                     <ul>

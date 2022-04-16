@@ -3,7 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ProductService} from '../../../../shared/services/misc/product.service';
-import {OrderService} from '../../../../shared/services/misc/order.service';
+import {WebsiteCheckoutService} from '../../service/website-checkout.service';
+import {ProductDetailDto} from '../../../dto/ProductDetailDto';
+import {BrandSetupDto} from '../../../dto/BrandSetupDto';
+import {classToObj} from '../../../../common/util/object-util';
+
 
 @Component({
   selector: 'app-checkout',
@@ -13,12 +17,14 @@ import {OrderService} from '../../../../shared/services/misc/order.service';
 export class CheckoutComponent implements OnInit {
 
   public checkoutForm: FormGroup;
-  public products;
+  public cartProductList:Array<ProductDetailDto> = [];
   public payment = 'Stripe';
   public amount: any;
 
-  constructor(private fb: FormBuilder, public productService: ProductService,
-              private orderService: OrderService, private http: HttpClient) {
+  constructor(private fb: FormBuilder,
+              public productService: ProductService,
+              private websiteCheckoutService: WebsiteCheckoutService,
+              private http: HttpClient) {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -33,9 +39,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get('assets/data/products16.json').subscribe(data => {
-      this.products = data;
-    });
+    this.getCartProductList().subscribe((res:Array<ProductDetailDto>) => {
+        this.cartProductList= res;
+    }, err => {});
     this.getTotal.subscribe(amount => this.amount = amount);
     this.initConfig();
   }
@@ -112,4 +118,11 @@ export class CheckoutComponent implements OnInit {
     };*/
   }
 
+  private getCartProductList():Observable<Array<ProductDetailDto>> {
+    const pd1:ProductDetailDto = classToObj(ProductDetailDto,{id:1,seoTitle:'seoTitle 1',size:'small'})
+    const pd2:ProductDetailDto = classToObj(ProductDetailDto,{id:2,seoTitle:'seoTitle 2',size:'medium'})
+    const pd3:ProductDetailDto = classToObj(ProductDetailDto,{id:3,seoTitle:'seoTitle 3',size:'large'})
+
+    return of([pd1,pd2,pd3]);
+  }
 }
