@@ -30,8 +30,8 @@ export class WebsiteHomeService {
     return this.crudService.get( {orgName}, '/productGroup/getAllWithChildByOrgName', false, false);
   }
 
-  getBannerList(orgName): Observable<any> {
-    return this.crudService.get( {orgName}, '/websiteBanner/getAllByOrgName', false, false);
+  getBannerList(organizationWebAddress): Observable<any> {
+    return this.crudService.get( {organizationWebAddress}, '/websiteBanner/getAllByOrgName', false, false);
   }
 
   getProductList(): Observable<any> {

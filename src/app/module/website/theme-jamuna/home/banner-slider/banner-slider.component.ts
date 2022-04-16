@@ -1,15 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import {WebsiteBannerDto} from '../../../../dto/WebsiteBannerDto';
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  selector: 'app-banner-slider',
+  templateUrl: './banner-slider.component.html',
+  styleUrls: ['./banner-slider.component.scss']
 })
-export class SliderComponent implements OnInit {
+export class BannerSliderComponent implements OnInit {
 
-  @Input() sliders: any[];
-
+  @Input() websiteBannerDtoList: WebsiteBannerDto[];
 
   public HomeSliderConfig: any = {
     loop: true,

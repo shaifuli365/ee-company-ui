@@ -5,9 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {ProductService} from '../../../../shared/services/misc/product.service';
 import {WebsiteCheckoutService} from '../../service/website-checkout.service';
 import {ProductDetailDto} from '../../../dto/ProductDetailDto';
-import {BrandSetupDto} from '../../../dto/BrandSetupDto';
 import {classToObj} from '../../../../common/util/object-util';
-
 
 @Component({
   selector: 'app-checkout',

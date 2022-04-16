@@ -11,9 +11,6 @@ import {MultilevelNavModule} from '../../../../shared/module/multilevel-nav/mult
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {HttpClientModule} from '@angular/common/http';
-
-import {SliderComponent} from '../widgets/slider/slider.component';
-import {LogoComponent} from '../widgets/logo/logo.component';
 import {CollectionComponent} from '../widgets/collection/collection.component';
 import {SkeletonProductBoxComponent} from '../widgets/skeleton-product-box/skeleton-product-box.component';
 import {ServiceIconComponent} from '../widgets/service-icon/service-icon.component';
@@ -23,14 +20,14 @@ import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product
 import {ImageLazyLoadModule} from '../../../../shared/module/image-lazy-load/image-lazy-load.module';
 import {RouterModule} from '@angular/router';
 import {JamunaHeaderModule} from '../header/jamuna-header.module';
+import {BannerSliderComponent} from '../home/banner-slider/banner-slider.component';
 
 @NgModule({
   declarations: [
     JamunaLayoutComponent,
     JamunaHomeComponent,
     JamunaFooterComponent,
-    SliderComponent,
-    LogoComponent,
+    BannerSliderComponent,
     CollectionComponent,
     SkeletonProductBoxComponent,
     ServiceIconComponent,

@@ -2,10 +2,11 @@
 
 <div class="organization-page">
   <div class="container">
-    <app-slider [sliders]="sliders" ></app-slider>
+
+    <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
 
     <div class="row">
-      <!--<div class="col-md-3">
+      <div class="col-md-3">
         <div class="category-sidebar p-1 bg-1 text-uppercase" >
           <div class="wrapper-tree">
             <div *ngIf="productGroupList.length > 0">
@@ -17,7 +18,7 @@
             </div>
           </div>
         </div>
-      </div>-->
+      </div>
 
       <div class="col-md-12 bg">
         <div *ngFor="let displayGroupUnique of displayGroupUniqueList">

@@ -9,6 +9,7 @@ import {WebsiteDisplayGroupProductDetailProjection} from '../../../dto/WebsiteDi
 import {HttpResponse} from '@angular/common/http';
 import {ResponseMessage} from '../../../model/ResponseMessage';
 import {WebsiteService} from '../../service/website.service';
+import {WebsiteBannerDto} from '../../../dto/WebsiteBannerDto';
 
 @Component({
   selector: 'app-jamuna-home',
@@ -21,7 +22,7 @@ export class JamunaHomeComponent implements OnInit {
   organizationWebAddress:string = '';
   menuTitleList:Array<string> = [];
   products;
-  sliders = [];
+  websiteBannerDtoList:Array<WebsiteBannerDto> = [];
   productGroupList:Array<any> = [];
   navItems: CategoryItem[] = [];
   displayGroupWithProductDetailList: Array<WebsiteDisplayGroupProductDetailProjection> = [];
@@ -35,6 +36,7 @@ export class JamunaHomeComponent implements OnInit {
     this.websiteService.getOrganizationWebAddress(location).subscribe(res => {
       this.getMenuList(res);
       this.getDisplayGroupList(res);
+      this.getBannerList(res);
     }, err => {});
 
     //this.getProductGroupList();
@@ -46,12 +48,12 @@ export class JamunaHomeComponent implements OnInit {
     this.websiteHomeService.getDisplayGroupList<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>
     (encodeURI(organizationWebAddress)).subscribe(
       (res: HttpResponse<ResponseMessage<Array<WebsiteDisplayGroupProductDetailProjection>>>) => {
-        console.log(res.body);
+        //console.log(res.body);
         if(res.body && res.body.data){
           this.displayGroupWithProductDetailList = res.body.data;
         }
         this.displayGroupUniqueList = uniqueObjList(this.displayGroupWithProductDetailList, 'wdgId');
-        console.log(this.displayGroupUniqueList);
+        //console.log(this.displayGroupUniqueList);
       }, err => {});
   }
 
@@ -65,17 +67,12 @@ export class JamunaHomeComponent implements OnInit {
       }, err => {});
   }
 
-  /*
-    getBannerList(){
-      this.websiteHomeService.getBannerList(this.organizationName).subscribe(res => {
-        // console.log(res);
-        if (res.status === true) {
-          // res.data.map(element => this.sliders.push(element));
-          this.sliders = res.data;
-        }
-      }, err => {});
-    }
-  */
+  getBannerList(organizationWebAddress: string){
+    this.websiteHomeService.getBannerList(organizationWebAddress).subscribe(res => {
+      console.log(res.body.data);
+      this.websiteBannerDtoList = res.body.data;
+    }, err => {});
+  }
 
   getProductGroupList(){
     this.websiteHomeService.getProductGroupList(this.organizationName)

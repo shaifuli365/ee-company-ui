@@ -1,0 +1,19 @@
+
+<div class="main-slider">
+	<owl-carousel-o [options]="HomeSliderConfig"  >
+		<ng-container *ngFor="let websiteBannerDto of websiteBannerDtoList">
+			<ng-template carouselSlide>
+        <image-lazy-load [src]="websiteBannerDto.bannerUrl ? websiteBannerDto.bannerUrl : ''"></image-lazy-load>
+
+				<!--<div class="home background-contain-color"
+						 [ngStyle]="{'background-image': 'url('+websiteBannerDto.bannerUrl+') '}">
+					<div class="slider-contain">
+						<h2>{{websiteBannerDto.title}}</h2>
+						<h4>{{websiteBannerDto.description}}</h4>
+					</div>
+				</div>-->
+			</ng-template>
+		</ng-container>
+	</owl-carousel-o>
+</div>
+
