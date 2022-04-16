@@ -40,7 +40,6 @@ export class JamunaHomeComponent implements OnInit {
       this.getBannerList(res);
       this.getProductGroupList(res);
     }, err => {});
-
   }
 
   getDisplayGroupList(organizationWebAddress: string){
@@ -68,7 +67,7 @@ export class JamunaHomeComponent implements OnInit {
 
   getBannerList(organizationWebAddress: string){
     this.websiteHomeService.getBannerList(organizationWebAddress).subscribe(res => {
-      console.log(res.body.data);
+      //console.log(res.body.data);
       this.websiteBannerDtoList = res.body.data;
     }, err => {});
   }
@@ -76,7 +75,7 @@ export class JamunaHomeComponent implements OnInit {
   getProductGroupList(organizationWebAddress: string){
     this.websiteHomeService.getProductGroupList(organizationWebAddress)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
         this.productGroupList = res.body.data;
         // console.log(this.productGroupList);
         const navItems = [];
@@ -86,16 +85,11 @@ export class JamunaHomeComponent implements OnInit {
       }, err => {});
   }
 
-
-
   getProductList(){
     this.websiteHomeService.getProductList().subscribe(res => {
       this.products = res;
     }, err => {});
   }
-
-
-
 
   navClicked($event: any) {
 

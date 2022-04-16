@@ -43,7 +43,7 @@ export class WebsiteHomeService {
   }
 
   makeNavItemRecursively(pgList, navItems, organizationName:string){
-    console.dir(pgList);
+    //console.log(pgList);
     for (let i = 0; i < pgList.length; i++) {
       navItems[i] = {
         displayName: pgList[i].name,
