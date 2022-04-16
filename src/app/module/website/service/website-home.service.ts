@@ -26,8 +26,8 @@ export class WebsiteHomeService {
     return this.crudService.get({organizationWebAddress: organizationWebAddress}, '/websiteMenu/getAllMenuListByOrganizationName', false, true);
   }
 
-  getProductGroupList(orgName): Observable<any> {
-    return this.crudService.get( {orgName}, '/productGroup/getAllWithChildByOrgName', false, false);
+  getProductGroupList(organizationWebAddress): Observable<any> {
+    return this.crudService.get( {organizationWebAddress}, '/productGroup/getAllWithChildByOrgName', false, false);
   }
 
   getBannerList(organizationWebAddress): Observable<any> {

@@ -10,6 +10,7 @@ import {HttpResponse} from '@angular/common/http';
 import {ResponseMessage} from '../../../model/ResponseMessage';
 import {WebsiteService} from '../../service/website.service';
 import {WebsiteBannerDto} from '../../../dto/WebsiteBannerDto';
+import {ProductGroupDto} from '../../../dto/ProductGroupDto';
 
 @Component({
   selector: 'app-jamuna-home',
@@ -23,7 +24,7 @@ export class JamunaHomeComponent implements OnInit {
   menuTitleList:Array<string> = [];
   products;
   websiteBannerDtoList:Array<WebsiteBannerDto> = [];
-  productGroupList:Array<any> = [];
+  productGroupList:Array<ProductGroupDto> = [];
   navItems: CategoryItem[] = [];
   displayGroupWithProductDetailList: Array<WebsiteDisplayGroupProductDetailProjection> = [];
   displayGroupUniqueList : Array<WebsiteDisplayGroupProductDetailProjection> = [];
@@ -37,11 +38,9 @@ export class JamunaHomeComponent implements OnInit {
       this.getMenuList(res);
       this.getDisplayGroupList(res);
       this.getBannerList(res);
+      this.getProductGroupList(res);
     }, err => {});
 
-    //this.getProductGroupList();
-    //this.getProductList();
-    //this.getDisplayGroupListList();
   }
 
   getDisplayGroupList(organizationWebAddress: string){
@@ -74,10 +73,11 @@ export class JamunaHomeComponent implements OnInit {
     }, err => {});
   }
 
-  getProductGroupList(){
-    this.websiteHomeService.getProductGroupList(this.organizationName)
+  getProductGroupList(organizationWebAddress: string){
+    this.websiteHomeService.getProductGroupList(organizationWebAddress)
       .subscribe(res => {
-        this.productGroupList = res.data;
+        console.log(res);
+        this.productGroupList = res.body.data;
         // console.log(this.productGroupList);
         const navItems = [];
         this.websiteHomeService.makeNavItemRecursively(this.productGroupList, navItems,this.organizationName);

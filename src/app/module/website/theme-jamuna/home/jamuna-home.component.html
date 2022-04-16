@@ -1,35 +1,29 @@
 <app-jamuna-header [menuTitleList]="menuTitleList"></app-jamuna-header>
 
-<div class="organization-page">
-  <div class="container">
+<div class="">
 
-    <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
+  <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
 
-    <div class="row">
-      <div class="col-md-3">
-        <div class="category-sidebar p-1 bg-1 text-uppercase" >
-          <div class="wrapper-tree">
-            <div *ngIf="productGroupList.length > 0">
-              <mat-nav-list>
-                <app-multilevel-category *ngFor="let item of navItems"
-                                         [item]="item" (navClicked)="navClicked($event)">
-                </app-multilevel-category>
-              </mat-nav-list>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12 bg">
-        <div *ngFor="let displayGroupUnique of displayGroupUniqueList">
-          <app-display-group [displayGroupWithProductDetailList]="displayGroupWithProductDetailList"
-                             [displayGroup]="displayGroupUnique"
-                             [organizationName]="organizationName">
-          </app-display-group>
-
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-md-3">
+      <!--<div *ngIf="productGroupList.length > 0">-->
+        <mat-nav-list>
+          <app-multilevel-category *ngFor="let item of navItems"
+                                   [item]="item" (navClicked)="navClicked($event)">
+          </app-multilevel-category>
+        </mat-nav-list>
+      <!--</div>-->
     </div>
 
+    <div class="col-md-12">
+      <div *ngFor="let displayGroupUnique of displayGroupUniqueList">
+        <app-display-group [displayGroupWithProductDetailList]="displayGroupWithProductDetailList"
+                           [displayGroup]="displayGroupUnique"
+                           [organizationName]="organizationName">
+        </app-display-group>
+      </div>
+    </div>
   </div>
+
 </div>
+
