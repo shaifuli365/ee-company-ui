@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {Product} from '../../entity/product';
 import {ProductService} from '../../services/misc/product.service';
 import {QuickViewComponent} from '../quick-view/quick-view.component';
-import {CartService} from '../../services/misc/cart.service';
 import {WishListService} from '../../services/misc/wishlist.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class ProductBoxComponent implements OnInit {
 
   public ImageSrc: string;
 
-  constructor(private productService: ProductService, private cartService: CartService,
+  constructor(private productService: ProductService,
               private wishListService: WishListService) { }
   ngOnInit(): void {
     if (this.loader) {
@@ -30,7 +29,7 @@ export class ProductBoxComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    this.cartService.addProductToCart(product);
+    //this.cartService.addProductToCart(product);
   }
 
   addToWishList(product: any) {

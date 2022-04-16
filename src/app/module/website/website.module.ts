@@ -29,8 +29,18 @@ export class WebsiteComponent implements OnInit {
           {path: 'category/:category', loadChildren: () => import('./theme-loader/category/theme-category-loader.module')
               .then(m => m.ThemeCategoryLoaderModule) , canActivate: [AuthGuard] },
 
+          {path: 'product/:product', loadChildren: () => import('./theme-loader/single-product/theme-single-product-loader.module')
+              .then(m => m.ThemeSingleProductLoaderModule) , canActivate: [AuthGuard] },
+
+          {path: 'checkout', loadChildren: () => import('./theme-loader/checkout/theme-checkout-loader.module')
+              .then(m => m.ThemeCheckoutLoaderModule) , canActivate: [AuthGuard] },
+
+          {path: 'cart', loadChildren: () => import('./theme-loader/cart/theme-cart-loader.module')
+              .then(m => m.ThemeCartLoaderModule) , canActivate: [AuthGuard] },
+
           {path: ':page', loadChildren: () => import('./theme-loader/dynamic-page/theme-dynamic-page-loader.module')
               .then(m => m.ThemeDynamicPageLoaderModule) , canActivate: [AuthGuard] },
+
         ]
       }
     ]),
