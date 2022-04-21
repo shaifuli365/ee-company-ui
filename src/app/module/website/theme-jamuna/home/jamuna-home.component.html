@@ -1,6 +1,6 @@
 <app-jamuna-header [menuTitleList]="menuTitleList"></app-jamuna-header>
 
-<div class="">
+<div class="container">
 
   <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
 
@@ -8,8 +8,7 @@
     <div class="col-md-3">
       <div *ngIf="productGroupList.length > 0">
         <mat-nav-list>
-          <app-multilevel-category *ngFor="let item of navItems"
-                                   [item]="item" (navClicked)="navClicked($event)">
+          <app-multilevel-category *ngFor="let item of navItems" [item]="item" (navClicked)="navClicked($event)">
           </app-multilevel-category>
         </mat-nav-list>
       </div>

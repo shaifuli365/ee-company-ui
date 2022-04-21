@@ -10,8 +10,9 @@ export class ImageLazyLoadComponent implements OnInit {
   @Input() src  = '';
   @Input() defaultSrc  = 'assets/images/study.jpg';
   @Input() lazy  = true;
+  @Input() width  = '160';
+  @Input() height  = '130';
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
 }
