@@ -2,18 +2,31 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <div class="collection-filter">
+
+
+        <!--<form [formGroup]="form" >
+          <label formArrayName="orders" *ngFor="let order of ordersFormArray.controls; let i = index">
+            <input type="checkbox" [formControlName]="i">
+            {{ordersData[i]['name']}}
+          </label>
+          <button [disabled]="!form.valid" (click)="submit()">submit</button>
+        </form>-->
+
+
+        <div class="collection-filter" [formGroup]="categoryFilterFg">
           <div class="collection-filter-block">
             <div class="collection-collapse-block" [class.open]="brandCollapse" *ngIf="brandSetupDtoList.length > 0">
               <h3 class="collapse-block-title" (click)="brandCollapse = !brandCollapse">Brand</h3>
               <div class="collection-collapse-block-content">
                 <div class="collection-brand-filter">
-                  <div class="custom-control custom-checkbox collection-filter-checkbox"
-                       *ngFor="let brand of brandSetupDtoList; let i = index">
-                    <input type="checkbox" [value]="brand" [checked]="brand?.selected" [id]="brand.id"
-                           (change)="applyBrandFilter($event,brand)" class="custom-control-input" />
-                    <label class="custom-control-label" for="{{brand?.id}}">{{ brand?.name }}</label>
-                  </div>
+
+                    <div formArrayName="selectedBrandListFa">
+                      <div *ngFor="let item of selectedBrandListFa.controls; let index = index" [formGroupName]="index">
+                        <input type="checkbox" formControlName="selected">
+                        {{brandSetupDtoList[index]['name']}}
+                      </div>
+                    </div>
+
                 </div>
               </div>
             </div>
@@ -22,13 +35,13 @@
               <h3 class="collapse-block-title" (click)="priceCollapse = !priceCollapse">Price range</h3>
               <div class="row mt-3">
                 <div class="col-md-5">
-                  <div class="form-group">
-                    <input class="form-control" [(ngModel)]="minPrice" placeholder="min"/>
+                  <div class="form-group"> <!--[(ngModel)]="minPrice"-->
+                    <input class="form-control"  formControlName="minPrice" placeholder="min"/>
                   </div>
                 </div>
                 <div class="col-md-7">
-                  <div class="form-group">
-                    <input class="form-control" [(ngModel)]="maxPrice" placeholder="max"/>
+                  <div class="form-group"> <!--[(ngModel)]="maxPrice"-->
+                    <input class="form-control" formControlName="maxPrice" placeholder="max"/>
                   </div>
                 </div>
               </div>
@@ -68,7 +81,17 @@
               </div>
             </div>
           </div>
-          <div class="mt-3">pagination</div>
+          <div class="mt-3">
+            <!--[totalItems]="this.page.totalElements"-->
+            <pagination [itemsPerPage]="getSize()"
+                        [boundaryLinks]="true"
+
+                        [rotate]="true"
+                        [(ngModel)]="currentPageNumber"
+                        [disabled]="false"
+                        (pageChanged)="onPageChange($event)" >
+            </pagination>
+          </div>
         </div>
       </div>
     </div>

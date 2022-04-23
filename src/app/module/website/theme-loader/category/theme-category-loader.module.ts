@@ -6,6 +6,7 @@ import {ThemeCategoryLoaderComponent} from './theme-category-loader.component';
 import {CategoryService} from '../../theme-jamuna/category/category.service';
 import {WishListService} from '../../../../shared/services/misc/wishlist.service';
 import {WebsiteService} from '../../service/website.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import {WebsiteService} from '../../service/website.service';
     CommonModule,
     RouterModule.forChild([{
       path: '', component: ThemeCategoryLoaderComponent,
-    }])
+    }]),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     WebsiteService,

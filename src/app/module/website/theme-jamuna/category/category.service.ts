@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
@@ -121,11 +121,15 @@ export class CategoryService {
             startPage, endPage, startIndex, endIndex, pages};
     }
 
-  getBrandList(orgName):Observable<Array<BrandSetupDto>> {
+/*  getBrandList(orgName):Observable<Array<BrandSetupDto>> {
 
     const bs1:BrandSetupDto = classToObj(BrandSetupDto,{id:1,name:'brand 1'})
     const bs2:BrandSetupDto = classToObj(BrandSetupDto,{id:2,name:'brand 2'})
     const bs3:BrandSetupDto = classToObj(BrandSetupDto,{id:3,name:'brand 3'})
     return of([bs1,bs2,bs3]);
+  }*/
+
+  getBrandList<T extends object>(organizationWebAddress:string):Observable<HttpResponse<T>> {
+    return this.crudService.get<T>( {organizationWebAddress}, '/brand/getAllByOrgName', false, false);
   }
 }

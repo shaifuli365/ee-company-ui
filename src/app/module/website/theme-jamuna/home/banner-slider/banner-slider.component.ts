@@ -12,25 +12,22 @@ export class BannerSliderComponent implements OnInit {
 
   public HomeSliderConfig: any = {
     loop: true,
-    nav: true,
     dots: true,
-    navContainerClass: 'owl-nav',
-    navClass: [ 'owl-prev', 'owl-next' ],
-    navText: [ '<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>' ],
+    navSpeed: 300,
     responsive: {
+      991: {
+        items: 1
+      },
+      767: {
+        items: 1
+      },
+      420: {
+        items: 1
+      },
       0: {
         items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
       }
-    },
+    }
   };
 
   constructor() { }

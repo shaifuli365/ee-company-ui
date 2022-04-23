@@ -9,7 +9,9 @@ import {WebsiteDisplayGroupProductDetailProjection} from '../../../../dto/Websit
 })
 export class DisplayGroupComponent implements OnInit, OnChanges {
 
-  /*public ProductSliderConfig: any = {
+
+
+  public ProductSliderConfig: any = {
     loop: true,
     dots: true,
     navSpeed: 300,
@@ -27,7 +29,7 @@ export class DisplayGroupComponent implements OnInit, OnChanges {
         items: 1
       }
     }
-  };*/
+  };
 
   @Input() organizationName: string;
 

@@ -2,9 +2,7 @@
 
 <div class="container">
 
-  <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
-
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-md-3">
       <div *ngIf="productGroupList.length > 0">
         <mat-nav-list>
@@ -13,7 +11,12 @@
         </mat-nav-list>
       </div>
     </div>
+    <div class="col-md-9">
+      <app-banner-slider [websiteBannerDtoList]="websiteBannerDtoList" ></app-banner-slider>
+    </div>
+  </div>
 
+  <div class="row">
     <div class="col-md-12">
       <div *ngFor="let displayGroupUnique of displayGroupUniqueList">
         <app-display-group [displayGroupWithProductDetailList]="displayGroupWithProductDetailList"

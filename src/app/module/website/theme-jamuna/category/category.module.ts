@@ -6,8 +6,9 @@ import {RouterModule} from '@angular/router';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {SkeletonProductBoxComponent} from './widgets/skeleton-product-box/skeleton-product-box.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product
     CarouselModule,
     NgxSkeletonLoaderModule,
     ProductBoxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    PaginationModule.forRoot(),
   ],
   providers: []
 })

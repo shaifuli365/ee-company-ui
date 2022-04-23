@@ -1,22 +1,29 @@
-export class Page {
-  content: any[] = [];
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable = new Pageable();
-  size: number;
-  sort: string;
-  totalElements: number;
-  totalPages: number;
-}
+import {Pageable} from './pageable';
+import {Sort} from './sort';
 
-export class Pageable {
-  offset: number;
-  pageNumber: number;
-  pageSize: number;
-  paged: boolean;
-  unpaged: boolean;
+export class Page<T> {
+
+  content: T[] = [];
+  pageable: Pageable = new Pageable();
+  last: boolean;
+  totalElements: number = 0;
+  totalPages: number;
+  size: number;
+  number: number;
+
+  sort: Sort = new Sort();
+
+  first: boolean;
+  numberOfElements: number;
+  empty: boolean;
+
+  public getStart(size:number) : number{
+    return this.content.length > 0 ? (this.number * size) + 1 : 0
+  }
+
+  public getEnd(size:number) : number{
+    return (this.number * size) + this.content.length;
+  }
+
 }
 
