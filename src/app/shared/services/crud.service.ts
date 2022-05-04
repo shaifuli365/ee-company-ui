@@ -124,6 +124,35 @@ export class CrudService {
   /**
    * wrapper function for getting data with auth and organization id
    */
+  post<T extends object>( body:object = {}, relativeUrl: string,
+                         orgMust:boolean= false, authMust:boolean= true): Observable<HttpResponse<T>>{
+
+    let httpParams = new HttpParams();
+
+    if (orgMust){
+      if (this.preferenceService.getSelectedOrgId() == null){
+        this.toastrService.error( 'failed to get data, select an organization', 'Error' );
+        return new Observable();
+      }
+      httpParams.append('organizationId', this.preferenceService.getSelectedOrgId());
+    }
+
+    if (authMust){
+      return this.http.get<T>(
+        `${environment.apiUrl}${relativeUrl}`,
+        { headers:  this.authService.getHeadersWithAccessToken(),
+          params: httpParams,
+          observe: 'response',
+          responseType : 'json'
+        });
+    }
+
+    return this.http.post<T>(`${environment.apiUrl}${relativeUrl}`,body, {params: httpParams, observe: 'response', responseType : 'json'});
+  }
+
+  /**
+   * wrapper function for getting data with auth and organization id
+   */
   get<T extends object>( params:object = {}, relativeUrl: string,
                          orgMust:boolean= false, authMust:boolean= true): Observable<HttpResponse<T>>{
 

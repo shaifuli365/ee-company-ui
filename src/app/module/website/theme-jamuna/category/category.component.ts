@@ -15,6 +15,7 @@ import {CurrentPage} from '../../../../common/model/current-page';
 import {ResponseMessage} from '../../../model/ResponseMessage';
 import {WebsiteDisplayGroupProductDetailProjection} from '../../../dto/WebsiteDisplayGroupProductDetailProjection';
 import {HttpResponse} from '@angular/common/http';
+import {ProductDetailSearchDto} from '../../../dto/ProductDetailSearchDto';
 
 @Component({
   selector: 'app-category',
@@ -45,6 +46,7 @@ export class CategoryComponent implements OnInit {
 
   categoryFilterFg = this.fb.group({
     selectedBrandListFa: this.fb.array([]),
+    selectedColorListFa: this.fb.array([]),
     minPrice: [null, []],
     maxPrice: [null, []],
   });
@@ -52,23 +54,13 @@ export class CategoryComponent implements OnInit {
   get selectedBrandListFa() {
     return this.categoryFilterFg.controls['selectedBrandListFa'] as FormArray;
   }
+  get selectedColorListFa() {
+    return this.categoryFilterFg.controls['selectedColorListFa'] as FormArray;
+  }
 
   constructor(private fb:FormBuilder, private location: Location, private route: ActivatedRoute, private router: Router,
               private websiteService: WebsiteService, private viewScroller: ViewportScroller,
               public categoryService: CategoryService) {
-
-    this.brandSetupDtoList = [new BrandSetupDto(1,'brand 1', 'bs1',true),
-      new BrandSetupDto(2,'brand 2', 'bs2',true)]
-
-    this.brandSetupDtoList.forEach((e,i) => this.selectedBrandListFa.push(
-      this.fb.group({
-        id: [e.id, []],
-        name: [e.name, []],
-        shortName: [e.shortName, []],
-        selected: [e.selected, []],
-      })
-    ));
-
   }
 
   ngOnInit(): void {
@@ -81,19 +73,24 @@ export class CategoryComponent implements OnInit {
       //this.sortBy = params['sortBy'] ? params['sortBy'] : 'ascending';
       //this.currentPage = params['page'] ? params['page'] : this.currentPage;
     });
-
     this.route.params.subscribe((params: Params) => {
       const list = decodeURIComponent(this.location.path()).split('/');
       this.organizationName = list[1];
       this.websiteService.getOrganizationWebAddress(location).subscribe(res => {
         this.getBrandList(res);
+        this.getColorList(res);
       }, err => {});
 
     });
-    this.getProductDetailPaginationByFilter(2);
-
   }
 
+
+  getColorList(organizationWebAddress: string) {
+    this.categoryService.getBrandList<ResponseMessage<Array<BrandSetupDto>>>
+    (encodeURI(organizationWebAddress)).subscribe(
+      (res: HttpResponse<ResponseMessage<Array<BrandSetupDto>>>) => {
+      })
+  }
 
   getBrandList(organizationWebAddress: string){
     this.categoryService.getBrandList<ResponseMessage<Array<BrandSetupDto>>>
@@ -102,6 +99,14 @@ export class CategoryComponent implements OnInit {
         //console.log(res.body);
         if(res.body && res.body.data){
           this.brandSetupDtoList = res.body.data;
+          this.brandSetupDtoList.forEach((e,i) => this.selectedBrandListFa.push(
+            this.fb.group({
+              id: [e.id, []],
+              name: [e.name, []],
+              shortName: [e.shortName, []],
+              selected: [e.selected, []],
+            })
+          ));
         }
 
         /*for (const brandParamName of this.brandParamNameList) {
@@ -154,37 +159,32 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['/' + this.organizationName + '/' + this.categoryName + '/' + product.title ]);
   }
 
-  applyBrandFilter(event, obj) {
-    if (event.target.checked) {
-      /*if (!isInList(this.brandSetupSltList, obj, 'id' )){
-        this.brandSetupSltList.push(obj);
-      }*/
-      this.brandSetupSltList.push(obj);
-    }
-    else {
-      /*if (isInList(this.brandSetupSltList, obj, 'id' )){
-        this.brandSetupSltList = removeObjFromList(this.brandSetupSltList, obj, 'id' );
-      }*/
-      this.brandSetupSltList = removeObjFromList(this.brandSetupSltList, obj, 'id' );
-    }
-    // console.log(this.brandSetupSltList);
-  }
 
   applyFilter() {
 
     console.log(this.categoryFilterFg.value);
 
-    let qp: any = { brand: this.brandSetupSltList.map(e => e.name).join(',') };
+    const productDetailSearchDto:ProductDetailSearchDto =new ProductDetailSearchDto(
+      0,
+      10,
+      this.categoryFilterFg.value['selectedBrandListFa'].map(e=>e['id']),
+      this.categoryFilterFg.value['selectedColorListFa'],
+      this.categoryFilterFg.value['minPrice'],
+      this.categoryFilterFg.value['maxPrice'],
+      'organization1.com')
+
+    /*let qp: any = { brand: this.brandSetupSltList.map(e => e.name).join(',') };
     console.log(qp);
-    // if (this.minPrice !== null && isNumber(this.minPrice) && this.minPrice >= 0){
-    //   const minPrice = this.minPrice;
-    //   qp = {...qp, minPrice};
-    // }
-    // if (this.maxPrice !== null && isNumber(this.maxPrice) && this.maxPrice >= 0){
-    //   const maxPrice = this.maxPrice;
-    //   qp = {...qp, maxPrice};
-    // }
-    this.router.navigate([], {
+    if (this.minPrice !== null && isNumber(this.minPrice) && this.minPrice >= 0){
+      const minPrice = this.minPrice;
+      qp = {...qp, minPrice};
+    }
+    if (this.maxPrice !== null && isNumber(this.maxPrice) && this.maxPrice >= 0){
+      const maxPrice = this.maxPrice;
+      qp = {...qp, maxPrice};
+    }*/
+
+    /*this.router.navigate([], {
       relativeTo: this.route,
       queryParams: qp,
       queryParamsHandling: 'merge', // preserve the existing query params in the route
@@ -192,21 +192,19 @@ export class CategoryComponent implements OnInit {
     }).finally(() => {
       this.viewScroller.setOffset([120, 120]);
       this.viewScroller.scrollToAnchor('products');
-    });
-    this.getProductDetailPaginationByFilter(2);
+    });*/
+    this.getProductDetailPaginationByFilter(productDetailSearchDto);
   }
 
-  getProductDetailPaginationByFilter(filter){
+  getProductDetailPaginationByFilter(productDetailSearchDto: ProductDetailSearchDto){
 
-    this.productDetailList = [
-      classToObj(ProductDetailDto, {id: '1', seoTitle: 'shirt 1', seoUrl: 'shirt-1', size: 'small'}),
-      classToObj(ProductDetailDto, {id: '2', seoTitle: 'shirt 2', seoUrl: 'shirt 2', size: 'medium'}),
-      classToObj(ProductDetailDto, {id: '3', seoTitle: 'shirt 3', seoUrl: 'shirt 3', size: 'large'}),
-    ]
-    /* this.categoryService.getProductList()
-       .subscribe(response => {
-         this.productDetailList = response;
-       });*/
+     this.categoryService.getProductDetailPaginationByFilter<ResponseMessage<Page<ProductDetailDto>>>(productDetailSearchDto)
+       .subscribe((res: HttpResponse<ResponseMessage<Page<ProductDetailDto>>>) => {
+         if(res.body && res.body.data){
+           const t: Page<ProductDetailDto> = res.body.data;
+
+         }
+       });
   }
 
   submit() {
@@ -226,7 +224,7 @@ export class CategoryComponent implements OnInit {
   onPageChange(event: PageChangedEvent): void {
     console.log(event);
     this.currentPageNumber =  event.page - 1;
-    const currentPage: CurrentPage = new CurrentPage({page: event.page - 1, size: this.page.size})
+    const currentPage: CurrentPage = new CurrentPage(event.page - 1, this.page.size)
   }
 
 }

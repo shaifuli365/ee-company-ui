@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {CrudService} from 'src/app/shared/services/crud.service';
 import {Product} from 'src/app/shared/entity/product';
-import {BrandSetupDto} from '../../../dto/BrandSetupDto';
-import {classToObj} from '../../../../common/util/object-util';
+import {ProductDetailSearchDto} from '../../../dto/ProductDetailSearchDto';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable()
 export class CategoryService {
@@ -130,6 +130,11 @@ export class CategoryService {
   }*/
 
   getBrandList<T extends object>(organizationWebAddress:string):Observable<HttpResponse<T>> {
-    return this.crudService.get<T>( {organizationWebAddress}, '/brand/getAllByOrgName', false, false);
+    return this.crudService.get<T>( {organizationWebAddress}, '/brandSetup/getAllByOrgName', false, false);
+  }
+
+  getProductDetailPaginationByFilter<T extends object>(productDetailSearchDto: ProductDetailSearchDto):Observable<HttpResponse<T>> {
+
+    return this.crudService.post<T>( productDetailSearchDto, '/productDetail/getProductDetailPageByFilter', false, false);
   }
 }

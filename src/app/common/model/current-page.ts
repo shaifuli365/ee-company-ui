@@ -7,8 +7,10 @@ export class CurrentPage {
   @prop()
   size:number = 10;
 
-  public constructor(o?: Partial<CurrentPage>) {
-    Object.assign(this, o);
+
+  constructor(page: number, size: number) {
+    this.page = page;
+    this.size = size;
   }
 }
 

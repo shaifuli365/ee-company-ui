@@ -15,6 +15,7 @@
 
         <div class="collection-filter" [formGroup]="categoryFilterFg">
           <div class="collection-filter-block">
+
             <div class="collection-collapse-block" [class.open]="brandCollapse" *ngIf="brandSetupDtoList.length > 0">
               <h3 class="collapse-block-title" (click)="brandCollapse = !brandCollapse">Brand</h3>
               <div class="collection-collapse-block-content">
