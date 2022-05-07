@@ -25,7 +25,7 @@
   <div class="product-detail">
     <!--<a [routerLink]="['/Test%20organization%201%20diu/product', 'toyota'.replace(' ', '-')]">-->
     <a href="/{{getEncodeURI(organizationName)}}/product/{{getEncodeURI(productDetail.seoUrl)}}">
-      <div class="product-title">product title</div>
+      <div class="product-title">{{ productDetail?.seoTitle | truncate:9:' ...' }}</div>
     </a>
     <!--<h6>{{ product?.title | titlecase }}</h6>-->
     <!--<p>{{ product?.description }}</p>-->

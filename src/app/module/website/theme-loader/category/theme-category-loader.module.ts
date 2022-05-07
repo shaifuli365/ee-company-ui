@@ -7,6 +7,7 @@ import {CategoryService} from '../../theme-jamuna/category/category.service';
 import {WishListService} from '../../../../shared/services/misc/wishlist.service';
 import {WebsiteService} from '../../service/website.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TruncatePipeModule} from '../../../../shared/pipes/truncate/truncate-pipe.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
       path: '', component: ThemeCategoryLoaderComponent,
     }]),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
     WebsiteService,

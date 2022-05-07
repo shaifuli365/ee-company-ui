@@ -9,6 +9,7 @@ import {SkeletonProductBoxComponent} from './widgets/skeleton-product-box/skelet
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product-box.module';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {TruncatePipeModule} from '../../../../shared/pipes/truncate/truncate-pipe.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
     FormsModule,
     ReactiveFormsModule,
     PaginationModule.forRoot(),
+
   ],
   providers: []
 })

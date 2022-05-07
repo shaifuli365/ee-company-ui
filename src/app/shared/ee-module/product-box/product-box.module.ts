@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {ProductBoxComponent} from './product-box.component';
 import {MatIconModule} from '@angular/material/icon';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {TruncatePipeModule} from '../../pipes/truncate/truncate-pipe.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
     CommonModule,
     RouterModule,
     MatIconModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    TruncatePipeModule
   ],
   exports: [
     ProductBoxComponent

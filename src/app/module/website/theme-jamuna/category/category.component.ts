@@ -28,6 +28,8 @@ export class CategoryComponent implements OnInit {
   public layoutView = 'grid-view';
   public productDetail;
   public productDetailList:Array<ProductDetailDto> = [];
+  public productDetailPage:Page<ProductDetailDto>;
+  public productDetailSearchDto:ProductDetailSearchDto;
 
   public brandSetupDtoList: BrandSetupDto[] = [];
   public brandSetupSltList: any[] = [];
@@ -50,6 +52,12 @@ export class CategoryComponent implements OnInit {
     minPrice: [null, []],
     maxPrice: [null, []],
   });
+
+  size = 2;
+  currentPageNumber: number;
+  start: number;
+  end: number;
+
 
   get selectedBrandListFa() {
     return this.categoryFilterFg.controls['selectedBrandListFa'] as FormArray;
@@ -126,7 +134,6 @@ export class CategoryComponent implements OnInit {
       }, err => {});
   }
 
-
   sortByFilter(value) {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -159,19 +166,20 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['/' + this.organizationName + '/' + this.categoryName + '/' + product.title ]);
   }
 
-
   applyFilter() {
 
     console.log(this.categoryFilterFg.value);
 
-    const productDetailSearchDto:ProductDetailSearchDto =new ProductDetailSearchDto(
+    this.productDetailSearchDto =new ProductDetailSearchDto(
       0,
-      10,
+      this.size,
       this.categoryFilterFg.value['selectedBrandListFa'].map(e=>e['id']),
       this.categoryFilterFg.value['selectedColorListFa'],
       this.categoryFilterFg.value['minPrice'],
       this.categoryFilterFg.value['maxPrice'],
-      'organization1.com')
+      'organization1.com');
+
+    this.getProductDetailPaginationByFilter(this.productDetailSearchDto);
 
     /*let qp: any = { brand: this.brandSetupSltList.map(e => e.name).join(',') };
     console.log(qp);
@@ -193,38 +201,31 @@ export class CategoryComponent implements OnInit {
       this.viewScroller.setOffset([120, 120]);
       this.viewScroller.scrollToAnchor('products');
     });*/
-    this.getProductDetailPaginationByFilter(productDetailSearchDto);
+
   }
 
   getProductDetailPaginationByFilter(productDetailSearchDto: ProductDetailSearchDto){
 
-     this.categoryService.getProductDetailPaginationByFilter<ResponseMessage<Page<ProductDetailDto>>>(productDetailSearchDto)
-       .subscribe((res: HttpResponse<ResponseMessage<Page<ProductDetailDto>>>) => {
-         if(res.body && res.body.data){
-           const t: Page<ProductDetailDto> = res.body.data;
-
-         }
-       });
+    this.categoryService.getProductDetailPaginationByFilter<ResponseMessage<Page<ProductDetailDto>>>(productDetailSearchDto)
+      .subscribe((res: HttpResponse<ResponseMessage<Page<ProductDetailDto>>>) => {
+        if(res.body && res.body.data){
+          this.productDetailPage = res.body.data;
+          this.productDetailList= res.body.data.content;
+        }
+      });
   }
 
   submit() {
     console.log(this.categoryFilterFg.value);
   }
 
-  page: Page<any>;
-  size = '10';
-  currentPageNumber: number;
-  start: number;
-  end: number;
-
-  getSize():number {
-    return toInteger(this.size);
-  }
-
   onPageChange(event: PageChangedEvent): void {
     console.log(event);
-    this.currentPageNumber =  event.page - 1;
-    const currentPage: CurrentPage = new CurrentPage(event.page - 1, this.page.size)
+    //this.currentPageNumber =  event.page - 1;
+    const currentPage: CurrentPage = new CurrentPage(event.page - 1, this.size)
+    this.productDetailSearchDto.page=event.page - 1;
+    this.productDetailSearchDto.size=this.size;
+    this.getProductDetailPaginationByFilter(this.productDetailSearchDto);
   }
 
 }
