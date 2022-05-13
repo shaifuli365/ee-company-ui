@@ -2,6 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
 import {WebsiteSingleProductService} from '../../service/website-single-product.service';
+import {ResponseMessage} from '../../../model/ResponseMessage';
+import {Page} from '../../../model/page';
+import {ProductDetailDto} from '../../../dto/ProductDetailDto';
+import {HttpResponse} from '@angular/common/http';
+import {SingleProductSearchDto} from '../../../dto/SingleProductSearchDto';
+import {ProductWithProductDetailDto} from '../../../dto/ProductWithProductDetailDto';
+
 
 @Component({
   selector: 'app-single-product',
@@ -47,22 +54,19 @@ export class SingleProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const list = decodeURI(this.location.path()).split('/');
-      this.organizationName = list[1];
-      this.productDetailUrl = list[3];
-      this.getProductWithDetail(list[1], list[3]);
+      this.getProductWithDetail('organization1.com','wwwwww');
     });
   }
 
-  getProductWithDetail(orgName, productDetailSeoUrl){
-    console.log(orgName);
-    console.log(productDetailSeoUrl);
-    this.websiteSingleProductService.getProductWithDetail(orgName, productDetailSeoUrl)
-      .subscribe(res => {
+  getProductWithDetail(organizationWebAddress:string, productDetailSeoUrl:string){
+
+    const singleProductSearchDto: SingleProductSearchDto= new SingleProductSearchDto(organizationWebAddress,productDetailSeoUrl);
+    this.websiteSingleProductService.getProductWithDetail<ResponseMessage<ProductWithProductDetailDto>>(singleProductSearchDto)
+      .subscribe((res: HttpResponse<ResponseMessage<ProductWithProductDetailDto>>) => {
         console.log(res);
-        this.productDetail = res.data;
-        this.getProductDetailList(res.data.id);
-      }, err => {});
+      });
+
+
   }
 
   getProductDetailList(productId){
