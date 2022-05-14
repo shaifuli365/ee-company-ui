@@ -11,14 +11,14 @@ export class ProductDto {
   specification: string|null = null;
   sku: string|null = null;
   tags: string|null = null;
-  productDetailDtoList: ProductDetailDto[]|null = null;
+  productDetailList: ProductDetailDto[]|null = null;
   productGalleryDtoList: ProductGalleryDto[]|null = null;
   unitSetupDtoList: UnitSetupDto[]|null = null;
   unitSetupId: number|null = null;
 
 
   constructor(id: number | null, name: string | null, description: string | null, specification: string | null,
-              sku: string | null, tags: string | null, productDetailDtoList: ProductDetailDto[] | null,
+              sku: string | null, tags: string | null, productDetailList: ProductDetailDto[] | null,
               productGalleryDtoList: ProductGalleryDto[] | null, unitSetupDtoList: UnitSetupDto[] | null,
               unitSetupId: number | null) {
     this.id = id;
@@ -27,7 +27,7 @@ export class ProductDto {
     this.specification = specification;
     this.sku = sku;
     this.tags = tags;
-    this.productDetailDtoList = productDetailDtoList;
+    this.productDetailList = productDetailList;
     this.productGalleryDtoList = productGalleryDtoList;
     this.unitSetupDtoList = unitSetupDtoList;
     this.unitSetupId = unitSetupId;

@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {JamunaLayoutComponent} from './jamuna-layout.component';
 import {JamunaHomeComponent} from '../home/jamuna-home.component';
 import {JamunaFooterComponent} from '../footer/jamuna-footer.component';
-import {JamunaHeaderComponent} from '../header/jamuna-header.component';
 import {MatListModule} from '@angular/material/list';
 import {MultilevelCategoryModule} from '../../../../shared/module/multilevel-category/multilevel-category.module';
 import {TruncatePipeModule} from '../../../../shared/pipes/truncate/truncate-pipe.module';

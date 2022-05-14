@@ -4,11 +4,23 @@
       <div class="wrapper row">
         <div class="preview col-md-6">
           <div class="preview-pic tab-content">
-            <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+            <div class="tab-pane active" id="pic-1">
+              <img src="http://placekitten.com/400/252" />
+            </div>
+
+            <div class="tab-pane" id="pic-2">
+              <img src="http://placekitten.com/400/252" />
+            </div>
+            <div class="tab-pane" id="pic-3">
+              <img src="http://placekitten.com/400/252" />
+            </div>
+            <div class="tab-pane" id="pic-4">
+              <img src="http://placekitten.com/400/252" />
+            </div>
+            <div class="tab-pane" id="pic-5">
+              <img src="http://placekitten.com/400/252" />
+            </div>
+
           </div>
           <ul class="preview-thumbnail nav nav-tabs">
             <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
@@ -25,69 +37,56 @@
         <div class="details col-md-6">
           <h3 class="product-title"><!--{{product}}--></h3>
           <div class="rating">
-            <div class="stars">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
+
+            <div style="color:#ff9f1a; font-size: 21px">
+              <!-- <rating [(ngModel)]="rate2" [max]="5"  [readonly]="true"> </rating>-->
             </div>
             <span class="review-no">41 reviews</span>
           </div>
-          <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-          <h4 class="price">current price: <span>$180</span></h4>
+          <p class="product-description">{{productDto?.description}}</p>
+          <h4 class="price">current price: <span>{{selectedProductDetail?.currentSalePrice}}</span></h4>
           <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-          <!--<div class="product-title">sizes:
-              <span class="size" data-toggle="tooltip" title="small">s</span>
-              <span class="size" data-toggle="tooltip" title="medium">m</span>
-              <span class="size" data-toggle="tooltip" title="large">l</span>
-              <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-          </div>-->
+
+
           <div class="product-property">
-            <div class="product-title">sizes</div>
-            <span class="product-color-boxed product-property-text">s</span>
-            <span class="product-color-boxed product-property-text">m</span>
+            <div class="product-title">Sizes</div>
+            <span *ngFor="let productDetailDto of productDto?.productDetailList">
+              <button class="btn btn-primary "
+                      [ngClass]="productDetailDto?.size === selectedProductDetail?.size ? 'selected-brand' : ''"
+                      (click)="selectSize(productDetailDto)"> {{productDetailDto?.size}}</button>&nbsp;
+            </span>
+
           </div>
           <div class="product-property">
             <div class="product-title">Models</div>
-            <span class="product-model-boxed product-property-text">2020</span>
-            <span class="product-model-boxed product-property-text">2022</span>
+            <span *ngFor="let productDetailDto of productDto?.productDetailList">
+              <button class="btn btn-primary" (click)="selectModel(productDetailDto)"> {{productDetailDto?.model}}</button>&nbsp;
+            </span>
           </div>
-          <!--<div class="product-title">Model:
-              <span class="product-model-boxed product-property-text">2020</span>
-              <span class="product-model-boxed product-property-text">2022</span>
-          </div>-->
+          <div class="product-property">
+            <div class="product-title">Brands</div>
+            <span *ngFor="let productDetailDto of productDto?.productDetailList">
+              <button class="btn btn-primary" (click)="selectBrand(productDetailDto)"> {{productDetailDto?.brandSetupId}}</button>&nbsp;
+            </span>
+          </div>
           <div class="product-property">
             <div class="product-title">Colors:</div>
-            <ul class="product-property-list">
-              <li class="product-property-item selected">
-                <div class="product-property-image">
-                  <img src="https://ae01.alicdn.com/kf/H215953b9fc3a456c890f9f17dbdc43c4l/SanDisk-USB-Stick-3-0-Key-USB-Flash-Drive-128GB-64GB-32GB-16GB-Pen-Drives-Pendrive.jpg_50x50.jpg_.webp"
-                       class="" title="100M Pendrive" alt="100M Pendrive" data-spm-anchor-id="a2g0o.detail.1000016.i5.3f0f76756nB3te">
-                </div>
-              </li>
-              <li class="product-property-item">
-                <div class="product-property-image">
-                  <img src="https://ae01.alicdn.com/kf/H0a07464529cf41f6adcd48c9a849615dm/SanDisk-USB-Stick-3-0-Key-USB-Flash-Drive-128GB-64GB-32GB-16GB-Pen-Drives-Pendrive.jpg_50x50.jpg_.webp"
-                       class="" title="100M Lanyard" alt="100M Lanyard">
-                </div>
-              </li>
-            </ul>
+            <span *ngFor="let productDetailDto of productDto?.productDetailList">
+              <button class="btn btn-primary" (click)="selectColor(productDetailDto)"> {{productDetailDto?.colorSetupId}}</button>&nbsp;
+            </span>
           </div>
           <h5 class="colors">colors:
             <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
             <span class="color green"></span>
             <span class="color blue"></span>
           </h5>
+
+
+
           <hr class="hr">
-          <h6 class="h6-normal">Product Weight:
-            <span id="weight">100 gram</span>
+          <h6 class="h6-normal">Product Weight (in gram): <span id="weight">{{selectedProductDetail?.productWeightInGram}}</span>
           </h6>
-          <h6 class="h6-normal">Manufacturing Year:
-            <span id="year">2021</span>
-          </h6>
-          <h6 class="h6-normal">Material:
-            <span id="material">Cotton</span>
+          <h6 class="h6-normal">Manufacturing Year: <span id="year">{{selectedProductDetail?.year}}</span>
           </h6>
 
         </div>
@@ -98,158 +97,120 @@
   <section class="tab-product pt-0 mt-5">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-lg-12">
-          <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-            <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"><i class="icofont icofont-ui-home"></i>Details</a>
-              <div class="material-border"></div>
-            </li>
-            <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Specifications</a>
-              <div class="material-border"></div>
-            </li>
-            <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Customer Reviews</a>
-              <div class="material-border"></div>
-            </li>
-          </ul>
-          <div class="tab-content nav-material" id="top-tabContent">
-            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-              <div class="product-tab-discription">
-                <div class="part">
-                  <p>The Model is wearing a white blouse from our stylist's collection, see the image
-                    for a mock-up of what the actual blouse would look like.it has text written on
-                    it in a black cursive language which looks great on a white color.</p>
-                </div>
-                <div class="part">
-                  <h5 class="inner-title">fabric:</h5>
-                  <p>Art silk is manufactured by synthetic fibres like rayon. It's light in weight and
-                    is soft on the skin for comfort in summers.Art silk is manufactured by synthetic
-                    fibres like rayon. It's light in weight and is soft on the skin for comfort in
-                    summers.</p>
-                </div>
-                <div class="part">
-                  <h5 class="inner-title">size &amp; fit:</h5>
-                  <p>The model (height 5'8") is wearing a size S</p>
-                </div>
-                <div class="part">
-                  <h5 class="inner-title">Material &amp; Care:</h5>
-                  <p>Top fabric: pure cotton</p>
-                  <p>Bottom fabric: pure cotton</p>
-                  <p>Hand-wash</p>
+
+        <mat-tab-group>
+          <mat-tab label="Details">
+
+            {{productDto?.description}}
+            <!--<div class="tab-content nav-material" id="top-tabContent">
+              <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                <div class="product-tab-discription">
+                  <div class="part">
+                    <p>The Model is wearing a white blouse from our stylist's collection, see the image
+                      for a mock-up of what the actual blouse would look like.it has text written on
+                      it in a black cursive language which looks great on a white color.</p>
+                  </div>
+                  <div class="part">
+                    <h5 class="inner-title">fabric:</h5>
+                    <p>Art silk is manufactured by synthetic fibres like rayon. It's light in weight and
+                      is soft on the skin for comfort in summers.Art silk is manufactured by synthetic
+                      fibres like rayon. It's light in weight and is soft on the skin for comfort in
+                      summers.</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-              <p>The Model is wearing a white blouse from our stylist's collection, see the image for a
-                mock-up of what the actual blouse would look like.it has text written on it in a black
-                cursive language which looks great on a white color.</p>
-              <div class="single-product-tables">
-                <table>
-                  <tbody>
+
+            <img class="detail-desc-decorate-image" src="https://ae01.alicdn.com/kf/Hcd6f1e2f57ea49a7929d7af4b01e7655i.jpg" slate-data-type="image">
+            <img class="detail-desc-decorate-image" src="https://ae01.alicdn.com/kf/Hc7297b6ad7be40bead1854796f8bdbbcu.jpg" slate-data-type="image">-->
+
+
+          </mat-tab>
+
+          <mat-tab label="Specifications">
+            {{productDto?.specification}}
+            <div class="single-product-tables">
+              <table>
+                <tbody>
+                <tr>
+                  <td>Sleeve Length</td>
+                  <td>Sleevless</td>
+                </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+
+
+          </mat-tab>
+
+          <mat-tab label="Customer Reviews">
+
+            <div id="transction-feedback" class="feedback-container" data-widget-cid="widget-1">
+              <div class="customer-reviews" data-spm-anchor-id="0.0.0.i1.2367iFoMiFoMlZ">Customer Reviews (2732)</div>
+              <div class="rate-detail util-clearfix">
+                <table class="table table-sm" style="width: 400px; margin-left: 15px;">
                   <tr>
-                    <td>Sleeve Length</td>
-                    <td>Sleevless</td>
+                    <td>5 Stars</td>
+                    <td class="text-danger">89%</td>
                   </tr>
                   <tr>
-                    <td>Neck</td>
-                    <td>Round Neck</td>
+                    <td>4 Stars</td>
+                    <td class="text-danger">7%</td>
                   </tr>
                   <tr>
-                    <td>Occasion</td>
-                    <td>Sports</td>
-                  </tr>
-                  </tbody>
-                </table>
-                <table>
-                  <tbody>
-                  <tr>
-                    <td>Fabric</td>
-                    <td>Polyester</td>
+                    <td>3 Stars</td>
+                    <td class="text-danger">2%</td>
                   </tr>
                   <tr>
-                    <td>Fit</td>
-                    <td>Regular Fit</td>
+                    <td>2 Stars</td>
+                    <td class="text-danger">1%</td>
                   </tr>
-                  </tbody>
+                  <tr>
+                    <td>1 Stars</td>
+                    <td class="text-danger">1%</td>
+                  </tr>
                 </table>
               </div>
             </div>
-            <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-              <form class="theme-form">
-                <div class="form-row row">
-                  <div class="col-md-12">
-                    <div class="media">
-                      <label>Rating</label>
-                      <div class="media-body ms-3">
-                        <div class="rating three-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+
+            <form class="theme-form">
+              <div class="form-row row">
+                <div class="col-md-12">
+                  <div class="media">
+                    <label>Give Rating &nbsp;</label>
+                    <div class="media-body ms-3">
+                      <div class="rating three-star">
+                        <div style="color:#ff9f1a; font-size: 21px">
+                          <!-- <rating [(ngModel)]="rate" [max]="max"  [readonly]="isReadonly"> </rating>-->
+                        </div>
+
+
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Your name" required="">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
-                  </div>
-                  <div class="col-md-12">
-                    <label for="review">Review Title</label>
-                    <input type="text" class="form-control" id="review" placeholder="Enter your Review Subjects" required="">
-                  </div>
-                  <div class="col-md-12">
-                    <label for="review">Review Title</label>
-                    <textarea class="form-control" placeholder="Wrire Your Testimonial Here" id="exampleFormControlTextarea1" rows="6"></textarea>
-                  </div>
-                  <div class="col-md-12">
-                    <button class="btn btn-solid" type="submit">Submit YOur
-                      Review</button>
-                  </div>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
+                <div class="col-md-12">
+                  <label for="review">Comment</label>
+                  <textarea class="form-control" placeholder="Wrire Your Testimonial Here" id="exampleFormControlTextarea1" rows="6"></textarea>
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-solid" type="submit">Submit your Review</button>
+                </div>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+
       </div>
     </div>
   </section>
 
-  <section class="tab-product pt-0 mt-5">
-    <div class="">
-      <!--<img class="detail-desc-decorate-image" src="https://ae01.alicdn.com/kf/Hccada86fb6cb4b3b8a185dc12f19b969b.jpg" slate-data-type="image">-->
-      <img class="detail-desc-decorate-image" src="https://ae01.alicdn.com/kf/Hcd6f1e2f57ea49a7929d7af4b01e7655i.jpg" slate-data-type="image">
-      <img class="detail-desc-decorate-image" src="https://ae01.alicdn.com/kf/Hc7297b6ad7be40bead1854796f8bdbbcu.jpg" slate-data-type="image">
-    </div>
-  </section>
 
-  <section class="tab-product pt-0 mt-5">
-    <div id="transction-feedback" class="feedback-container" data-widget-cid="widget-1">
-      <div class="customer-reviews" data-spm-anchor-id="0.0.0.i1.2367iFoMiFoMlZ">Customer Reviews (2732)</div>
-      <div class="rate-detail util-clearfix">
-        <table class="table table-sm" style="width: 400px; margin-left: 15px;">
-          <tr>
-            <td>5 Stars</td>
-            <td class="text-danger">89%</td>
-          </tr>
-          <tr>
-            <td>4 Stars</td>
-            <td class="text-danger">7%</td>
-          </tr>
-          <tr>
-            <td>3 Stars</td>
-            <td class="text-danger">2%</td>
-          </tr>
-          <tr>
-            <td>2 Stars</td>
-            <td class="text-danger">1%</td>
-          </tr>
-          <tr>
-            <td>1 Stars</td>
-            <td class="text-danger">1%</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </section>
 
+  <!--
+  Recommendations
   <section class="section-b-space ratio_asos mt-5">
     <div class="container">
       <div class="row">
@@ -362,5 +323,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 </div>

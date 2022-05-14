@@ -12,7 +12,8 @@ import {WebsiteSingleProductService} from '../../service/website-single-product.
     CommonModule,
     RouterModule.forChild([{
       path: '', component: ThemeSingleProductLoaderComponent,
-    }])
+    }]),
+
   ],
   providers: [
     WebsiteService,

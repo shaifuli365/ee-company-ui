@@ -11,6 +11,9 @@ import {ProductBoxModule} from '../../../../shared/ee-module/product-box/product
 import {
   ProductBoxVerticalSliderModule
 } from '../../../../shared/ee-module/product-box-vertical-slider/product-box-vertical-slider.module';
+import {MatTabsModule} from '@angular/material/tabs';
+import {RatingModule} from 'ngx-bootstrap/rating';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,10 @@ import {
     NgxSkeletonLoaderModule,
     ProductBoxModule,
     ProductBoxVerticalSliderModule,
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RatingModule.forRoot()
   ]
 })
 export class SingleProductModule { }

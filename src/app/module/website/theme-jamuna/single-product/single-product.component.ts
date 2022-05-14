@@ -1,14 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
 import {WebsiteSingleProductService} from '../../service/website-single-product.service';
 import {ResponseMessage} from '../../../model/ResponseMessage';
-import {Page} from '../../../model/page';
-import {ProductDetailDto} from '../../../dto/ProductDetailDto';
 import {HttpResponse} from '@angular/common/http';
 import {SingleProductSearchDto} from '../../../dto/SingleProductSearchDto';
-import {ProductWithProductDetailDto} from '../../../dto/ProductWithProductDetailDto';
-
+import {ProductDto} from '../../../dto/ProductDto';
+import {ProductDetailDto} from '../../../dto/ProductDetailDto';
 
 @Component({
   selector: 'app-single-product',
@@ -16,6 +14,11 @@ import {ProductWithProductDetailDto} from '../../../dto/ProductWithProductDetail
   styleUrls: ['./single-product.component.scss']
 })
 export class SingleProductComponent implements OnInit {
+
+  max = 5;
+  rate = 10;
+  rate2 = 3;
+  isReadonly = false;
 
   public counter = 1;
   public activeSlide: any = 0;
@@ -26,30 +29,12 @@ export class SingleProductComponent implements OnInit {
     dots: false
   };
   organizationName;
-  productDetailList;
-  productDetail;
-  productDetailUrl;
+
+  productDto : ProductDto | null;
+  selectedProductDetail: ProductDetailDto | null;
 
   constructor(private location: Location, private route: ActivatedRoute,
               public websiteSingleProductService: WebsiteSingleProductService) {
-
-    this.productDetail = {
-      id: 1,
-      seoUrl: 'trim dress',
-      seoTitle: 'trim dress',
-      sizeModel: 'trim dress',
-      basePrice: 100,
-      currentSalePrice: 150,
-      description: 'It is a long established fact that a reader will be distracted ',
-      specification: [{key: 'battery', value: '2000mah'}, {key: 'monitor', value: '32inch'}],
-      subSku: '008',
-      captionTitle: 'premium product',
-      captionBgColor: '#000000',
-      year: 2019,
-      product: {
-        id: 1,
-      }
-    };
   }
 
   ngOnInit(): void {
@@ -61,22 +46,14 @@ export class SingleProductComponent implements OnInit {
   getProductWithDetail(organizationWebAddress:string, productDetailSeoUrl:string){
 
     const singleProductSearchDto: SingleProductSearchDto= new SingleProductSearchDto(organizationWebAddress,productDetailSeoUrl);
-    this.websiteSingleProductService.getProductWithDetail<ResponseMessage<ProductWithProductDetailDto>>(singleProductSearchDto)
-      .subscribe((res: HttpResponse<ResponseMessage<ProductWithProductDetailDto>>) => {
-        console.log(res);
+    this.websiteSingleProductService.getProductWithDetail<ResponseMessage<ProductDto>>(singleProductSearchDto)
+      .subscribe((res: HttpResponse<ResponseMessage<ProductDto>>) => {
+        console.log(res.body ? res.body.data:null);
+        this.productDto = res.body ? res.body.data : null;
+        this.selectedProductDetail = this.productDto?.productDetailList ?
+          this.productDto?.productDetailList.filter(e=> e.seoUrl === productDetailSeoUrl)[0] : null;
       });
-
-
   }
-
-  getProductDetailList(productId){
-    this.websiteSingleProductService.getProductDetailList(productId)
-      .subscribe(res => {
-        console.log(res.data);
-        this.productDetailList = res.data;
-      }, err => {});
-  }
-
   increment() {
     this.counter++ ;
   }
@@ -100,6 +77,23 @@ export class SingleProductComponent implements OnInit {
   }
 
   showImage(image: number) {
+
+  }
+
+  selectSize( productDetailDto: ProductDetailDto) {
+    console.log(productDetailDto);
+  }
+
+  selectModel(productDetailDto: ProductDetailDto) {
+
+
+  }
+
+  selectColor(productDetailDto: ProductDetailDto) {
+
+  }
+
+  selectBrand(productDetailDto: ProductDetailDto) {
 
   }
 }
