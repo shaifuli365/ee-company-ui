@@ -81,7 +81,8 @@
             <span class="color blue"></span>
           </h5>
 
-
+          <img [src]="selectedProductDetail?  selectedProductDetail.productGalleryList[0] : null"
+               alt="" height="250" width="250" style="border: 2px solid gray;"/>
 
           <hr class="hr">
           <h6 class="h6-normal">Product Weight (in gram): <span id="weight">{{selectedProductDetail?.productWeightInGram}}</span>

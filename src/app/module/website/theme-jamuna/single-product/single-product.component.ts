@@ -86,7 +86,6 @@ export class SingleProductComponent implements OnInit {
 
   selectModel(productDetailDto: ProductDetailDto) {
 
-
   }
 
   selectColor(productDetailDto: ProductDetailDto) {

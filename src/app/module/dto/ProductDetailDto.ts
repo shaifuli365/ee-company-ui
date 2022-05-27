@@ -1,5 +1,8 @@
 import {ProductDto} from './ProductDto';
 import {OrganizationDto} from './OrganizationDto';
+import {BrandSetupDto} from './BrandSetupDto';
+import {ColorSetupDto} from './ColorSetupDto';
+import {ProductGalleryDto} from './ProductGalleryDto';
 
 export class ProductDetailDto {
   id: number|null = null;
@@ -17,25 +20,29 @@ export class ProductDetailDto {
   productWeightInGram: number|null = null;
   productMaterial: string|null = null;
   availableStock: number|null = null;
-  imageRootPath: string|null = null;
-  imageRelativePath: string|null = null;
-  imageNameWithExt: string|null = null;
-  product: ProductDto[];
+
+  product: ProductDto;
   productId: number|null = null;
-  organization: OrganizationDto[]|null = null;
+
+  organization: OrganizationDto|null = null;
   organizationId: number|null = null;
-  brandSetup: number|null = null;
+
+  brandSetup: BrandSetupDto|null = null;
   brandSetupId: number|null = null;
-  colorSetup: number|null = null;
+
+  colorSetup: ColorSetupDto|null = null;
   colorSetupId: number|null = null;
 
-  constructor(id: number, seoTitle: string, seoUrl: string, size: string, model: string,
-              barCode: string, basePrice: string, currentSalePrice: string, subSku: string,
-              captionTitle: string, captionBgColor: string, year: number, productWeightInGram: number,
-              productMaterial: string, availableStock: number, imageRootPath: string,
-              imageRelativePath: string, imageNameWithExt: string, product: ProductDto[],
-              productId: number, organization: OrganizationDto[], organizationId: number,
-              brandSetup: number, brandSetupId: number, colorSetup: number, colorSetupId: number) {
+  productGalleryList:ProductGalleryDto[] ;
+
+
+  constructor(id: number | null, seoTitle: string | null, seoUrl: string | null, size: string | null,
+              model: string | null, barCode: string | null, basePrice: string | null, currentSalePrice: string | null,
+              subSku: string | null, captionTitle: string | null, captionBgColor: string | null, year: number | null,
+              productWeightInGram: number | null, productMaterial: string | null, availableStock: number | null,
+              product: ProductDto, productId: number | null, organization: OrganizationDto | null,
+              organizationId: number | null, brandSetup: BrandSetupDto | null, brandSetupId: number | null,
+              colorSetup: ColorSetupDto | null, colorSetupId: number | null, productGalleryList: ProductGalleryDto[]) {
     this.id = id;
     this.seoTitle = seoTitle;
     this.seoUrl = seoUrl;
@@ -51,9 +58,6 @@ export class ProductDetailDto {
     this.productWeightInGram = productWeightInGram;
     this.productMaterial = productMaterial;
     this.availableStock = availableStock;
-    this.imageRootPath = imageRootPath;
-    this.imageRelativePath = imageRelativePath;
-    this.imageNameWithExt = imageNameWithExt;
     this.product = product;
     this.productId = productId;
     this.organization = organization;
@@ -62,5 +66,6 @@ export class ProductDetailDto {
     this.brandSetupId = brandSetupId;
     this.colorSetup = colorSetup;
     this.colorSetupId = colorSetupId;
+    this.productGalleryList = productGalleryList;
   }
 }

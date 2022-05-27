@@ -1,8 +1,6 @@
-
 import {ProductGalleryDto} from './ProductGalleryDto';
 import {ProductDetailDto} from './ProductDetailDto';
 import {UnitSetupDto} from './UnitSetup';
-
 
 export class ProductDto {
   id: number|null = null;
@@ -11,15 +9,17 @@ export class ProductDto {
   specification: string|null = null;
   sku: string|null = null;
   tags: string|null = null;
+
   productDetailList: ProductDetailDto[]|null = null;
-  productGalleryDtoList: ProductGalleryDto[]|null = null;
+
+  productGalleryList: ProductGalleryDto[]|null = null;
+
   unitSetupDtoList: UnitSetupDto[]|null = null;
   unitSetupId: number|null = null;
 
-
   constructor(id: number | null, name: string | null, description: string | null, specification: string | null,
               sku: string | null, tags: string | null, productDetailList: ProductDetailDto[] | null,
-              productGalleryDtoList: ProductGalleryDto[] | null, unitSetupDtoList: UnitSetupDto[] | null,
+              productGalleryList: ProductGalleryDto[] | null, unitSetupDtoList: UnitSetupDto[] | null,
               unitSetupId: number | null) {
     this.id = id;
     this.name = name;
@@ -28,7 +28,7 @@ export class ProductDto {
     this.sku = sku;
     this.tags = tags;
     this.productDetailList = productDetailList;
-    this.productGalleryDtoList = productGalleryDtoList;
+    this.productGalleryList = productGalleryList;
     this.unitSetupDtoList = unitSetupDtoList;
     this.unitSetupId = unitSetupId;
   }
