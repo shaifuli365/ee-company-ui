@@ -1,3 +1,8 @@
+# Run:
+github.com/nvm-sh/nvm   (node version : 16.17.1)
+npm install --force
+ng start
+
 
 # theme loading , routing and displaying architecture
 
@@ -11,7 +16,7 @@
 
 4 For example: for padma theme it will load PadmaModule
 
-5 PadmaModule will load PadmalayoutModule
+5 PadmaModule will load PadmaLayoutModule
 
 
 # todo
@@ -41,4 +46,11 @@ delivery
 
 ng add @angular/material
 npm install ngx-bootstrap --save
+
+
+
+sudo nano /etc/hosts
+127.0.0.1       sherabazar.com
+127.0.0.1       natunbazar.com
+
 

@@ -1,6 +1,9 @@
 import {Compiler, Component, ComponentFactory, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResponseMessage} from '../../../model/ResponseMessage';
+import {ThemeLoaderCompService} from "./ThemeLoaderCompService";
+import {OrganizationDto} from "../../../dto/OrganizationDto";
+import {Organization} from "../../../entity/Organization";
 
 class WebsiteSetup {
   id: number;
@@ -32,26 +35,23 @@ export class ThemeHomeLoaderComponent implements OnInit {
   constructor(private compiler: Compiler, private injector: Injector, private httpClient: HttpClient) {}
 
   async ngOnInit(){
-
-    //await this.loadPadmaTheme();
-    await this.loadJamunaTheme();
-    /*await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
+    await this.decideTheme().then(async (ws: ResponseMessage<WebsiteSetup> | undefined) => {
       console.log(ws);
       if (ws && ws.data.websiteTemplateDetailIndexPageId === 1){
-        await this.loadPadmaTheme();
+        await this.loadModule(await import('../../theme-padma/layout/padma-layout.module').then(m => m.PadmaLayoutModule));
       }
       else if (ws && ws.data.websiteTemplateDetailIndexPageId === 2){
-        await this.loadJamunaTheme();
+        await this.loadModule(await import('../../theme-jamuna/layout/jamuna-layout.module').then(m => m.JamunaLayoutModule));
       }else{
         await this.loadNotFoundTheme();
       }
-    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });*/
+    }).catch( (ws: WebsiteSetup | undefined) => { this.loadNotFoundTheme() });
   }
 
   async decideTheme(): Promise<ResponseMessage<WebsiteSetup> | undefined> {
-    return await this.httpClient
-        .post<ResponseMessage<WebsiteSetup> | undefined>('http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',{organizationWebAddress: 'diu.com'})
-        .toPromise();
+    return await this.httpClient.post<ResponseMessage<WebsiteSetup> | undefined>(
+      'http://localhost:9092/api/v1/websiteSetup/getSelectedTheme',new Organization({website: 'sherabazar.com'}))
+      .toPromise();
   }
 
   createComponent(factory: ComponentFactory<any>) {
@@ -59,18 +59,15 @@ export class ThemeHomeLoaderComponent implements OnInit {
     this.anchor.createComponent(factory);
   }
 
-  async loadPadmaTheme() {
-    //console.log('loading padma theme');
+/*  async loadPadmaTheme() {
     this.loadModule(await import('../../theme-padma/layout/padma-layout.module').then(m => m.PadmaLayoutModule));
   }
 
   async loadJamunaTheme() {
-    //console.log('loading jamuna theme');
     this.loadModule(await import('../../theme-jamuna/layout/jamuna-layout.module').then(m => m.JamunaLayoutModule));
-  }
+  }*/
 
   async loadNotFoundTheme() {
-    //console.log('Not found');
     this.loadModule(await import('../../theme-not-found/not-found-layout.module').then(m => m.NotFoundLayoutModule));
   }
 

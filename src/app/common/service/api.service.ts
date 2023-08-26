@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {JwtService} from './jwt.service';
 import {catchError} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root'})
 export class ApiService {
 
   constructor(private http: HttpClient) {}
