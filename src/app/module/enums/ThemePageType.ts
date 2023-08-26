@@ -5,11 +5,6 @@ export class ThemePageTypeValue {
   @prop() key: string;
   @prop() value: string;
 
-  /*public constructor(o?: Partial<ThemePageTypeValue>) {
-    Object.assign(this, o);
-  }*/
-
-
   constructor(key: string, value: string) {
     this.key = key;
     this.value = value;
@@ -19,14 +14,14 @@ export class ThemePageTypeValue {
 /** instruction: if update this please update the value in Backend enum as well */
 export class ThemePageType {
 
-  static INDEX = new ThemePageTypeValue( 'INDEX', 'Index');
-  static CATEGORY = new ThemePageTypeValue( 'CATEGORY', 'Category');
+  static HOME = new ThemePageTypeValue( 'HOME', 'HOME');
   static SINGLE_PRODUCT = new ThemePageTypeValue( 'SINGLE_PRODUCT', 'Single Product');
+  static CATEGORY_PRODUCT = new ThemePageTypeValue( 'CATEGORY_PRODUCT', 'Category Product');
 
   static themeEnumList = [
-    ThemePageType.INDEX,
-    ThemePageType.CATEGORY,
+    ThemePageType.HOME,
     ThemePageType.SINGLE_PRODUCT,
+    ThemePageType.CATEGORY_PRODUCT,
   ];
 
 }
