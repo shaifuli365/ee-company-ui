@@ -19,7 +19,7 @@ export class ThemeEnum {
   static JAMUNA = new ThemeEnumValue( 'JAMUNA', 'Jamuna', '/assets/theme_image/jamuna');
   static PADMA = new ThemeEnumValue('PADMA', 'Padma', '/assets/theme_image/padma');
 
-  static themeEnumList = [
+  static themeEnumList:Array<ThemeEnumValue> = [
     ThemeEnum.JAMUNA,
     ThemeEnum.PADMA,
   ];
